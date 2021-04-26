@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+@tailwind base;
+@tailwind components;
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+.ct-shadow {
+  box-shadow: 0 0 50px rgba(87, 85, 85, 0.219);
+}
+
+.ct-bg-grad {
+  background: rgb(110, 231, 183);
+  background: linear-gradient(
+    45deg,
+    rgba(110, 231, 183, 0.7) 0%,
+    rgba(67, 56, 202, 0.7) 100%
+  );
+}
+
+@tailwind utilities;
