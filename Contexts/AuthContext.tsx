@@ -3,11 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 interface authContextSchema {
+  user: firebase.default.User;
   emailPwdLogin: any;
   googleLogin: any;
   facebookLogin: any;
   twitterLogin: any;
-  fetchUser: any;
+  // fetchUser: any;
 }
 
 const AuthContext = React.createContext<authContextSchema>({} as any);
@@ -16,7 +17,19 @@ export const useAuthContext = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const usersRef = db.collection("users")
   const router = useRouter();
+
+  const createSocialUser = async (user) => {
+    const res = await usersRef.doc(user.uid).get()
+    if (res.exists) {
+      return;
+    } else {
+      await usersRef.doc(user.uid).set({
+        
+      })
+    }
+  }
 
   const createUser = () => {
     
@@ -28,8 +41,8 @@ export const AuthProvider = ({ children }) => {
 
   const twitterLogin = async () => {
     const provider = new auth.TwitterAuthProvider();
-    auth().signInWithRedirect(provider);
-    await auth().getRedirectResult();
+    const res = await auth().signInWithPopup(provider);
+    console.log(res.user)
   };
 
   const googleLogin = async () => {
@@ -44,23 +57,20 @@ export const AuthProvider = ({ children }) => {
     await auth().getRedirectResult();
   };
 
-  const fetchUser = () => {
-    return auth().currentUser;
-  };
-
   useEffect(() => {
     auth().onAuthStateChanged((user) => {
       setUser(user);
-      console.log(user);
     });
   }, []);
 
+
   const value = {
+    user,
     emailPwdLogin,
     facebookLogin,
     googleLogin,
     twitterLogin,
-    fetchUser,
+    // fetchUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
