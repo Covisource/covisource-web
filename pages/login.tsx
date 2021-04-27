@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "~components/Form/Input";
 import Button from "~components/Form/Button";
 import SocialProvider from "~components/Login/SocialProvider";
+import { useAuthContext } from "~contexts/AuthContext";
 
 const login = () => {
+  const auth = useAuthContext();
+
+  const [email, setEmail] = useState<string>();
+  const [password, setPassword] = useState<string>();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (email && password) {
+      auth.emailPwdLogin(email, password);
+    }
+  };
+
   return (
     <div className="h-screen w-screen lg:grid lg:place-items-center mx-auto">
       <div className="ct-shadow rounded-xl blur-lg flex flex-col items-center justify-center h-screen w-screen lg:h-auto lg:w-96 p-3">
@@ -19,6 +33,7 @@ const login = () => {
             placeholder="Email"
             prepend={<i className="fal fa-at text-gray-700 text-sm"></i>}
             id="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Input
             className="w-80"
@@ -26,8 +41,12 @@ const login = () => {
             prepend={<i className="fal fa-lock-alt text-gray-700 text-sm"></i>}
             id="password"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <Button className="bg-green-500 hover:bg-green-400 transition-all text-gray-50 focus:outline-none focus:ring-1 focus:ring-green-500">
+          <Button
+            className="bg-green-500 hover:bg-green-400 transition-all text-gray-50 focus:outline-none focus:ring-1 focus:ring-green-500"
+            onClick={handleSubmit}
+          >
             Login
           </Button>
           <div className="text-center text-gray-400">

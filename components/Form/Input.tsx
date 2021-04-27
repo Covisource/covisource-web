@@ -22,7 +22,7 @@ const Input = (props: Props) => {
       <input
         type={props.type || "text"}
         name={props.name}
-        onChange={() => props.onChange}
+        onChange={props.onChange}
         placeholder={props.placeholder || ""}
         id={props.id || ""}
         className={`w-full bg-gray-200 placeholder-gray-700 border-none rounded-lg h-12 focus:ring-gray-700 focus:ring-1 ${props.prepend ? "pl-10" : ""} ${props.append ? "pr-8" : ""}`}
