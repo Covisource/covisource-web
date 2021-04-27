@@ -59,7 +59,7 @@ const login = () => {
             </Link>
           </div>
         </div>
-        {auth.user.displayName}
+        {auth.user?.displayName}
 
         <div className="flex mx-auto mt-5">
           <SocialProvider provider="twitter" />
