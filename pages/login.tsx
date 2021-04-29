@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import Input from "~components/Form/Input";
 import Button from "~components/Form/Button";
 import SocialProvider from "~components/Login/SocialProvider";
-import { useAuthContext } from "~contexts/AuthContext";
 import Link from "next/link";
 
 const login = () => {
-  const auth = useAuthContext();
-
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -15,7 +12,7 @@ const login = () => {
     e.preventDefault();
 
     if (email && password) {
-      auth.emailPwdLogin(email, password);
+      
     }
   };
 
@@ -59,7 +56,6 @@ const login = () => {
             </Link>
           </div>
         </div>
-        {auth.user?.displayName}
 
         <div className="flex mx-auto mt-5">
           <SocialProvider provider="twitter" />
