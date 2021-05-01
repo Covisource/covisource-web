@@ -1,8 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
-import axios from "axios";
-import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default NextAuth({
   providers: [
@@ -35,9 +33,18 @@ export default NextAuth({
             },
           }),
         }).then((res) => res.json());
-        console.log(res);
 
-        return true;
+        if (res.success === false) {
+          if (res.code === "user_exists") {
+            console.log("User exists");
+            return true; // we can let the login continue, because the user exists, and can login
+          }
+
+          return `/signin-error?message=${res.mesage}`;
+        } else {
+          console.log("User Created")
+          return true;
+        }
       } else {
         return "/signin-error";
       }
