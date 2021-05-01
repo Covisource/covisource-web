@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
+import axios from "axios";
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 export default NextAuth({
   providers: [
@@ -18,6 +20,23 @@ export default NextAuth({
   callbacks: {
     async signIn(user, account, profile) {
       if (account.provider === "google" || account.provider === "twitter") {
+        // sign the user up if they arent yet
+        const res = await fetch(`${process.env.SERVER_URL}/auth/newUser`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: {
+              id: account.id,
+              name: user.name,
+              email: user.email,
+              provider: account.provider,
+            },
+          }),
+        }).then((res) => res.json());
+        console.log(res);
+
         return true;
       } else {
         return "/signin-error";
@@ -25,17 +44,13 @@ export default NextAuth({
     },
     async jwt(token, user, account, profile, isNewUser) {
       // generate a jwt and save it
-      if (account.id) {
-        const jwtToken = jwt.sign(
-          {
-            id: account.id,
-          },
-          "hi"
-        );
-        console.log(jwtToken);
-        token.jwt = jwtToken;
-      }
-      console.log(token)
+      const jwtToken = jwt.sign(
+        {
+          id: `${account?.provider}_${account?.id}`,
+        },
+        "hi"
+      );
+      token.jwt = jwtToken;
       return token;
     },
   },
