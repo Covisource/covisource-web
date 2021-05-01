@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/client";
 import React from "react";
 
 interface Props {
@@ -13,12 +14,14 @@ const SocialProvider = (props: Props) => {
     case "twitter":
       icon = <i className="fab fa-twitter"></i>;
       color = "blue-400";
-
+      clickHandler = () =>
+        signIn("twitter", { callbackUrl: `${process.env.BASE_URL}/` });
       break;
     case "google":
       icon = <i className="fab fa-google"></i>;
       color = "red-400";
-
+      clickHandler = () =>
+        signIn("google", { callbackUrl: `${process.env.BASE_URL}/` });
       break;
     case "facebook":
       icon = <i className="fab fa-facebook-f"></i>;
