@@ -30,8 +30,7 @@ export default NextAuth({
           {
             id: account.id,
           },
-          String(process.env.JWT_SECRET),
-          { expiresIn: "1h" }
+          "hi"
         );
         console.log(jwtToken);
         token.jwt = jwtToken;
