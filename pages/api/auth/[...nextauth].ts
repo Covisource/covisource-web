@@ -42,7 +42,7 @@ export default NextAuth({
 
           return `/signin-error?message=${res.mesage}`;
         } else {
-          console.log("User Created")
+          console.log("User Created");
           return true;
         }
       } else {
@@ -59,6 +59,9 @@ export default NextAuth({
       );
       token.jwt = jwtToken;
       return token;
+    },
+    async session(session, token) {
+      return session;
     },
   },
 });

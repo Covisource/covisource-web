@@ -11,6 +11,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script src="/cae5433c70.js"></script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAmMC4ZdLIClmqKd1sa9VMIZanVN6k0bs&libraries=places"></script>
           <title>CoviSource</title>
 
           <link
