@@ -1,42 +1,23 @@
 import axios from "axios";
-import { retrieveHereToken } from "helpers/hereToken";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { debounce } from "debounce";
+import { useHereContext } from "~contexts/HereContext";
 
 const Navbar = () => {
   const session = useSession();
   const user = session[0]?.user;
+  const hereToken = useHereContext();
 
   // router
   const router = useRouter();
 
-  // location
-  const [location, setLocation] = useState<string>("");
-  const [hereToken, setHereToken] = useState<string>("");
-  const [
-    inputChangedMoreThanOnce,
-    setInputChangedMoreThanOnce,
-  ] = useState<boolean>(false);
-
   const handleInputChange = debounce(async (e) => {
     // handle the user typing a location
-    setLocation(e.target.value);
-    setInputChangedMoreThanOnce(true);
+    const location = e.target.value;
 
-    if (!inputChangedMoreThanOnce) {
-      const res = await retrieveHereToken();
-      if (res.error) {
-        router.push(`/server-error?error=${res.message}`);
-      } else {
-        console.log(res.message);
-        setHereToken(res.token);
-      }
-    }
-    console.log(hereToken);
-
-    if (hereToken && location.replace(" ", "").length > 0) {
+    if (location.replace(" ", "").length > 0) {
       const res = await axios.get(
         `https://autosuggest.search.hereapi.com/v1/autosuggest?q=${location}&in=countryCode:IND&at=-13.163068,-72.545128`,
         {
@@ -47,7 +28,7 @@ const Navbar = () => {
       );
       console.log(res.data.items[0]);
     }
-  }, 1000);
+  }, 500);
 
   return (
     <div className="flex items-center justify-between">
