@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   className?: string;
+  subClassName?: string;
   prepend?: any;
   append?: any;
   placeholder?: string;
@@ -25,7 +26,9 @@ const Input = (props: Props) => {
         onChange={props.onChange}
         placeholder={props.placeholder || ""}
         id={props.id || ""}
-        className={`w-full bg-gray-200 placeholder-gray-700 border-none rounded-lg h-12 focus:ring-gray-700 focus:ring-1 ${props.prepend ? "pl-10" : ""} ${props.append ? "pr-8" : ""}`}
+        className={`w-full bg-gray-200 placeholder-gray-700 border-none rounded-lg h-12 focus:ring-0 text-sm ${
+          props.prepend ? "pl-10" : ""
+        } ${props.append ? "pr-8" : ""} ${props.subClassName || ""}`}
       />
       {props.append ? (
         <div className="absolute right-2">{props.append}</div>
