@@ -8,6 +8,7 @@ interface Props {
   placeholder?: string;
   id?: string;
   onChange?: any;
+  onKeyDown?: any;
   name?: string;
   type?: string;
 }
@@ -24,6 +25,7 @@ const Input = (props: Props) => {
         type={props.type || "text"}
         name={props.name}
         onChange={props.onChange}
+        onKeyDown={props.onKeyDown}
         placeholder={props.placeholder || ""}
         id={props.id || ""}
         className={`w-full bg-gray-200 placeholder-gray-700 border-none rounded-lg h-12 focus:ring-0 text-sm ${

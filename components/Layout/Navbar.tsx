@@ -1,9 +1,14 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
 import { debounce } from "debounce";
+
+// utils
 import { useHereContext } from "~contexts/HereContext";
+
+// components
+import Input from "~components/Form/Input";
 
 const Navbar = () => {
   const session = useSession();
@@ -14,7 +19,6 @@ const Navbar = () => {
   const router = useRouter();
 
   const handleInputChange = debounce(async (e) => {
-    // handle the user typing a location
     const location = e.target.value;
 
     if (location.replace(" ", "").length > 0) {
@@ -40,15 +44,12 @@ const Navbar = () => {
         />
         <img src="/logo-sm.png" alt="CoviSource" className="lg:hidden h-10" />
       </div>
-      <input onChange={handleInputChange} />
 
       <div className="flex items-center gap-3">
         <div className="h-12 flex items-center p-3 rounded-3xl bg-gray-200">
-          <div className="flex items-center gap-2 mr-10">
+          <div className="flex items-center gap-1 mr-2">
             <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
-            <span className="text-gray-700 text-sm font-medium">
-              Mumbai, India
-            </span>
+            <Input placeholder="Enter a location" className="w-auto" subClassName="text-gray-700 text-sm font-medium" onKeyDown={handleInputChange} />
           </div>
           <i className="fas fa-caret-down text-gray-700"></i>
         </div>
