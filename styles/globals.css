@@ -23,4 +23,21 @@
   );
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(3, 3, 3, 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(12, 11, 11, 0.7);
+  border-radius: 10px;
+}
+
 @tailwind utilities;

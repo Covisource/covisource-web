@@ -87,9 +87,14 @@ const Navbar = () => {
                 append={<i className="fas fa-caret-down text-gray-700"></i>}
               />
               <div
-                className={`absolute top-14 p-4 rounded-lg max-h-72 overflow-auto bg-gray-200 w-60 shadow-md transition-all ${
+                className={`absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 shadow-md transition-all ${
                   !locationPopupOpen && "hidden"
                 } `}
+                onClick={(e) => {
+                  setLocationPopupOpen(true);
+                  e.stopPropagation()
+                  e.preventDefault()
+                }}
               >
                 {isLoading && "Loading"}
                 {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
@@ -98,7 +103,6 @@ const Navbar = () => {
                       return (
                         <Hit
                           key={hit.id}
-                          address={hit.address.label}
                           title={hit.title}
                         />
                       );
