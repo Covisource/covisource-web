@@ -9,6 +9,9 @@ import { useHereContext } from "~contexts/HereContext";
 
 // components
 import Input from "~components/Form/Input";
+import Hit from "~components/Search/Hit";
+
+// schemas
 import HitSchema from "schema/HitSchema";
 
 const Navbar = () => {
@@ -62,20 +65,35 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center">
+          <div className="relative">
+            <Input
+              placeholder="Enter a location"
+              className="w-44 border-r border-gray-300"
+              subClassName="text-gray-700 text-sm font-medium rounded-r-none"
+              onChange={handleInputChange}
+              prepend={
+                <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
+              }
+              append={<i className="fas fa-caret-down text-gray-700"></i>}
+            />
+            <div className="absolute top-12">
+              {isLoading && "Loading"}
+              {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
+              {hits.length > 1
+                ? hits.map((hit: HitSchema) => {
+                    return (
+                      <Hit
+                        key={hit.id}
+                        address={hit.address.label}
+                        title={hit.title}
+                      />
+                    );
+                  })
+                : ""}
+            </div>
+          </div>
           <Input
-            placeholder="Enter a location"
-            className="w-44 border-r border-gray-300"
-            subClassName="text-gray-700 text-sm font-medium rounded-r-none"
-            onChange={handleInputChange}
-            prepend={
-              <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
-            }
-            append={<i className="fas fa-caret-down text-gray-700"></i>}
-          />
-          <Input
-            prepend={
-              <i className="fal fa-search text-gray-900 text-lg"></i>
-            }
+            prepend={<i className="fal fa-search text-gray-900 text-lg"></i>}
             subClassName="rounded-l-none text-gray-700 text-sm font-medium"
             className="w-96"
             placeholder="Find Resources..."
@@ -90,13 +108,6 @@ const Navbar = () => {
           />
         </div>
       </div>
-      {isLoading && "Loading"}
-      {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
-      {hits.length > 1
-        ? hits.map((hit: HitSchema) => {
-            return hit.title;
-          })
-        : ""}
     </>
   );
 };
