@@ -9,6 +9,7 @@ import { useHereContext } from "~contexts/HereContext";
 
 // components
 import Input from "~components/Form/Input";
+import HitSchema from "schema/HitSchema";
 
 const Navbar = () => {
   // config
@@ -60,19 +61,28 @@ const Navbar = () => {
           <img src="/logo-sm.png" alt="CoviSource" className="lg:hidden h-10" />
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="h-12 flex items-center p-3 rounded-3xl bg-gray-200">
-            <div className="flex items-center gap-1 mr-2">
+        <div className="flex items-center">
+          <Input
+            placeholder="Enter a location"
+            className="w-44 border-r border-gray-300"
+            subClassName="text-gray-700 text-sm font-medium rounded-r-none"
+            onChange={handleInputChange}
+            prepend={
               <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
-              <Input
-                placeholder="Enter a location"
-                className="w-auto"
-                subClassName="text-gray-700 text-sm font-medium"
-                onChange={handleInputChange}
-              />
-            </div>
-            <i className="fas fa-caret-down text-gray-700"></i>
-          </div>
+            }
+            append={<i className="fas fa-caret-down text-gray-700"></i>}
+          />
+          <Input
+            prepend={
+              <i className="fal fa-search text-gray-900 text-lg"></i>
+            }
+            subClassName="rounded-l-none text-gray-700 text-sm font-medium"
+            className="w-96"
+            placeholder="Find Resources..."
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
           <img
             src={user ? user.image : ""}
             alt="Profile Photo"
@@ -82,7 +92,11 @@ const Navbar = () => {
       </div>
       {isLoading && "Loading"}
       {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
-      {hits.length > 1 ? hits.map((hit) => hit.title) : ""}
+      {hits.length > 1
+        ? hits.map((hit: HitSchema) => {
+            return hit.title;
+          })
+        : ""}
     </>
   );
 };
