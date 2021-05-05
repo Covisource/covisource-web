@@ -38,7 +38,7 @@ const Navbar = () => {
         setIsLoading(true);
         setHits([]);
         const res = await axios.get(
-          `https://autosuggest.search.hereapi.com/v1/autosuggest?q=${location}&in=countryCode:IND&at=-13.163068,-72.545128`,
+          `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${location}&in=countryCode:IND&at=-13.163068,-72.545128`,
           {
             headers: {
               Authorization: "Bearer " + hereToken,
@@ -47,6 +47,7 @@ const Navbar = () => {
         );
         setIsLoading(false);
         setHits(res.data.items);
+        console.log(res.data.items);
       } catch (err) {
         console.error(err);
       }
@@ -92,18 +93,21 @@ const Navbar = () => {
                 } `}
                 onClick={(e) => {
                   setLocationPopupOpen(true);
-                  e.stopPropagation()
-                  e.preventDefault()
+                  e.stopPropagation();
+                  e.preventDefault();
                 }}
               >
                 {isLoading && "Loading"}
                 {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
-                {hits.length > 1
+                {hits.length > 0
                   ? hits.map((hit: HitSchema) => {
                       return (
                         <Hit
                           key={hit.id}
-                          title={hit.title}
+                          address={hit.address?.label
+                            .replace(", India", "")
+                            .replace(/^/ + hit.title + /,$/, "")}
+                          title={hit.title.replace(", India", "")}
                         />
                       );
                     })
