@@ -27,6 +27,9 @@ const Navbar = () => {
   const [hits, setHits] = useState<object[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // search field states
+  const [locationPopupOpen, setLocationPopupOpen] = useState<boolean>(false);
+
   const handleInputChange = debounce(async (e) => {
     const location = e.target.value;
 
@@ -56,48 +59,60 @@ const Navbar = () => {
     <>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <img
-            src="/logo.png"
-            alt="CoviSource"
-            className="hidden lg:block h-10"
-          />
-          <img src="/logo-sm.png" alt="CoviSource" className="lg:hidden h-10" />
-        </div>
-
-        <div className="flex items-center">
-          <div className="relative">
-            <Input
-              placeholder="Enter a location"
-              className="w-44 border-r border-gray-300"
-              subClassName="text-gray-700 text-sm font-medium rounded-r-none"
-              onChange={handleInputChange}
-              prepend={
-                <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
-              }
-              append={<i className="fas fa-caret-down text-gray-700"></i>}
+          <div className="mr-5">
+            <img
+              src="/logo.png"
+              alt="CoviSource"
+              className="hidden lg:block h-12"
             />
-            <div className="absolute top-12">
-              {isLoading && "Loading"}
-              {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
-              {hits.length > 1
-                ? hits.map((hit: HitSchema) => {
-                    return (
-                      <Hit
-                        key={hit.id}
-                        address={hit.address.label}
-                        title={hit.title}
-                      />
-                    );
-                  })
-                : ""}
-            </div>
+            <img
+              src="/logo-sm.png"
+              alt="CoviSource"
+              className="lg:hidden h-10"
+            />
           </div>
-          <Input
-            prepend={<i className="fal fa-search text-gray-900 text-lg"></i>}
-            subClassName="rounded-l-none text-gray-700 text-sm font-medium"
-            className="w-96"
-            placeholder="Find Resources..."
-          />
+
+          <div className="flex items-center">
+            <div className="relative">
+              <Input
+                placeholder="Enter a location"
+                className="w-44 border-r border-gray-300 ct-location_search shadow-md"
+                subClassName="text-gray-700 text-sm font-medium rounded-r-none"
+                onChange={handleInputChange}
+                onFocus={() => setLocationPopupOpen(true)}
+                onBlur={() => setLocationPopupOpen(false)}
+                prepend={
+                  <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
+                }
+                append={<i className="fas fa-caret-down text-gray-700"></i>}
+              />
+              <div
+                className={`absolute top-14 p-4 rounded-lg max-h-72 overflow-auto bg-gray-200 w-60 shadow-md transition-all ${
+                  !locationPopupOpen && "hidden"
+                } `}
+              >
+                {isLoading && "Loading"}
+                {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
+                {hits.length > 1
+                  ? hits.map((hit: HitSchema) => {
+                      return (
+                        <Hit
+                          key={hit.id}
+                          address={hit.address.label}
+                          title={hit.title}
+                        />
+                      );
+                    })
+                  : ""}
+              </div>
+            </div>
+            <Input
+              prepend={<i className="fal fa-search text-gray-900 text-lg"></i>}
+              subClassName="rounded-l-none text-gray-700 text-sm font-medium"
+              className="w-96 shadow-md"
+              placeholder="Find Resources..."
+            />
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
