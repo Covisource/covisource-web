@@ -45,8 +45,16 @@ const Navbar = () => {
             },
           }
         );
+        const toInsert: HitSchema[] = [];
+
+        (res.data.items as HitSchema[]).forEach((location) => {
+          if (location.position || location.access[0]) {
+            toInsert.push(location);
+          }
+        });
+        console.log(toInsert);
+        setHits(toInsert);
         setIsLoading(false);
-        setHits(res.data.items);
         console.log(res.data.items);
       } catch (err) {
         console.error(err);
@@ -125,6 +133,7 @@ const Navbar = () => {
                           .replace(", India", "")
                           .replace(hit.title + ",", "")}
                         title={hit.title.replace(", India", "")}
+                        // coordinates={[hit.access[0]?.lng, hit.access[0]?.lng]}
                       />
                     );
                   })
@@ -141,7 +150,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-3">
           <div
-            className="w-12 h-12 rounded-full ct-bg-grad"
+            className="w-12 h-12 rounded-full ct-bg-grad shadow-sm"
             style={{ padding: "2px" }}
           >
             <img
