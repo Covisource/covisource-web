@@ -47,14 +47,14 @@ const Navbar = () => {
         );
         const toInsert: HitSchema[] = [];
 
-        (res.data.items as HitSchema[]).forEach((location) => {
-          if (location.position || location.access[0]) {
-            toInsert.push(location);
+        (res.data.items as HitSchema[]).forEach((hit) => {
+          if (hit.position || hit.access?.length > 0) {
+            toInsert.push(hit);
           }
         });
         console.log(toInsert);
-        setHits(toInsert);
         setIsLoading(false);
+        setHits(toInsert);
         console.log(res.data.items);
       } catch (err) {
         console.error(err);
@@ -133,7 +133,11 @@ const Navbar = () => {
                           .replace(", India", "")
                           .replace(hit.title + ",", "")}
                         title={hit.title.replace(", India", "")}
-                        // coordinates={[hit.access[0]?.lng, hit.access[0]?.lng]}
+                        coordinates={
+                          hit.position
+                            ? [hit.position.lat, hit.position.lng]
+                            : [hit.access[0].lat, hit.access[0].lng]
+                        }
                       />
                     );
                   })
