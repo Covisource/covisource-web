@@ -83,7 +83,18 @@ const Navbar = () => {
                 onFocus={() => setLocationPopupOpen(true)}
                 onBlur={() => setLocationPopupOpen(false)}
                 prepend={
-                  <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
+                  isLoading ? (
+                    <svg
+                      className="animate-spin h-4 w-4 rounded-full border-2 border-purple-500 border-opacity-50"
+                      style={{
+                        borderRightColor: "#E5E7EB",
+                        borderTopColor: "#E5E7EB",
+                      }}
+                      viewBox="0 0 24 24"
+                    ></svg>
+                  ) : (
+                    <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
+                  )
                 }
                 append={<i className="fas fa-caret-down text-gray-700"></i>}
               />
@@ -113,8 +124,8 @@ const Navbar = () => {
                           key={hit.id}
                           address={hit.address?.label
                             .replace(", India", "")
-                            .replace(/^/ + hit.title + /$/, "")
-                            .replace(/^/ + hit.title + /$/, "")}
+                            .replace(hit.title + ",", "")
+                          }
                           title={hit.title.replace(", India", "")}
                         />
                       );

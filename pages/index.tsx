@@ -4,9 +4,7 @@ import React from "react";
 export default function Home() {
   return (
     <Layout>
-      <div className="">
-        hi
-      </div>
+      <div className=""></div>
     </Layout>
   );
 }
