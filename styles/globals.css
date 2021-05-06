@@ -15,12 +15,22 @@
 }
 
 .ct-bg-grad {
-  background: rgb(110, 231, 183);
   background: linear-gradient(
-    45deg,
-    rgba(110, 231, 183, 0.7) 0%,
-    rgba(67, 56, 202, 0.7) 100%
+    -45deg,
+    rgba(28, 201, 131, 0.7),
+    rgba(88, 74, 245, 0.7)
   );
+}
+
+.ct-text-grad {
+  background: linear-gradient(
+    -45deg,
+    rgba(28, 201, 131, 0.7),
+    rgba(88, 74, 245, 0.7)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 ::-webkit-scrollbar {
