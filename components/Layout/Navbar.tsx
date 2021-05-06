@@ -91,14 +91,21 @@ const Navbar = () => {
                 className={`absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 shadow-md transition-all ${
                   !locationPopupOpen && "hidden"
                 } `}
-                onClick={(e) => {
-                  setLocationPopupOpen(true);
-                  e.stopPropagation();
-                  e.preventDefault();
-                }}
               >
-                {isLoading && "Loading"}
-                {hits.length < 1 && !isLoading ? "No Results Found..." : ""}
+                {(hits.length < 1 || isLoading) && (
+                  <div className="flex items-center gap-2 py-4 px-3 border-b border-gray-300 text-gray-700 select-none hover:bg-gray-300 cursor-pointer">
+                    <i className="fal fa-radar text-xl text-purple-400"></i>
+                    <div className="flex flex-col justify-center gap-1">
+                      <span className="text-purple-400 text">
+                        Auto Detect Location
+                      </span>
+                      <span className="text-xs text-gray-600 font-light">
+                        Click Allow If Your Browser Prompts You
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {hits.length > 0
                   ? hits.map((hit: HitSchema) => {
                       return (
@@ -106,7 +113,8 @@ const Navbar = () => {
                           key={hit.id}
                           address={hit.address?.label
                             .replace(", India", "")
-                            .replace(/^/ + hit.title + /,$/, "")}
+                            .replace(/^/ + hit.title + /$/, "")
+                            .replace(/^/ + hit.title + /$/, "")}
                           title={hit.title.replace(", India", "")}
                         />
                       );

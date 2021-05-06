@@ -2,9 +2,9 @@ import React from "react";
 
 const Hit = (props) => {
   return (
-    <div className="flex flex-col justify-center gap-2 py-3 px-2 border-b border-gray-300 text-gray-700">
+    <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-300 text-gray-700 select-none hover:bg-gray-300 cursor-pointer">
         <span className="truncate">{props.title}</span>
-        <span className="truncate text-sm text-gray-600">{props.address}</span>
+        <span className="truncate text-xs text-gray-600">{props.address}</span>
       </div>
   );
 };
