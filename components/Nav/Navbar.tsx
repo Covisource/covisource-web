@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 
 // components
 import SearchBar from "~components/Nav/SearchBar";
+import Button from "~components/Form/Button";
+
+// schemas
 import SessionSchema from "schema/SessionSchema";
 
 const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
@@ -14,8 +17,8 @@ const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
   const router = useRouter();
 
   return (
-    <>
-      <div className="flex items-center justify-between">
+    <div className="border-b border-gray-200 shadow-sm">
+      <div className="flex items-center justify-between mx-auto py-4 px-6">
         <div className="flex items-center">
           <div className="">
             <span className="hidden lg:block ct-text-grad text-2xl font-bold">
@@ -34,20 +37,18 @@ const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
           setLocationBoxOpen={setLocationBoxOpen}
         />
 
-        <div className="flex items-center gap-3">
-          <div
-            className="w-12 h-12 rounded-full ct-bg-grad shadow-sm"
-            style={{ padding: "2px" }}
-          >
-            <img
-              src={user ? user.picture : ""}
-              alt="Profile Photo"
-              className="rounded-full object-contain"
-            />
-          </div>
+        <div className="flex items-center">
+          <img
+            src={user ? user.picture : ""}
+            alt="Profile Photo"
+            className="rounded-full object-contain w-9 h-9 mr-4"
+          />
+          <Button className="bg-purple-400 text-white text-sm rounded-lg">
+            Create
+          </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

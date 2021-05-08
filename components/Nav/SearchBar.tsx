@@ -55,7 +55,7 @@ const Search = ({ locationBoxOpen, setLocationBoxOpen }) => {
       <div className="relative">
         <Input
           placeholder="Enter a location"
-          className="w-44 border-r border-gray-300 ct-location_search shadow-md"
+          className="w-44 border-r border-gray-400 ct-location_search"
           subClassName="text-gray-700 text-sm font-medium rounded-r-none"
           onChange={handleInputChange}
           onFocus={() => setLocationBoxOpen(true)}
@@ -80,7 +80,7 @@ const Search = ({ locationBoxOpen, setLocationBoxOpen }) => {
         {locationBoxOpen && (
           <div
             className={
-              "absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 shadow-md transition-all"
+              "absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 transition-all"
             }
           >
             {(hits.length < 1 || isLoading) && (
@@ -122,7 +122,7 @@ const Search = ({ locationBoxOpen, setLocationBoxOpen }) => {
       <Input
         prepend={<i className="fal fa-search text-gray-900 text-lg"></i>}
         subClassName="rounded-l-none text-gray-700 text-sm font-medium"
-        className="w-96 shadow-md"
+        className="w-96"
         placeholder="Find Resources..."
       />
     </div>

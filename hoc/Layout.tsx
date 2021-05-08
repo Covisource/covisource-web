@@ -22,12 +22,12 @@ const Layout = ({ children }) => {
   }, []);
 
   return (
-    <div className="container mx-auto pt-4 h-screen" ref={containerRef}>
+    <div className="h-screen" ref={containerRef}>
       <Navbar
         locationBoxOpen={locationBoxOpen}
         setLocationBoxOpen={setLocationBoxOpen}
       />
-      <div className="mt-5">{children}</div>
+      <div className="mt-5 container">{children}</div>
     </div>
   );
 };
