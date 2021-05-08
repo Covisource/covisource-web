@@ -1,4 +1,6 @@
+import { useSession } from "next-auth/client";
 import React from "react";
+import SessionSchema from "schema/SessionSchema";
 
 interface Props {
   title: string;
@@ -7,8 +9,26 @@ interface Props {
 }
 
 const Hit = (props: Props) => {
+  const user: SessionSchema = useSession()[0] as any;
+  console.log(user.jwt);
   const handleHitClick = async () => {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`)
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `token ${user.jwt}`,
+        },
+        body: JSON.stringify({
+          coordinates: {
+            long: props.coordinates[0],
+            lat: props.coordinates[1],
+          },
+        }),
+      }
+    );
+    console.log(res);
   };
 
   return (
