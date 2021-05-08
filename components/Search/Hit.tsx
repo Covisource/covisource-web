@@ -6,6 +6,7 @@ interface Props {
   title: string;
   address: string;
   coordinates: number[];
+  setLocationBoxOpen: any;
 }
 
 const Hit = (props: Props) => {
@@ -18,7 +19,7 @@ const Hit = (props: Props) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `token ${user.jwt}`,
+          Authorization: `token ${user?.jwt}`,
         },
         body: JSON.stringify({
           coordinates: {
@@ -28,7 +29,11 @@ const Hit = (props: Props) => {
         }),
       }
     );
-    console.log(res);
+
+    (document.getElementById("navbarLocationSearch") as any).value =
+      props.title;
+
+    props.setLocationBoxOpen(false);
   };
 
   return (

@@ -59,6 +59,7 @@ const Search = ({ locationBoxOpen, setLocationBoxOpen }) => {
           subClassName="text-gray-700 text-sm font-medium rounded-r-none"
           onChange={handleInputChange}
           onFocus={() => setLocationBoxOpen(true)}
+          id="navbarLocationSearch"
           prepend={
             isLoading ? (
               <svg
@@ -110,6 +111,7 @@ const Search = ({ locationBoxOpen, setLocationBoxOpen }) => {
                           ? [hit.position.lat, hit.position.lng]
                           : [hit.position.lat, hit.position.lng]
                       }
+                      setLocationBoxOpen={setLocationBoxOpen}
                     />
                   );
                 })
