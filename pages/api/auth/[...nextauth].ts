@@ -51,15 +51,19 @@ export default NextAuth({
     },
     async jwt(token, user, account, profile, isNewUser) {
       // generate a jwt and save it
-      const jwtToken = jwt.sign(
-        {
-          id: `${account?.provider}_${account?.id}`,
-        },
-        "hi"
-      );
-      console.log(jwtToken);
-      token.jwt = jwtToken;
+      if (!token.jwt) {
+        const jwtToken = jwt.sign(
+          {
+            id: `${account?.provider}_${account?.id}`,
+          },
+          "hi"
+        );
+        token.jwt = jwtToken;
+      }
       return token;
+    },
+    async session(session, user) {
+      return user;
     },
   },
 });

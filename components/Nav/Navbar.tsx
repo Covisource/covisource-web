@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 
 // components
 import SearchBar from "~components/Nav/SearchBar";
+import SessionSchema from "schema/SessionSchema";
 
 const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
   // config
-  const session = useSession();
-  const user = session[0]?.user;
+  const user: SessionSchema = useSession()[0] as any;
 
   // router
   const router = useRouter();
@@ -40,7 +40,7 @@ const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
             style={{ padding: "2px" }}
           >
             <img
-              src={user ? user.image : ""}
+              src={user ? user.picture : ""}
               alt="Profile Photo"
               className="rounded-full object-contain"
             />

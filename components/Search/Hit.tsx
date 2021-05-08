@@ -7,8 +7,8 @@ interface Props {
 }
 
 const Hit = (props: Props) => {
-  const handleHitClick = () => {
-    console.log(props.coordinates);
+  const handleHitClick = async () => {
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`)
   };
 
   return (
