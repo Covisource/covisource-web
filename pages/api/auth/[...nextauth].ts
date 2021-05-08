@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 
 export default NextAuth({
   providers: [
@@ -19,11 +20,11 @@ export default NextAuth({
     async signIn(user, account, profile) {
       if (account.provider === "google" || account.provider === "twitter") {
         // sign the user up if they arent yet
-        const res = await fetch(`${process.env.SERVER_URL}/auth/newUser`, {
-          method: "POST",
+        const res = await fetch("http://localhost:8000/user/newUser", {
           headers: {
             "Content-Type": "application/json",
           },
+          method: "POST",
           body: JSON.stringify({
             user: {
               id: account.id,
@@ -39,7 +40,6 @@ export default NextAuth({
             console.log("User exists");
             return true; // we can let the login continue, because the user exists, and can login
           }
-
           return `/signin-error?message=${res.mesage}`;
         } else {
           console.log("User Created");
@@ -57,11 +57,9 @@ export default NextAuth({
         },
         "hi"
       );
+      console.log(jwtToken);
       token.jwt = jwtToken;
       return token;
-    },
-    async session(session, token) {
-      return session;
     },
   },
 });
