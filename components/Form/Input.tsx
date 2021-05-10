@@ -33,7 +33,7 @@ const Input = (props: Props) => {
         placeholder={props.placeholder || ""}
         id={props.id || ""}
         autoComplete="off"
-        className={`w-full placeholder-gray-800 ct-bg-muted font-semibold border-none rounded-lg h-14 focus:ring-0 text-sm ${
+        className={`w-full font-semibold border-none rounded-lg h-14 focus:ring-0 text-sm ${
           props.prepend ? "pl-10" : ""
         } ${props.append ? "pr-8" : ""} ${props.subClassName || ""}`}
       />

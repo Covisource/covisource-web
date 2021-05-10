@@ -58,7 +58,7 @@ const Search = () => {
 
   return (
     <div
-      className={`flex items-center shadow-2xl transition-all mb-10 ${
+      className={`flex items-center shadow-2xl transition-all mb-10 ct-bg-grad rounded-lg ${
         !locationBoxOpen && ""
       }`}
       id="searchbar_home"
@@ -67,7 +67,7 @@ const Search = () => {
         <Input
           placeholder="Enter a location"
           className="border-r border-gray-400 ct-location_search"
-          subClassName="text-gray-700 text-sm font-medium rounded-r-none"
+          subClassName="text-gray-200 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-200"
           onChange={handleInputChange}
           onFocus={() => setLocationBoxOpen(true)}
           id="navbarLocationSearch"
@@ -82,10 +82,10 @@ const Search = () => {
                 viewBox="0 0 24 24"
               ></svg>
             ) : (
-              <i className="fad fa-map-marker-alt text-purple-500 text-2xl"></i>
+              <i className="fad fa-map-marker-alt text-gray-200 text-2xl"></i>
             )
           }
-          append={<i className="fas fa-caret-down text-gray-700"></i>}
+          append={<i className="fas fa-caret-down text-gray-200"></i>}
         />
 
         {locationBoxOpen && (
@@ -131,8 +131,8 @@ const Search = () => {
         )}
       </div>
       <Input
-        prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
-        subClassName="rounded-l-none text-gray-700 text-sm font-medium"
+        prepend={<i className="fal fa-search text-gray-200 text-lg"></i>}
+        subClassName="rounded-l-none text-gray-200 text-sm font-medium bg-transparent placeholder-gray-200"
         className="w-2/3"
         placeholder="Find Resources..."
       />
