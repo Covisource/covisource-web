@@ -3,7 +3,7 @@ import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 
 // components
-import SearchBar from "~components/Nav/SearchBar";
+import SearchBar from "~components/Search/SearchBar";
 import Button from "~components/Form/Button";
 
 // schemas
@@ -38,14 +38,18 @@ const Navbar = ({ locationBoxOpen, setLocationBoxOpen }) => {
         />
 
         <div className="flex items-center">
+          <span className="relative mr-2 ">
+            {/* <span className="bg-red-500 rounded-full h-2 w-2 text-white p-1 absolute top-0 right-0 grid place-items-center"></span> */}
+            <i className="fas fa-handshake-alt text-black text-2xl"></i>
+          </span>
           <img
             src={user ? user.picture : ""}
             alt="Profile Photo"
-            className="rounded-full object-contain w-9 h-9 mr-4"
+            className="rounded-full object-contain w-10 h-10 mr-4"
           />
-          <Button className="bg-purple-400 text-white text-sm rounded-lg">
+          {/* <Button className="bg-purple-400 text-white text-sm rounded-lg">
             Create
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
