@@ -24,9 +24,28 @@ const Navbar = () => {
                     <i className="fal fa-bars"></i>
                   )}
                 </Menu.Button>
-                <Menu.Items className="lg:hidden absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="px-2 pt-2 pb-3 space-y-1">
-                    <a>KJSBFJHDUJHsfbjhk</a>
+                <Menu.Items className="lg:hidden absolute right-0 w-56 mt-2 origin-top-right bg-gray-900 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col gap-3">
+                    <div>
+                    <NavItem
+                      title="Add Resource"
+                      icon={<i className="fas fa-plus"></i>}
+                      hamburger={true}
+                    />
+                    <NavItem
+                      title="Partner"
+                      icon={<i className="fas fa-handshake-alt"></i>}
+                      hamburger={true}
+                    />
+                    <NavItem
+                      title="Donate"
+                      icon={<i className="fas fa-hands-usd"></i>}
+                      hamburger={true}
+                    />
+                    </div>
+                    <Button className="bg-gray-50 ct-text-color rounded-md ct-font-mont font-semibold text-sm py-2">
+                      Login
+                    </Button>
                   </div>
                 </Menu.Items>
               </>
@@ -38,12 +57,18 @@ const Navbar = () => {
           <NavItem
             title="Add Resource"
             icon={<i className="fas fa-plus"></i>}
+            hamburger={false}
           />
           <NavItem
             title="Partner"
             icon={<i className="fas fa-handshake-alt"></i>}
+            hamburger={false}
           />
-          <NavItem title="Donate" icon={<i className="fas fa-hands-usd"></i>} />
+          <NavItem
+            title="Donate"
+            icon={<i className="fas fa-hands-usd"></i>}
+            hamburger={false}
+          />
           <Button className="bg-gray-50 ct-text-color rounded-md ct-font-mont font-semibold text-sm py-2">
             Login
           </Button>
