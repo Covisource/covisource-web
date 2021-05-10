@@ -6,7 +6,7 @@ import HomeNavbar from "~components/Landing/Nav/Navbar";
 
 const Layout = ({ children, page }) => {
   return (
-    <div className="h-screen pt-4">
+    <div className="h-screen p-4">
       {page === "home" ? <HomeNavbar /> : <Navbar />}
       <div
         className="overflow-auto"
