@@ -36,19 +36,11 @@
 }
 
 .ct-bg-grad {
-  background: linear-gradient(
-    -45deg,
-    rgba(28, 201, 131, 0.7),
-    rgba(88, 74, 245, 0.7)
-  );
+  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
 }
 
 .ct-text-grad {
-  background: linear-gradient(
-    -45deg,
-    rgba(28, 201, 131, 0.7),
-    rgba(88, 74, 245, 0.7)
-  );
+  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
