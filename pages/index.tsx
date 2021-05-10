@@ -19,6 +19,13 @@ export default function Home() {
           nemo animi, numquam nulla
         </p>
         <SearchBar />
+        <div className="flex items-center ct-font-mont font-semibold ct-font-muted gap-3">
+          <span>1m+ users helped</span>
+          <i className="fas fa-circle ct-circle-sep"></i>
+          <span>500k Resources Uploaded</span>
+          <i className="fas fa-circle ct-circle-sep"></i>
+          <span>10k Vendors</span>
+        </div>
       </div>
     </Layout>
   );

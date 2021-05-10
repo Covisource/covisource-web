@@ -58,7 +58,7 @@ const Search = () => {
 
   return (
     <div
-      className={`flex items-center shadow-2xl transition-all ${
+      className={`flex items-center shadow-2xl transition-all mb-10 ${
         !locationBoxOpen && ""
       }`}
       id="searchbar_home"

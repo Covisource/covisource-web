@@ -54,6 +54,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+.ct-circle-sep {
+  font-size: 5px;
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
