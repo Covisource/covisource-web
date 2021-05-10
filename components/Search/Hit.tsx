@@ -11,7 +11,6 @@ interface Props {
 
 const Hit = (props: Props) => {
   const user: SessionSchema = useSession()[0] as any;
-  console.log(user.jwt);
   const handleHitClick = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`,

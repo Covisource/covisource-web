@@ -32,6 +32,7 @@ const Input = (props: Props) => {
         onBlur={props.onBlur}
         placeholder={props.placeholder || ""}
         id={props.id || ""}
+        autoComplete="off"
         className={`w-full bg-gray-200 placeholder-gray-700 border-none rounded-lg h-12 focus:ring-0 text-sm ${
           props.prepend ? "pl-10" : ""
         } ${props.append ? "pr-8" : ""} ${props.subClassName || ""}`}

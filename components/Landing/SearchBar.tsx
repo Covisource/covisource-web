@@ -57,7 +57,7 @@ const Search = () => {
   }, 500);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center" id="searchbar_home">
       <div className="relative">
         <Input
           placeholder="Enter a location"
