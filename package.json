@@ -18,7 +18,8 @@
     "next-auth": "^3.19.2",
     "places.js": "^1.19.0",
     "react": "next",
-    "react-dom": "next"
+    "react-dom": "next",
+    "react-text-loop": "^2.3.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

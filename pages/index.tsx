@@ -1,14 +1,23 @@
 import Layout from "~hoc/Layout";
-import React from "react";
-import SearchBar from "~components/Landing/SearchBar";
+import React, { useEffect } from "react";
+import SearchBar from "~components/Landing/Search/SearchBar";
+import TextLoop from "react-text-loop";
 
 export default function Home() {
+  const changingWords = ["Injections", "Medicine", "Plasma", "Oxygen"];
+
   return (
     <Layout page="home">
       <div className="flex flex-col justify-center h-full lg:w-3/5">
         <h1 className="ct-font-mont font-bold text-4xl lg:text-5xl xl:text-6xl mb-4">
-          Find{" "}
-          <span className="ct-text-grad ct-font-mont font-bold">Plasma</span>
+          Find
+          <TextLoop springConfig={{ stiffness: 180, damping: 8 }}>
+            {changingWords.map((word, index) => (
+              <span key={index} className="ct-text-grad ct-font-mont font-bold">
+                {word}
+              </span>
+            ))}
+          </TextLoop>
           <br />
           From Anywhere In
           <br />

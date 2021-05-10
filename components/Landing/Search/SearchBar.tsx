@@ -6,7 +6,7 @@ import { useHereContext } from "~contexts/HereContext";
 
 // components
 import Input from "~components/Form/Input";
-import Hit from "~components/Search/Hit";
+import LocationPopup from "~components/Landing/Search/LocationPopup";
 
 // schemas
 import HitSchema from "schema/HitSchema";
@@ -58,9 +58,7 @@ const Search = () => {
 
   return (
     <div
-      className={`flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg ${
-        !locationBoxOpen && ""
-      }`}
+      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
       id="searchbar_home"
     >
       <div className="relative w-1/3">
@@ -88,47 +86,7 @@ const Search = () => {
           append={<i className="fas fa-caret-down ct-text-color"></i>}
         />
 
-        {locationBoxOpen && (
-          <div
-            className={
-              "absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80"
-            }
-          >
-            {(hits.length < 1 || isLoading) && (
-              <div className="flex items-center gap-2 py-4 px-3 text-gray-700 select-none hover:bg-gray-300 cursor-pointer">
-                <i className="fal fa-radar text-xl text-purple-400"></i>
-                <div className="flex flex-col justify-center gap-1">
-                  <span className="text-purple-400 text">
-                    Auto Detect Location
-                  </span>
-                  <span className="text-xs text-gray-600 font-light">
-                    Click Allow If Your Browser Prompts You
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {hits.length > 0
-              ? hits.map((hit: HitSchema) => {
-                  return (
-                    <Hit
-                      key={hit.id}
-                      address={hit.address?.label
-                        .replace(", India", "")
-                        .replace(hit.title + ",", "")}
-                      title={hit.title.replace(", India", "")}
-                      coordinates={
-                        hit.position
-                          ? [hit.position.lat, hit.position.lng]
-                          : [hit.position.lat, hit.position.lng]
-                      }
-                      setLocationBoxOpen={setLocationBoxOpen}
-                    />
-                  );
-                })
-              : ""}
-          </div>
-        )}
+        {locationBoxOpen && <LocationPopup hits={hits} isLoading={isLoading} />}
       </div>
       <Input
         prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
