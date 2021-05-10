@@ -31,6 +31,10 @@
   color: #d3d3d3;
 }
 
+.ct-bg-muted {
+  background-color: #e5e7eb;
+}
+
 .ct-bg-grad {
   background: linear-gradient(
     -45deg,
@@ -65,6 +69,10 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(43, 40, 40, 0.7);
   border-radius: 10px;
+}
+
+::placeholder {
+  color: #333a46;
 }
 
 @tailwind utilities;

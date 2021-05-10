@@ -57,11 +57,16 @@ const Search = () => {
   }, 500);
 
   return (
-    <div className="flex items-center" id="searchbar_home">
-      <div className="relative">
+    <div
+      className={`flex items-center shadow-2xl transition-all ${
+        !locationBoxOpen && ""
+      }`}
+      id="searchbar_home"
+    >
+      <div className="relative w-1/3">
         <Input
           placeholder="Enter a location"
-          className="w-44 border-r border-gray-400 ct-location_search"
+          className="border-r border-gray-400 ct-location_search"
           subClassName="text-gray-700 text-sm font-medium rounded-r-none"
           onChange={handleInputChange}
           onFocus={() => setLocationBoxOpen(true)}
@@ -86,7 +91,7 @@ const Search = () => {
         {locationBoxOpen && (
           <div
             className={
-              "absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 transition-all"
+              "absolute top-14 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80"
             }
           >
             {(hits.length < 1 || isLoading) && (
@@ -126,9 +131,9 @@ const Search = () => {
         )}
       </div>
       <Input
-        prepend={<i className="fal fa-search text-gray-900 text-lg"></i>}
+        prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
         subClassName="rounded-l-none text-gray-700 text-sm font-medium"
-        className="w-96"
+        className="w-2/3"
         placeholder="Find Resources..."
       />
     </div>

@@ -14,7 +14,7 @@ export default function Home() {
           <br />
           India.
         </h1>
-        <p className="ct-font-mont ct-font-muted font-semibold text-md leading-5">
+        <p className="ct-font-mont ct-font-muted font-semibold text-md leading-5 mb-8">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque placeat
           nemo animi, numquam nulla
         </p>
