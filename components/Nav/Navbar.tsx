@@ -17,7 +17,7 @@ const Navbar = () => {
   const router = useRouter();
 
   return (
-    <div className="border-b border-gray-200 shadow-sm">
+    <div className="border-b border-gray-200 shadow-sm container mx-auto">
       <div className="flex items-center justify-between mx-auto py-4 px-6">
         <div className="flex items-center">
           <div className="">

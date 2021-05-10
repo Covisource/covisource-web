@@ -4,7 +4,7 @@ import NavItem from "./NavItem";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between container mx-auto">
       <div>
         <span className="text-xl font-extrabold tracking-wide">CoviSource</span>
       </div>
