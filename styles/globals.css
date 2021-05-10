@@ -1,26 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 
 * {
-  font-family: "Roboto", "sans-serif";
+  font-family: "Raleway", "sans-serif";
   line-height: 14px;
   letter-spacing: 0em;
   font-weight: 400;
+}
+
+.ct-font-mont {
+  font-family: "Montserrat", "sans-serif";
+}
+
+.ct-bg {
+  background-color: #333a46;
+}
+
+.ct-text-color {
+  color: #333a46;
 }
 
 .ct-shadow {
   box-shadow: 0 0 50px rgba(87, 85, 85, 0.219);
 }
 
+.ct-font-muted {
+  color: #d3d3d3;
+}
+
 .ct-bg-grad {
-  background: rgb(110, 231, 183);
   background: linear-gradient(
-    45deg,
-    rgba(110, 231, 183, 0.7) 0%,
-    rgba(67, 56, 202, 0.7) 100%
+    -45deg,
+    rgba(28, 201, 131, 0.7),
+    rgba(88, 74, 245, 0.7)
   );
+}
+
+.ct-text-grad {
+  background: linear-gradient(
+    -45deg,
+    rgba(28, 201, 131, 0.7),
+    rgba(88, 74, 245, 0.7)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(3, 3, 3, 0.15);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(43, 40, 40, 0.7);
+  border-radius: 10px;
 }
 
 @tailwind utilities;

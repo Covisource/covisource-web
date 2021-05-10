@@ -33,7 +33,7 @@
     "~": "./"
   },
   "description": "The web server for covisource",
-  "repository": "https://github.com/Covisource/covisource-web/",
+  "repository": "https://github.com/Covisource/covisource-web",
   "author": "Aaryaman Maheshwari <fullstackslayer@gmail.com>",
   "license": "Apache-2.0"
 }

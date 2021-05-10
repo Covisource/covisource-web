@@ -9,7 +9,7 @@ interface Props {
 
 const Button = (props: Props) => {
   return (
-    <a href={props.href || ""} className={`p-2 flex items-center justify-center text-lg rounded-lg ${props.className}`} onClick={props.onClick}>
+    <a href={props.href || ""} className={`flex items-center content-center justify-center px-4 ${props.className}`} onClick={props.onClick}>
       {props.children}
     </a>
   );
