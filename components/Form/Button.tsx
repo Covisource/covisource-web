@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 interface Props {
   href?: string;
@@ -8,11 +9,27 @@ interface Props {
 }
 
 const Button = (props: Props) => {
-  return (
-    <a href={props.href || ""} className={`flex items-center content-center justify-center px-4 ${props.className}`} onClick={props.onClick}>
-      {props.children}
-    </a>
-  );
+  if (props.href) {
+    return (
+      <Link href={props.href}>
+        <a
+          className={`flex items-center content-center justify-center px-4 ${props.className}`}
+          // onClick={props.onClick || ""}
+        >
+          {props.children}
+        </a>
+      </Link>
+    );
+  } else {
+    return (
+      <a
+        className={`flex items-center content-center justify-center px-4 ${props.className}`}
+        onClick={props.onClick}
+      >
+        {props.children}
+      </a>
+    );
+  }
 };
 
 export default Button;
