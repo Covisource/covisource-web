@@ -20,6 +20,7 @@
       "~styles/*": ["styles/*"], 
       "~hoc/*": ["hoc/*"],
       "~contexts/*": ["contexts/*"],
+      "~schema/*": ["schema/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

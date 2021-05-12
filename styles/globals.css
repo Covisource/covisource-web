@@ -31,23 +31,23 @@
   color: #d3d3d3;
 }
 
+.ct-bg-muted {
+  background-color: #e5e7eb;
+}
+
 .ct-bg-grad {
-  background: linear-gradient(
-    -45deg,
-    rgba(28, 201, 131, 0.7),
-    rgba(88, 74, 245, 0.7)
-  );
+  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
 }
 
 .ct-text-grad {
-  background: linear-gradient(
-    -45deg,
-    rgba(28, 201, 131, 0.7),
-    rgba(88, 74, 245, 0.7)
-  );
+  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.ct-circle-sep {
+  font-size: 5px;
 }
 
 ::-webkit-scrollbar {
@@ -65,6 +65,10 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(43, 40, 40, 0.7);
   border-radius: 10px;
+}
+
+::placeholder {
+  color: #333a46;
 }
 
 @tailwind utilities;

@@ -6,12 +6,11 @@ interface Props {
   title: string;
   address: string;
   coordinates: number[];
-  setLocationBoxOpen: any;
 }
 
 const Hit = (props: Props) => {
   const user: SessionSchema = useSession()[0] as any;
-  console.log(user.jwt);
+
   const handleHitClick = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`,
@@ -32,8 +31,6 @@ const Hit = (props: Props) => {
 
     (document.getElementById("navbarLocationSearch") as any).value =
       props.title;
-
-    props.setLocationBoxOpen(false);
   };
 
   return (

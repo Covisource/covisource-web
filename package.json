@@ -8,6 +8,7 @@
     "start": "link-module-alias && next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.2.0",
     "@tailwindcss/forms": "^0.3.2",
     "axios": "^0.21.1",
     "debounce": "^1.2.1",
@@ -17,7 +18,9 @@
     "next-auth": "^3.19.2",
     "places.js": "^1.19.0",
     "react": "next",
-    "react-dom": "next"
+    "react-dom": "next",
+    "react-select-search": "^3.0.7",
+    "react-text-loop": "^2.3.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
