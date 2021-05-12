@@ -6,7 +6,7 @@ import HomeNavbar from "~components/Landing/Nav/Navbar";
 
 const Layout = ({ children, page }) => {
   return (
-    <div className="h-screen p-4">
+    <div className="h-screen">
       {page === "home" ? <HomeNavbar /> : <Navbar />}
       <div
         className="overflow-auto"
@@ -14,7 +14,7 @@ const Layout = ({ children, page }) => {
           height: "calc(100vh - 3.3rem)",
         }}
       >
-        <div className="container mx-auto h-full w-full">{children}</div>
+        <div className="container mx-auto h-full w-full p-4">{children}</div>
       </div>
     </div>
   );
