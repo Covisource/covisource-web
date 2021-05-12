@@ -1,6 +1,6 @@
 import axios from "axios";
 import { debounce } from "debounce";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useHereContext } from "~contexts/HereContext";
 
@@ -18,25 +18,21 @@ const Search = () => {
   const [locationBoxOpen, setLocationBoxOpen] = useState(false);
   const locationBoxRef = useRef(null);
 
-  const handleClick = () => {
-    if (!locationBoxOpen) {
-      // attach/remove event handler
-      document.addEventListener("click", handleOutsideClick, false);
-    } else {
-      document.removeEventListener("click", handleOutsideClick, false);
-    }
-
-    setLocationBoxOpen((cur) => !cur);
-  };
-
-  const handleOutsideClick = (e) => {
-    // ignore clicks on the component itself
-    if (locationBoxRef.current.contains(e.target)) {
+  const handleDocumentClick = (e) => {
+    console.log(locationBoxRef);
+    // if the user clicks on the popup itself
+    if (locationBoxRef.current?.contains(e.target)) {
       return;
     }
 
-    handleClick();
+    setLocationBoxOpen(false);
   };
+
+  useEffect(() => {
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, []);
 
   // state
   const [hits, setHits] = useState<object[]>([]);
@@ -106,6 +102,7 @@ const Search = () => {
 
         {locationBoxOpen && (
           <LocationPopup
+            ref={locationBoxRef}
             hits={hits}
             isLoading={isLoading}
             setLocationBoxOpen={setLocationBoxOpen}

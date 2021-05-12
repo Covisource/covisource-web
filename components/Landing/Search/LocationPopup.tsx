@@ -5,21 +5,18 @@ import Hit from "~components/Search/Hit";
 
 // schemas
 import HitSchema from "schema/HitSchema";
+import { forwardRef } from "react";
 
-const LocationPopup = ({
-  hits,
-  isLoading,
-  setLocationBoxOpen,
-  locationBoxRef,
-}) => {
+const LocationPopup = forwardRef((props: any, ref) => {
+  console.log(ref)
   return (
     <div
       className={
         "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 locationSearchPopup"
       }
-      ref={locationBoxRef}
+      ref={ref}
     >
-      {(hits.length < 1 || isLoading) && (
+      {(props.hits.length < 1 || props.isLoading) && (
         <div className="flex items-center gap-2 py-4 px-3 text-gray-700 select-none hover:bg-gray-300 cursor-pointer">
           <i className="fal fa-radar text-xl text-purple-400"></i>
           <div className="flex flex-col justify-center gap-1">
@@ -31,8 +28,8 @@ const LocationPopup = ({
         </div>
       )}
 
-      {hits.length > 0
-        ? hits.map((hit: HitSchema) => {
+      {props.hits.length > 0
+        ? props.hits.map((hit: HitSchema) => {
             return (
               <Hit
                 key={hit.id}
@@ -45,13 +42,13 @@ const LocationPopup = ({
                     ? [hit.position.lat, hit.position.lng]
                     : [hit.access[0].lat, hit.access[0].lng]
                 }
-                setLocationBoxOpen={setLocationBoxOpen}
+                setLocationBoxOpen={props.setLocationBoxOpen}
               />
             );
           })
         : ""}
     </div>
   );
-};
+});
 
 export default LocationPopup;

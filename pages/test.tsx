@@ -15,6 +15,8 @@ export default function Example() {
     search: true,
   });
 
+  console.log(valueProps);
+
   return (
     <div>
       <Input
