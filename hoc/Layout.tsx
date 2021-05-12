@@ -1,20 +1,19 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 
 // components
-import Navbar from "~components/Nav/Navbar";
-import HomeNavbar from "~components/Landing/Nav/Navbar";
+import HomeNavbar from "~components/Page/Landing/Nav/Navbar";
 
 const Layout = ({ children, page }) => {
   return (
     <div className="h-screen">
-      {page === "home" ? <HomeNavbar /> : <Navbar />}
+      {page === "home" ? <HomeNavbar /> : ""}
       <div
         className="overflow-auto"
         style={{
-          height: "calc(100vh - 3.3rem)",
+          height: "calc(100vh - 4.5rem)",
         }}
       >
-        <div className="container mx-auto h-full w-full p-4">{children}</div>
+        <div className="container mx-auto h-full w-full px-4">{children}</div>
       </div>
     </div>
   );

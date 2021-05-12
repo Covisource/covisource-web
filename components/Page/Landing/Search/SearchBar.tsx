@@ -5,8 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useHereContext } from "~contexts/HereContext";
 
 // components
-import Input from "~components/Form/Input";
-import LocationPopup from "~components/Landing/Search/LocationPopup";
+import Input from "~components/General/Input";
+import LocationPopup from "~components/Page/Landing/Search/LocationPopup";
 
 // schemas
 import HitSchema from "schema/HitSchema";

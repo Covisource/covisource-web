@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // components
-import Button from "~components/Form/Button";
+import Button from "~components/General/Button";
 import NavItem from "./NavItem";
 import { Menu } from "@headlessui/react";
 
@@ -16,7 +16,7 @@ const Navbar = () => {
   console.log(user);
 
   return (
-    <div className="flex items-center justify-between container mx-auto">
+    <div className="flex items-center justify-between container mx-auto p-4">
       {/* Logo */}
       <div>
         <span className="text-2xl font-extrabold tracking-wide">

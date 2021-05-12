@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 // components
-import Hit from "~components/Search/Hit";
+import Hit from "~components/General/SearchHit";
 
 // schemas
 import HitSchema from "schema/HitSchema";

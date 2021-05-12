@@ -35,7 +35,6 @@ const SocialProvider = (props: Props) => {
   return (
     <span
       className={`cursor-pointer transition-all w-12 h-12 grid place-items-center mr-2 border-2 border-gray-200 p-2 text-xl text-gray-600 rounded-full hover:border-transparent hover:text-gray-50 hover:bg-${color}`}
-      style={{}}
       onClick={clickHandler}
     >
       {icon}
