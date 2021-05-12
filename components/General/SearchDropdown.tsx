@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 
 // components
 import Input from "~components/General/Input";
-import LocationPopup from "~components/Page/Landing/Search/LocationPopup";
+import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
 
 // functions
 import { locationSearchHandler } from "~util/searchBoxFunctions";
