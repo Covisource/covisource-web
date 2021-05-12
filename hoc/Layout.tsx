@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import HomeNavbar from "~components/Page/Landing/Nav/Navbar";
+import HomeNavbar from "~components/Page/Landing/Navbar";
 
 const Layout = ({ children, page }) => {
   return (
