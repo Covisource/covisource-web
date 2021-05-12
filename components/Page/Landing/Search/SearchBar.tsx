@@ -50,6 +50,42 @@ const Search = () => {
     }
   }, 500);
 
+  // popup config
+  const [locationPopupVisible, setLocationPopupVisible] = useState(false);
+  const locationPopupRef = useRef(null);
+
+  const handleClickOutsideForLocationPopup = (e) => {
+    if (
+      locationPopupRef.current &&
+      locationPopupRef.current.contains(e.target)
+    ) {
+      // inside click
+      return;
+    }
+    // outside click
+    setLocationPopupVisible(false);
+  };
+
+  useEffect(() => {
+    if (locationPopupVisible) {
+      document.addEventListener(
+        "mousedown",
+        handleClickOutsideForLocationPopup
+      );
+    } else {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutsideForLocationPopup
+      );
+    }
+    return () => {
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutsideForLocationPopup
+      );
+    };
+  }, [locationPopupVisible]);
+
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
@@ -62,6 +98,7 @@ const Search = () => {
           subClassName="ct-text-color text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
           onChange={handleInputChange}
           id="navbarLocationSearch"
+          onFocus={() => setLocationPopupVisible(true)}
           prepend={
             isLoading ? (
               <svg
@@ -79,10 +116,11 @@ const Search = () => {
           append={<i className="fas fa-caret-down ct-text-color"></i>}
         />
 
-        <LocationPopup
-          hits={hits}
-          isLoading={isLoading}
-        />
+        <div ref={locationPopupRef}>
+          {locationPopupVisible && (
+            <LocationPopup hits={hits} isLoading={isLoading} />
+          )}
+        </div>
       </div>
       <Input
         prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
