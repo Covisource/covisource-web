@@ -14,26 +14,6 @@ import HitSchema from "schema/HitSchema";
 const Search = () => {
   const hereToken = useHereContext();
 
-  // popup config
-  const [locationBoxOpen, setLocationBoxOpen] = useState(false);
-  const locationBoxRef = useRef(null);
-
-  const handleDocumentClick = (e) => {
-    console.log(locationBoxRef);
-    // if the user clicks on the popup itself
-    if (locationBoxRef.current?.contains(e.target)) {
-      return;
-    }
-
-    setLocationBoxOpen(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleDocumentClick);
-
-    return () => document.removeEventListener("click", handleDocumentClick);
-  }, []);
-
   // state
   const [hits, setHits] = useState<object[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -81,7 +61,6 @@ const Search = () => {
           className="border-r border-gray-400 ct-location_search"
           subClassName="ct-text-color text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
           onChange={handleInputChange}
-          onFocus={() => setLocationBoxOpen(true)}
           id="navbarLocationSearch"
           prepend={
             isLoading ? (
@@ -100,15 +79,10 @@ const Search = () => {
           append={<i className="fas fa-caret-down ct-text-color"></i>}
         />
 
-        {locationBoxOpen && (
-          <LocationPopup
-            ref={locationBoxRef}
-            hits={hits}
-            isLoading={isLoading}
-            setLocationBoxOpen={setLocationBoxOpen}
-            locationBoxRef={locationBoxRef}
-          />
-        )}
+        <LocationPopup
+          hits={hits}
+          isLoading={isLoading}
+        />
       </div>
       <Input
         prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
