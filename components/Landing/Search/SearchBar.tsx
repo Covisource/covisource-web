@@ -1,6 +1,6 @@
 import axios from "axios";
 import { debounce } from "debounce";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { useHereContext } from "~contexts/HereContext";
 
@@ -11,14 +11,32 @@ import LocationPopup from "~components/Landing/Search/LocationPopup";
 // schemas
 import HitSchema from "schema/HitSchema";
 
-// contexts
-import { usePopupOpenContext } from "~contexts/PopupOpenContext";
-
 const Search = () => {
   const hereToken = useHereContext();
 
-  // popup state
-  const { locationBoxOpen, setLocationBoxOpen } = usePopupOpenContext();
+  // popup config
+  const [locationBoxOpen, setLocationBoxOpen] = useState(false);
+  const locationBoxRef = useRef(null);
+
+  const handleClick = () => {
+    if (!locationBoxOpen) {
+      // attach/remove event handler
+      document.addEventListener("click", handleOutsideClick, false);
+    } else {
+      document.removeEventListener("click", handleOutsideClick, false);
+    }
+
+    setLocationBoxOpen((cur) => !cur);
+  };
+
+  const handleOutsideClick = (e) => {
+    // ignore clicks on the component itself
+    if (locationBoxRef.current.contains(e.target)) {
+      return;
+    }
+
+    handleClick();
+  };
 
   // state
   const [hits, setHits] = useState<object[]>([]);
@@ -86,7 +104,14 @@ const Search = () => {
           append={<i className="fas fa-caret-down ct-text-color"></i>}
         />
 
-        {locationBoxOpen && <LocationPopup hits={hits} isLoading={isLoading} />}
+        {locationBoxOpen && (
+          <LocationPopup
+            hits={hits}
+            isLoading={isLoading}
+            setLocationBoxOpen={setLocationBoxOpen}
+            locationBoxRef={locationBoxRef}
+          />
+        )}
       </div>
       <Input
         prepend={<i className="fal fa-search ct-text-color text-lg"></i>}

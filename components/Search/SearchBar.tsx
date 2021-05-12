@@ -11,14 +11,11 @@ import Hit from "~components/Search/Hit";
 // schemas
 import HitSchema from "schema/HitSchema";
 
-// contexts
-import { usePopupOpenContext } from "~contexts/PopupOpenContext";
-
 const Search = () => {
   const hereToken = useHereContext();
 
   // popup state
-  const { locationBoxOpen, setLocationBoxOpen } = usePopupOpenContext();
+  const [locationBoxOpen, setLocationBoxOpen] = useState(false);
 
   // state
   const [hits, setHits] = useState<object[]>([]);

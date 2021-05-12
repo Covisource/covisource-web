@@ -42,16 +42,19 @@ const Navbar = () => {
                     <NavItem
                       title="Add Resource"
                       icon={<i className="fas fa-plus"></i>}
+                      link="/add-resource"
                       hamburger={true}
                     />
                     <NavItem
                       title="Partner"
                       icon={<i className="fas fa-handshake-alt"></i>}
+                      link="/partner"
                       hamburger={true}
                     />
                     <NavItem
                       title="Donate"
                       icon={<i className="fas fa-hands-usd"></i>}
+                      link="/donate"
                       hamburger={true}
                     />
 
@@ -81,16 +84,19 @@ const Navbar = () => {
         <NavItem
           title="Add Resource"
           icon={<i className="fas fa-plus"></i>}
+          link="/add-resource"
           hamburger={false}
         />
         <NavItem
           title="Partner"
           icon={<i className="fas fa-handshake-alt"></i>}
+          link="/partner"
           hamburger={false}
         />
         <NavItem
           title="Donate"
           icon={<i className="fas fa-hands-usd"></i>}
+          link="/donate"
           hamburger={false}
         />
         {!user ? (
@@ -101,32 +107,11 @@ const Navbar = () => {
             Login
           </Button>
         ) : (
-          <Menu>
-            <Menu.Button>
-              <img
-                src={user.picture}
-                alt="Profile Photo"
-                className="rounded-full object-contain w-10 h-10 mr-4"
-              />
-            </Menu.Button>
-            <Menu.Items className="lg:hidden absolute right-0 w-56 mt-2 origin-top-right bg-gray-900 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <NavItem
-                title="Add Resource"
-                icon={<i className="fas fa-plus"></i>}
-                hamburger={true}
-              />
-              <NavItem
-                title="Partner"
-                icon={<i className="fas fa-handshake-alt"></i>}
-                hamburger={true}
-              />
-              <NavItem
-                title="Donate"
-                icon={<i className="fas fa-hands-usd"></i>}
-                hamburger={true}
-              />
-            </Menu.Items>
-          </Menu>
+          <img
+            src={user.picture}
+            alt="Profile Photo"
+            className="rounded-full object-contain w-10 h-10 mr-4"
+          />
         )}
       </div>
     </div>

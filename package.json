@@ -19,6 +19,7 @@
     "places.js": "^1.19.0",
     "react": "next",
     "react-dom": "next",
+    "react-select-search": "^3.0.7",
     "react-text-loop": "^2.3.0"
   },
   "devDependencies": {

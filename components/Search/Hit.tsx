@@ -1,19 +1,16 @@
 import { useSession } from "next-auth/client";
 import React from "react";
 import SessionSchema from "schema/SessionSchema";
-import { usePopupOpenContext } from "~contexts/PopupOpenContext";
 
 interface Props {
   title: string;
   address: string;
   coordinates: number[];
+  setLocationBoxOpen: any;
 }
 
 const Hit = (props: Props) => {
   const user: SessionSchema = useSession()[0] as any;
-
-  // popup state
-  const { setLocationBoxOpen } = usePopupOpenContext();
 
   const handleHitClick = async () => {
     const res = await fetch(
@@ -36,7 +33,7 @@ const Hit = (props: Props) => {
     (document.getElementById("navbarLocationSearch") as any).value =
       props.title;
 
-    setLocationBoxOpen(false);
+    props.setLocationBoxOpen(false);
   };
 
   return (
