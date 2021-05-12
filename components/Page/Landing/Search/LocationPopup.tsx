@@ -6,14 +6,14 @@ import Hit from "~components/General/SearchHit";
 // schemas
 import HitSchema from "schema/HitSchema";
 
-const LocationPopup = ({ hits, isLoading }) => {
+const LocationPopup = ({ hits, loading }) => {
   return (
     <div
       className={
         "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 locationSearchPopup"
       }
     >
-      {(hits.length < 1 || isLoading) && (
+      {(hits.length < 1 || loading) && (
         <div className="flex items-center gap-2 py-4 px-3 text-gray-700 select-none hover:bg-gray-300 cursor-pointer">
           <i className="fal fa-radar text-xl text-purple-400"></i>
           <div className="flex flex-col justify-center gap-1">
