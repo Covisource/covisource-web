@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 // components
 import Input from "~components/General/Input";
-import SearchablePopup from "~components/General/SearchDropdown";
+import SearchablePopup from "~components/General/SearchablePopup";
 
 // session
 import { useSession } from "next-auth/client";

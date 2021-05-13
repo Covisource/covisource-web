@@ -43,6 +43,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
           <LocationPopup
             hits={results}
             loading={loading}
+            setLoading={setLoading}
             setInputValue={setInputValue}
             hidePopup={() => setIsVisible(false)}
           />

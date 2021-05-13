@@ -11,11 +11,20 @@ import SessionSchema from "~schema/SessionSchema";
 // session
 import { useSession } from "next-auth/client";
 
-const LocationPopup = ({ hits, loading, setInputValue, hidePopup }) => {
+const LocationPopup = ({
+  hits,
+  loading,
+  setLoading,
+  setInputValue,
+  hidePopup,
+}) => {
   const user: SessionSchema = useSession()[0] as any;
 
   const autoDetectLocation = () => {
     if ("geolocation" in navigator) {
+      setLoading(true);
+      hidePopup();
+
       navigator.geolocation.getCurrentPosition(async (position) => {
         const res = await fetch(
           `https://us1.locationiq.com/v1/reverse.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_TOKEN}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
@@ -52,9 +61,9 @@ const LocationPopup = ({ hits, loading, setInputValue, hidePopup }) => {
         );
         Cookies.set("coviUserLocationDisplay", res.display_name);
 
-        // set the input value to the title of what they select and then hide the popup
+        // set the input value to the title of what they select
         setInputValue(res.display_name);
-        hidePopup();
+        setLoading(false);
       });
     } else {
       console.log("Auto location is not available.");

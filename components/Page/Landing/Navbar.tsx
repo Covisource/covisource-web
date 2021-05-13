@@ -95,9 +95,8 @@ const Navbar = () => {
 
       <div className="hidden lg:flex items-center gap-6">
         <i className="far fa-search text-lg ct-text-color-1"></i>
-        <Button className="bg-gray-500 ct-text-color-1 rounded-lg ct-font-mont font-semibold text-sm py-2">
-          Create Resource
-        </Button>
+        <i className="far fa-plus text-lg ct-text-color-1"></i>
+
         {!user ? (
           <Button
             href="/login"
