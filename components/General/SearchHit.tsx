@@ -7,6 +7,7 @@ interface Props {
   address: string;
   coordinates: number[];
   setInputValue: any;
+  hidePopup: any;
 }
 
 const Hit = (props: Props) => {
@@ -31,6 +32,7 @@ const Hit = (props: Props) => {
     );
 
     props.setInputValue(props.title);
+    props.hidePopup();
   };
 
   return (

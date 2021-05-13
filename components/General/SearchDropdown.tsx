@@ -40,7 +40,12 @@ const SearchablePopup: React.FC<Props> = (props) => {
     case "location":
       popup = (
         <div ref={node}>
-          <LocationPopup hits={results} loading={loading} setInputValue={setInputValue} />
+          <LocationPopup
+            hits={results}
+            loading={loading}
+            setInputValue={setInputValue}
+            hidePopup={() => setIsVisible(false)}
+          />
         </div>
       );
       inputChangeHandler = (e) => {

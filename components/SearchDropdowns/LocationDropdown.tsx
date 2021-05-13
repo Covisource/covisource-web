@@ -6,7 +6,7 @@ import Hit from "~components/General/SearchHit";
 // schemas
 import HitSchema from "schema/HitSchema";
 
-const LocationPopup = ({ hits, loading, setInputValue }) => {
+const LocationPopup = ({ hits, loading, setInputValue, hidePopup }) => {
   return (
     <div
       className={
@@ -40,6 +40,7 @@ const LocationPopup = ({ hits, loading, setInputValue }) => {
                     : [hit.access[0].lat, hit.access[0].lng]
                 }
                 setInputValue={setInputValue}
+                hidePopup={hidePopup}
               />
             );
           })
