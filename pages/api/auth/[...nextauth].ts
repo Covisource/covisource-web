@@ -63,6 +63,24 @@ export default NextAuth({
       return token;
     },
     async session(session, user) {
+      let res;
+      try {
+        res = await fetch("http://localhost:8000/user/fetchUser", {
+          headers: {
+            Authorization: `token ${user.jwt}`,
+          },
+        }).then((res) => res.json());
+      } catch (err) {
+        console.error(err);
+      }
+      if (res.data?.success) {
+        return {
+          ...user,
+          coordinates: [...res.data.location.coordinates],
+        };
+      }
+
+      // no user has logged in yet
       return user;
     },
   },

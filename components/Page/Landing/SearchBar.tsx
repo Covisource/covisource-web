@@ -5,12 +5,19 @@ import React, { useState } from "react";
 import Input from "~components/General/Input";
 import SearchablePopup from "~components/General/SearchDropdown";
 
+// session
+import { useSession } from "next-auth/client";
+import SessionSchema from "~schema/SessionSchema";
+
 const Search = () => {
+  const user: SessionSchema = useSession()[0] as any;
+
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
       id="searchbar_home"
     >
+      {console.log(user?.coordinates)}
       <SearchablePopup
         inputClassName="border-r border-gray-400 ct-location_search"
         inputSubClassName="ct-text-color text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"

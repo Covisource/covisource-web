@@ -4,6 +4,7 @@ export default interface SessionSchema {
   picture: string;
   sub: string;
   jwt: string;
+  coordinates: string[];
   iat: number;
   exp: number;
 }
