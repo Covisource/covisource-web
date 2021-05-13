@@ -20,11 +20,11 @@ const Search = () => {
     >
       <SearchablePopup
         inputClassName="border-r border-gray-400 ct-location_search"
-        inputSubClassName="ct-text-color text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
+        inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
         inputPrepend={
-          <i className="fad fa-map-marker-alt ct-text-color text-2xl"></i>
+          <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
         } 
-        inputAppend={<i className="fas fa-caret-down ct-text-color"></i>}
+        inputAppend={<i className="fas fa-caret-down ct-text-color-3"></i>}
         inputValue={userLocationInCookie || ""}
         loader={true}
         searchType="location"
@@ -32,8 +32,8 @@ const Search = () => {
         inputId="navbarLocationSearch"
       />
       <Input
-        prepend={<i className="fal fa-search ct-text-color text-lg"></i>}
-        subClassName="rounded-l-none ct-text-color text-sm font-medium bg-transparent placeholder-gray-900"
+        prepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
+        subClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-900"
         className="w-2/3"
         placeholder="Find Resources..."
       />

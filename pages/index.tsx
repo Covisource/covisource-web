@@ -4,7 +4,7 @@ import SearchBar from "~components/Page/Landing/SearchBar";
 import TextLoop from "react-text-loop";
 
 export default function Home() {
-  const changingWords = ["Injections", "Medicine", "Plasma", "Oxygen"];
+  const changingWords = ["Injections", "Medicine", "Plasma", "Oxygen", "Remdesivir", "Beds", "Tocilizumab", "Ventilators", "Staples"];
 
   return (
     <Layout page="home">
@@ -24,18 +24,18 @@ export default function Home() {
             <br /> From Anywhere In <br /> India.
           </span>
         </div>
-        <p className="ct-font-mont ct-font-muted font-semibold text-md leading-5 mb-8">
+        <p className="ct-font-mont ct-text-color-2 font-semibold text-md leading-5 mb-8">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque placeat
           nemo animi, numquam nulla
         </p>
         <SearchBar />
-        <div className="flex items-center ct-font-mont font-semibold ct-font-muted gap-3">
+        {/* <div className="flex items-center ct-font-mont font-semibold ct-text-color-2 gap-3">
           <span className="inline-block">1m+ users helped</span>
           <i className="fas fa-circle ct-circle-sep"></i>
           <span>500k Resources Uploaded</span>
           <i className="fas fa-circle ct-circle-sep"></i>
           <span>10k Vendors</span>
-        </div>
+        </div> */}
       </div>
     </Layout>
   );

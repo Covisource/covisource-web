@@ -17,10 +17,24 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between container mx-auto p-4">
       {/* Logo */}
-      <div>
+      <div className="hidden lg:flex items-center gap-10">
         <span className="text-2xl font-extrabold tracking-wide">
           CoviSource
         </span>
+        <div className="hidden lg:flex items-center gap-8">
+          <NavItem
+            title="Partner"
+            icon={<i className="far fa-handshake-alt"></i>}
+            link="/partner"
+            hamburger={false}
+          />
+          <NavItem
+            title="Donate"
+            icon={<i className="far fa-hands-usd"></i>}
+            link="/donate"
+            hamburger={false}
+          />
+        </div>
       </div>
 
       {/* Haburger Menu */}
@@ -79,29 +93,15 @@ const Navbar = () => {
         </Menu>
       </div>
 
-      <div className="hidden lg:flex items-center gap-8">
-        <NavItem
-          title="Add Resource"
-          icon={<i className="fas fa-plus"></i>}
-          link="/add-resource"
-          hamburger={false}
-        />
-        <NavItem
-          title="Partner"
-          icon={<i className="fas fa-handshake-alt"></i>}
-          link="/partner"
-          hamburger={false}
-        />
-        <NavItem
-          title="Donate"
-          icon={<i className="fas fa-hands-usd"></i>}
-          link="/donate"
-          hamburger={false}
-        />
+      <div className="hidden lg:flex items-center gap-6">
+        <i className="far fa-search text-lg ct-text-color-1"></i>
+        <Button className="border border-gray-300 ct-text-color-1 rounded-lg ct-font-mont font-semibold text-sm py-2">
+          Create Resource
+        </Button>
         {!user ? (
           <Button
             href="/login"
-            className="bg-gray-50 ct-text-color rounded-md ct-font-mont font-semibold text-sm py-2"
+            className="bg-gray-50 ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
           >
             Login
           </Button>

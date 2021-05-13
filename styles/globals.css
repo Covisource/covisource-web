@@ -19,16 +19,20 @@
   background-color: #333a46;
 }
 
-.ct-text-color {
+.ct-text-color-1 {
+  color: #d3d3d3;
+}
+
+.ct-text-color-2 {
+  color: #ffffff9d;
+}
+
+.ct-text-color-3 {
   color: #333a46;
 }
 
 .ct-shadow {
   box-shadow: 0 0 50px rgba(87, 85, 85, 0.219);
-}
-
-.ct-font-muted {
-  color: #d3d3d3;
 }
 
 .ct-bg-muted {

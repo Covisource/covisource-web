@@ -13,7 +13,7 @@ const Button = (props: Props) => {
     return (
       <Link href={props.href}>
         <a
-          className={`flex items-center content-center justify-center px-4 ${props.className}`}
+          className={`flex items-center content-center justify-center px-4 cursor-pointer select-none ${props.className}`}
           // onClick={props.onClick || ""}
         >
           {props.children}
@@ -23,7 +23,7 @@ const Button = (props: Props) => {
   } else {
     return (
       <a
-        className={`flex items-center content-center justify-center px-4 ${props.className}`}
+        className={`flex items-center content-center justify-center px-4 cursor-pointer select-none ${props.className}`}
         onClick={props.onClick}
       >
         {props.children}
