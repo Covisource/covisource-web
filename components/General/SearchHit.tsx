@@ -58,7 +58,7 @@ const Hit = (props: Props) => {
       onClick={handleHitClick}
     >
       <span className="truncate">{props.title}</span>
-      <span className="truncate text-xs text-gray-600">{props.address}</span>
+      <span className="truncate text-xs text-gray-600" title={props.address}>{props.address}</span>
     </div>
   );
 };
