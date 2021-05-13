@@ -34,17 +34,18 @@ const Hit = (props: Props) => {
                 long: props.coordinates[0],
                 lat: props.coordinates[1],
               },
+              displayName: props.title,
             }),
           }
         );
       } catch (err) {
         console.log(err);
       }
-    } else {
-      Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
-      Cookies.set("coviUserLocationLat", props.coordinates[1].toString());
-      Cookies.set("coviUserLocationDisplay", props.title);
     }
+
+    Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
+    Cookies.set("coviUserLocationLat", props.coordinates[1].toString());
+    Cookies.set("coviUserLocationDisplay", props.title);
 
     // set the input value to the title of what they select and then hide the popup
     props.setInputValue(props.title);

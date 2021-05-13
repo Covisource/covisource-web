@@ -20,20 +20,23 @@ export default NextAuth({
     async signIn(user, account, profile) {
       if (account.provider === "google" || account.provider === "twitter") {
         // sign the user up if they arent yet
-        const res = await fetch("http://localhost:8000/user/newUser", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({
-            user: {
-              id: account.id,
-              name: user.name,
-              email: user.email,
-              provider: account.provider,
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/newUser`,
+          {
+            headers: {
+              "Content-Type": "application/json",
             },
-          }),
-        }).then((res) => res.json());
+            method: "POST",
+            body: JSON.stringify({
+              user: {
+                id: account.id,
+                name: user.name,
+                email: user.email,
+                provider: account.provider,
+              },
+            }),
+          }
+        ).then((res) => res.json());
 
         if (res.success === false) {
           if (res.code === "user_exists") {
@@ -64,17 +67,24 @@ export default NextAuth({
     },
     async session(session, user) {
       try {
-        const res = await fetch("http://localhost:8000/user/fetchUser", {
-          headers: {
-            Authorization: `token ${user.jwt}`,
-          },
-        }).then((res) => res.json());
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/fetchUser`,
+          {
+            headers: {
+              Authorization: `token ${user.jwt}`,
+              "Content-Type": "application/json",
+            },
+          }
+        ).then((res) => res.json());
 
         if (res.success) {
-          console.log("Fetched user from server sucessfully")
+          console.log("Fetched user from server sucessfully");
           return {
             ...user,
-            coordinates: [...res.data.location.coordinates],
+            location: {
+              coordinates: [...res.data.location.coordinates],
+              displayName: res.data.location.displayName,
+            },
           };
         } else {
           console.log("Error fetching user: " + res.message);

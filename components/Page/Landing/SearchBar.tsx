@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import Cookies from "js-cookie"
+import React from "react";
+import Cookies from "js-cookie";
 
 // components
 import Input from "~components/General/Input";
@@ -13,8 +13,6 @@ import SessionSchema from "~schema/SessionSchema";
 const Search = () => {
   const user: SessionSchema = useSession()[0] as any;
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
-  const userLocationInSession = user?.coordinates[0];
-
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
@@ -25,9 +23,9 @@ const Search = () => {
         inputSubClassName="ct-text-color text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
         inputPrepend={
           <i className="fad fa-map-marker-alt ct-text-color text-2xl"></i>
-        }
+        } 
         inputAppend={<i className="fas fa-caret-down ct-text-color"></i>}
-        inputValue={userLocationInSession || userLocationInCookie || ""}
+        inputValue={userLocationInCookie || ""}
         loader={true}
         searchType="location"
         inputPlaceholder="Enter a location"
