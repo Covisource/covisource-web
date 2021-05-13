@@ -1,6 +1,6 @@
 // dependencies
 import React from "react";
-import cookieCutter from "cookie-cutter";
+import Cookies from "js-cookie";
 
 // session imports
 import { useSession } from "next-auth/client";
@@ -41,9 +41,9 @@ const Hit = (props: Props) => {
         console.log(err);
       }
     } else {
-      cookieCutter.set("coviUserLocationLong", props.coordinates[0]);
-      cookieCutter.set("coviUserLocationLat", props.coordinates[1]);
-      cookieCutter.set("coviUserLocationDisplay", props.title);
+      Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
+      Cookies.set("coviUserLocationLat", props.coordinates[1].toString());
+      Cookies.set("coviUserLocationDisplay", props.title);
     }
 
     // set the input value to the title of what they select and then hide the popup

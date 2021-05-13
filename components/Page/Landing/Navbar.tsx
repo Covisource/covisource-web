@@ -13,7 +13,6 @@ import SessionSchema from "~schema/SessionSchema";
 
 const Navbar = () => {
   const user: SessionSchema = useSession()[0] as any;
-  console.log(user);
 
   return (
     <div className="flex items-center justify-between container mx-auto p-4">
