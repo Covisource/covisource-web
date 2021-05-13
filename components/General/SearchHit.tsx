@@ -6,6 +6,7 @@ interface Props {
   title: string;
   address: string;
   coordinates: number[];
+  setInputValue: any;
 }
 
 const Hit = (props: Props) => {
@@ -29,8 +30,7 @@ const Hit = (props: Props) => {
       }
     );
 
-    (document.getElementById("navbarLocationSearch") as any).value =
-      props.title;
+    props.setInputValue(props.title);
   };
 
   return (

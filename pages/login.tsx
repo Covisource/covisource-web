@@ -12,7 +12,6 @@ const login = () => {
     e.preventDefault();
 
     if (email && password) {
-      
     }
   };
 

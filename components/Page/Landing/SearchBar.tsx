@@ -18,6 +18,7 @@ const Search = () => {
           <i className="fad fa-map-marker-alt ct-text-color text-2xl"></i>
         }
         inputAppend={<i className="fas fa-caret-down ct-text-color"></i>}
+        inputValue="lolx"
         loader={true}
         searchType="location"
         inputPlaceholder="Enter a location"

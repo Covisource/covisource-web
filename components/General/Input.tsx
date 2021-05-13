@@ -13,6 +13,7 @@ interface Props {
   onKeyDown?: any;
   name?: string;
   type?: string;
+  value?: string;
 }
 
 const Input = (props: Props) => {
@@ -31,6 +32,7 @@ const Input = (props: Props) => {
         onFocus={props.onFocus}
         onBlur={props.onBlur}
         placeholder={props.placeholder || ""}
+        value={props.value}
         id={props.id || ""}
         autoComplete="off"
         className={`w-full font-semibold border-none rounded-lg h-14 focus:ring-0 text-sm ${

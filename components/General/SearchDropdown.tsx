@@ -17,12 +17,14 @@ interface Props {
   inputPlaceholder: string;
   inputPrepend?: any;
   inputAppend?: any;
+  inputValue: string;
   searchType: "location" | "resource";
   loader?: boolean;
 }
 
 const SearchablePopup: React.FC<Props> = (props) => {
   // state
+  const [inputValue, setInputValue] = useState<string>(props.inputValue || "");
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -38,11 +40,13 @@ const SearchablePopup: React.FC<Props> = (props) => {
     case "location":
       popup = (
         <div ref={node}>
-          <LocationPopup hits={results} loading={loading} />
+          <LocationPopup hits={results} loading={loading} setInputValue={setInputValue} />
         </div>
       );
-      inputChangeHandler = (e) =>
+      inputChangeHandler = (e) => {
+        setInputValue(e.target.value);
         locationSearchHandler(e, setResults, setLoading, hereToken);
+      };
       break;
   }
 
@@ -50,10 +54,10 @@ const SearchablePopup: React.FC<Props> = (props) => {
 
   const handleClickOutsideForLocationPopup = (e) => {
     if (node.current && node.current.contains(e.target)) {
-      // inside click
+      // user clicks on the popup itself
       return;
     }
-    // outside click
+    // user clicks outside of the popup
     setIsVisible(false);
   };
 
@@ -84,6 +88,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
         className={props.inputClassName}
         subClassName={props.inputSubClassName}
         onChange={inputChangeHandler}
+        value={inputValue}
         id={props.inputId || ""}
         onFocus={() => setIsVisible(true)}
         prepend={
