@@ -6,13 +6,9 @@ import Cookies from "js-cookie";
 import Input from "~components/General/Input";
 import SearchablePopup from "~components/General/SearchablePopup";
 
-// session
-import { useSession } from "next-auth/client";
-import SessionSchema from "~schema/SessionSchema";
-
 const Search = () => {
-  const user: SessionSchema = useSession()[0] as any;
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
+
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"

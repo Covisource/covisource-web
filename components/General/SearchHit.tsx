@@ -18,31 +18,6 @@ const Hit = (props: Props) => {
   const user: SessionSchema = useSession()[0] as any;
 
   const handleHitClick = async () => {
-    // if the user is authenticated, make an api request to update their coordinates, else store them in a cookie
-    if (user) {
-      try {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `token ${user?.jwt}`,
-            },
-            body: JSON.stringify({
-              coordinates: {
-                long: props.coordinates[0],
-                lat: props.coordinates[1],
-              },
-              displayName: props.title,
-            }),
-          }
-        );
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
     Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
     Cookies.set("coviUserLocationLat", props.coordinates[1].toString());
     Cookies.set("coviUserLocationDisplay", props.title);
@@ -58,7 +33,9 @@ const Hit = (props: Props) => {
       onClick={handleHitClick}
     >
       <span className="truncate">{props.title}</span>
-      <span className="truncate text-xs text-gray-600" title={props.address}>{props.address}</span>
+      <span className="truncate text-xs text-gray-600" title={props.address}>
+        {props.address}
+      </span>
     </div>
   );
 };

@@ -26,43 +26,27 @@ const LocationPopup = ({
       hidePopup();
 
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const res = await fetch(
-          `https://us1.locationiq.com/v1/reverse.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_TOKEN}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
-        ).then((res) => res.json());
+        try {
+          const res = await fetch(
+            `https://us1.locationiq.com/v1/reverse.php?key=${process.env.NEXT_PUBLIC_LOCATIONIQ_TOKEN}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`
+          ).then((res) => res.json());
 
-        if (user) {
-          try {
-            await fetch(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/user/setUserLocation`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `token ${user?.jwt}`,
-                },
-                body: JSON.stringify({
-                  coordinates: {
-                    lat: position.coords.latitude,
-                    long: position.coords.longitude,
-                  },
-                  displayName: res.display_name,
-                }),
-              }
-            );
-          } catch (err) {
-            console.log(err);
-          }
+          Cookies.set(
+            "coviUserLocationLat",
+            position.coords.latitude.toString()
+          );
+          Cookies.set(
+            "coviUserLocationLong",
+            position.coords.longitude.toString()
+          );
+          Cookies.set("coviUserLocationDisplay", res.display_name);
+
+          // set the input value to the title of what they select
+          setInputValue(res.display_name);
+        } catch (err) {
+          console.error(err);
         }
 
-        Cookies.set("coviUserLocationLat", position.coords.latitude.toString());
-        Cookies.set(
-          "coviUserLocationLong",
-          position.coords.longitude.toString()
-        );
-        Cookies.set("coviUserLocationDisplay", res.display_name);
-
-        // set the input value to the title of what they select
-        setInputValue(res.display_name);
         setLoading(false);
       });
     } else {

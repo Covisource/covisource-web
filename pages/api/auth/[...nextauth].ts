@@ -66,33 +66,6 @@ export default NextAuth({
       return token;
     },
     async session(session, user) {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/fetchUser`,
-          {
-            headers: {
-              Authorization: `token ${user.jwt}`,
-              "Content-Type": "application/json",
-            },
-          }
-        ).then((res) => res.json());
-
-        if (res.success) {
-          console.log("Fetched user from server sucessfully");
-          return {
-            ...user,
-            location: {
-              coordinates: [...res.data.location.coordinates],
-              displayName: res.data.location.displayName,
-            },
-          };
-        } else {
-          console.log("Error fetching user: " + res.message);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-
       return user;
     },
   },
