@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 // components
 import ResourceHit from "~components/SearchDropdowns/ResourceHit";
 
-const LocationPopup = ({ hits, setInputValue, hidePopup }) => {
+const ResourcePopup = ({ hits, setInputValue, hidePopup }) => {
   return (
     <div
       className={
@@ -27,4 +27,4 @@ const LocationPopup = ({ hits, setInputValue, hidePopup }) => {
   );
 };
 
-export default LocationPopup;
+export default ResourcePopup;

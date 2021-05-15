@@ -4,7 +4,7 @@ import { debounce } from "debounce";
 // schemas
 import LocationHit from "~schema/LocationHitSchema";
 
-const locationSearchHandler = debounce(
+export const locationSearchHandler = debounce(
   async (e, setResults, setLoading, hereToken) => {
     const input = e.target.value;
 
@@ -39,35 +39,54 @@ const locationSearchHandler = debounce(
   500
 );
 
-const resourceSearchHandler = debounce(async (e, setResults, setLoading) => {
-  const input = e.target.value;
+export const resourceSearchHandler = debounce(
+  async (e, setResults, setLoading) => {
+    const input = e.target.value;
 
-  if (input.replace(" ", "").length > 0) {
-    try {
-      setLoading(true);
-      setResults([]);
-      const res = await axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory?q=${input}`
-        )
-        .then((res) => res.data);
+    if (input.replace(" ", "").length > 0) {
+      try {
+        setLoading(true);
+        setResults([]);
+        const res = await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory?q=${input}`
+          )
+          .then((res) => res.data);
 
-      if (!res.success) {
-        return console.error(res.message);
+        if (!res.success) {
+          return console.error(res.message);
+        }
+        const toInsert = [];
+
+        res.data.forEach((resource) => {
+          toInsert.push(resource);
+        });
+        setResults(toInsert);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
       }
-      const toInsert = [];
-
-      res.data.forEach((resource) => {
-        toInsert.push(resource);
-      });
-      setResults(toInsert);
-      setLoading(false);
-    } catch (err) {
-      console.error(err);
+    } else {
+      getAllResources(setResults);
     }
-  } else {
-    setResults([]);
-  }
-}, 500);
+  },
+  500
+);
 
-export { locationSearchHandler, resourceSearchHandler };
+export const getAllResources = async (setResults) => {
+  const res = await axios
+    .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory`)
+    .then((res) => res.data);
+
+  if (!res.success) {
+    return console.error(res.message);
+  }
+
+  const resources = [];
+
+  res.data.forEach((resource) => {
+    resources.push(resource);
+  });
+
+  setResults(resources);
+};
