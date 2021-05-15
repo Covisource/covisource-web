@@ -6,7 +6,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   return (
     <Dialog
       as="div"
-      className="fixed inset-0 z-10 overflow-y-auto"
+      className="fixed inset-0 z-10 bg-black bg-opacity-90 overflow-y-auto"
       open={isOpen}
       onClose={() => setIsOpen(false)}
     >
