@@ -1,5 +1,9 @@
-import { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
+
+// components
+import Input from "~components/General/Input";
+import Button from "~components/General/Button";
+import SearchablePopup from "~components/General/SearchablePopup";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   console.log(isOpen);
@@ -32,23 +36,29 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               1 of 3
             </span>
           </div>
-          <div className="mt-2">
-            <p className="text-sm text-gray-500">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
-              quaerat beatae iure aliquam sunt harum. Eaque deserunt incidunt
-              voluptates? Ducimus nobis soluta repudiandae repellendus tenetur
-              distinctio necessitatibus, aspernatur consectetur vitae.
-            </p>
+          <div className="mt-5 flex flex-col gap-2">
+            <Input
+              placeholder="Title"
+              subClassName="bg-gray-100"
+              prepend={<i className="fal fa-text"></i>}
+            />
+            <SearchablePopup
+              inputSubClassName="text-sm font-medium bg-gray-100"
+              inputPrepend={<i className="fal fa-search text-lg"></i>}
+              loader={true}
+              searchType="resource"
+              inputPlaceholder="Category"
+            />
+            <textarea
+              className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
+              placeholder="Description"
+            ></textarea>
           </div>
 
-          <div className="mt-4">
-            <button
-              type="button"
-              className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-              onClick={() => setIsOpen(false)}
-            >
-              Got it, thanks!
-            </button>
+          <div className="mt-4 w-full text-right">
+            <Button className="ct-bg-accent ct-text-color-3 rounded-lg">
+              Next
+            </Button>
           </div>
         </div>
       </div>

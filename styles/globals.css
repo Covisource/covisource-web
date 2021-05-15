@@ -16,15 +16,19 @@
 }
 
 .ct-bg {
-  background-color: #E9ECF1;
+  background-color: #e9ecf1;
 }
 
 .ct-bg-semilight {
-  background-color: #DEDEDE;
+  background-color: #dedede;
 }
 
 .ct-bg-dark {
   background-color: #374151;
+}
+
+.ct-bg-accent {
+  background-color: #6f74e7;
 }
 
 .ct-text-color-1 {

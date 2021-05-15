@@ -8,7 +8,7 @@ const ResourceDropdown = ({ hits, setInputValue, hidePopup }) => {
   return (
     <div
       className={
-        "absolute top-16 rounded-lg max-h-52 overflow-y-auto overflow-x-hidden ct-bg-dark w-full locationSearchPopup"
+        "absolute top-16 rounded-lg max-h-52 z-20 overflow-y-auto overflow-x-hidden ct-bg-dark w-full locationSearchPopup"
       }
     >
       {hits.length > 0
