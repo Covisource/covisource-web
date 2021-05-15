@@ -6,7 +6,7 @@ import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
 import ResourcePopup from "~components/SearchDropdowns/ResourcePopup";
 
 // functions
-import { locationSearchHandler } from "~util/searchBoxFunctions";
+import { locationSearchHandler, resourceSearchHandler } from "~util/searchBoxFunctions";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
@@ -60,8 +60,6 @@ const SearchablePopup: React.FC<Props> = (props) => {
         <div ref={node}>
           <ResourcePopup
             hits={results}
-            loading={loading}
-            setLoading={setLoading}
             setInputValue={setInputValue}
             hidePopup={() => setIsVisible(false)}
           />
@@ -69,7 +67,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
       );
       inputChangeHandler = (e) => {
         setInputValue(e.target.value);
-        locationSearchHandler(e, setResults, setLoading, hereToken);
+        resourceSearchHandler(e, setResults, setLoading);
       };
       break;
   }

@@ -39,4 +39,35 @@ const locationSearchHandler = debounce(
   500
 );
 
-export { locationSearchHandler };
+const resourceSearchHandler = debounce(async (e, setResults, setLoading) => {
+  const input = e.target.value;
+
+  if (input.replace(" ", "").length > 0) {
+    try {
+      setLoading(true);
+      setResults([]);
+      const res = await axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory?q=${input}`
+        )
+        .then((res) => res.data);
+
+      if (!res.success) {
+        return console.error(res.message);
+      }
+      const toInsert = [];
+
+      res.data.forEach((resource) => {
+        toInsert.push(resource);
+      });
+      setResults(toInsert);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    setResults([]);
+  }
+}, 500);
+
+export { locationSearchHandler, resourceSearchHandler };
