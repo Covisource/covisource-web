@@ -3,21 +3,27 @@ import React, { useRef, useState, useEffect } from "react";
 // components
 import Input from "~components/General/Input";
 import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
+import ResourcePopup from "~components/SearchDropdowns/ResourcePopup";
 
 // functions
-import { locationSearchHandler } from "~util/searchBoxFunctions";
+import {
+  getAllResources,
+  locationSearchHandler,
+  resourceSearchHandler,
+} from "~util/searchBoxFunctions";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
 
 interface Props {
   inputId?: string;
-  inputClassName: string;
+  inputClassName?: string;
   inputSubClassName?: string;
-  inputPlaceholder: string;
+  inputPlaceholder?: string;
+  containerClassName?: string;
   inputPrepend?: any;
   inputAppend?: any;
-  inputValue: string;
+  inputValue?: string;
   searchType: "location" | "resource";
   loader?: boolean;
 }
@@ -54,6 +60,24 @@ const SearchablePopup: React.FC<Props> = (props) => {
         locationSearchHandler(e, setResults, setLoading, hereToken);
       };
       break;
+    case "resource":
+      if (inputValue === "") {
+        getAllResources(setResults);
+      }
+      popup = (
+        <div ref={node}>
+          <ResourcePopup
+            hits={results}
+            setInputValue={setInputValue}
+            hidePopup={() => setIsVisible(false)}
+          />
+        </div>
+      );
+      inputChangeHandler = (e) => {
+        setInputValue(e.target.value);
+        resourceSearchHandler(e, setResults, setLoading);
+      };
+      break;
   }
 
   // Close popup when clicked outside of
@@ -88,7 +112,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
   }, [isVisible]);
 
   return (
-    <div className="relative w-1/3">
+    <div className={`relative ${props.containerClassName}`}>
       <Input
         placeholder={props.inputPlaceholder}
         className={props.inputClassName}

@@ -2,14 +2,10 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 
 // components
-import Hit from "~components/General/SearchHit";
+import LocationHit from "~components/SearchDropdowns/LocationHit";
 
 // schemas
-import HitSchema from "schema/HitSchema";
-import SessionSchema from "~schema/SessionSchema";
-
-// session
-import { useSession } from "next-auth/client";
+import LocationHitSchema from "~schema/LocationHitSchema";
 
 const LocationPopup = ({
   hits,
@@ -18,8 +14,6 @@ const LocationPopup = ({
   setInputValue,
   hidePopup,
 }) => {
-  const user: SessionSchema = useSession()[0] as any;
-
   const autoDetectLocation = () => {
     if ("geolocation" in navigator) {
       setLoading(true);
@@ -78,9 +72,9 @@ const LocationPopup = ({
       )}
 
       {hits.length > 0
-        ? hits.map((hit: HitSchema) => {
+        ? hits.map((hit: LocationHitSchema) => {
             return (
-              <Hit
+              <LocationHit
                 key={hit.id}
                 address={hit.address?.label
                   .replace(", India", "")

@@ -11,15 +11,16 @@ const Search = () => {
 
   return (
     <div
-      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
+      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-xl"
       id="searchbar_home"
     >
       <SearchablePopup
+        containerClassName=" w-1/3"
         inputClassName="border-r border-gray-400 ct-location_search"
         inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
         inputPrepend={
           <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
-        } 
+        }
         inputAppend={<i className="fas fa-caret-down ct-text-color-3"></i>}
         inputValue={userLocationInCookie || ""}
         loader={true}
@@ -27,11 +28,14 @@ const Search = () => {
         inputPlaceholder="Enter a location"
         inputId="navbarLocationSearch"
       />
-      <Input
-        prepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
-        subClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-900"
-        className="w-2/3"
-        placeholder="Find Resources..."
+      <SearchablePopup
+        containerClassName="w-2/3"
+        inputSubClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-900"
+        inputPrepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
+        loader={true}
+        searchType="resource"
+        inputPlaceholder="Find Resources..."
+        inputId="navbarLocationSearch"
       />
     </div>
   );
