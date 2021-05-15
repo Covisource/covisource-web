@@ -11,13 +11,13 @@ const Search = () => {
 
   return (
     <div
-      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-xl"
+      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-dark rounded-xl"
       id="searchbar_home"
     >
       <SearchablePopup
         containerClassName=" w-1/3"
         inputClassName="border-r border-gray-400 ct-location_search"
-        inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
+        inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-100"
         inputPrepend={
           <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
         }
@@ -30,7 +30,7 @@ const Search = () => {
       />
       <SearchablePopup
         containerClassName="w-2/3"
-        inputSubClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-900"
+        inputSubClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-100"
         inputPrepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
         loader={true}
         searchType="resource"

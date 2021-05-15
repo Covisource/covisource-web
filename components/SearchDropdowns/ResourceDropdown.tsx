@@ -4,11 +4,11 @@ import Cookies from "js-cookie";
 // components
 import ResourceHit from "~components/SearchDropdowns/ResourceHit";
 
-const ResourcePopup = ({ hits, setInputValue, hidePopup }) => {
+const ResourceDropdown = ({ hits, setInputValue, hidePopup }) => {
   return (
     <div
       className={
-        "absolute top-16 rounded-lg max-h-52 overflow-y-auto overflow-x-hidden bg-gray-200 w-full locationSearchPopup"
+        "absolute top-16 rounded-lg max-h-52 overflow-y-auto overflow-x-hidden ct-bg-dark w-full locationSearchPopup"
       }
     >
       {hits.length > 0
@@ -27,4 +27,4 @@ const ResourcePopup = ({ hits, setInputValue, hidePopup }) => {
   );
 };
 
-export default ResourcePopup;
+export default ResourceDropdown;

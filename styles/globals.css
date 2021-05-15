@@ -16,27 +16,31 @@
 }
 
 .ct-bg {
-  background-color: #333a46;
+  background-color: #E9ECF1;
+}
+
+.ct-bg-semilight {
+  background-color: #DEDEDE;
+}
+
+.ct-bg-dark {
+  background-color: #374151;
 }
 
 .ct-text-color-1 {
-  color: #d3d3d3;
+  color: #374151;
 }
 
 .ct-text-color-2 {
-  color: #ffffff9d;
+  color: #515151;
 }
 
 .ct-text-color-3 {
-  color: #333a46;
+  color: #f7f7f7;
 }
 
 .ct-shadow {
   box-shadow: 0 0 50px rgba(87, 85, 85, 0.219);
-}
-
-.ct-bg-muted {
-  background-color: #e5e7eb;
 }
 
 .ct-bg-grad {

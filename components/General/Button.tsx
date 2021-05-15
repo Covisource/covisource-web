@@ -14,7 +14,6 @@ const Button = (props: Props) => {
       <Link href={props.href}>
         <a
           className={`flex items-center content-center justify-center px-4 cursor-pointer select-none ${props.className}`}
-          // onClick={props.onClick || ""}
         >
           {props.children}
         </a>

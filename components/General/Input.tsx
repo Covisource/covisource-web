@@ -14,11 +14,16 @@ interface Props {
   name?: string;
   type?: string;
   value?: string;
+  style?: object;
+  subStyle?: object;
 }
 
 const Input = (props: Props) => {
   return (
-    <div className={"relative flex items-center " + props.className}>
+    <div
+      className={"relative flex items-center " + props.className}
+      style={props.style}
+    >
       {props.prepend ? (
         <div className="absolute left-3">{props.prepend}</div>
       ) : (
@@ -35,6 +40,7 @@ const Input = (props: Props) => {
         value={props.value}
         id={props.id || ""}
         autoComplete="off"
+        style={props.subStyle}
         className={`w-full font-semibold border-none rounded-lg h-14 focus:ring-0 text-sm ${
           props.prepend ? "pl-10" : ""
         } ${props.append ? "pr-8" : ""} ${props.subClassName || ""}`}

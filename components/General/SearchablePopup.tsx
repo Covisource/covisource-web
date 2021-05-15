@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 // components
 import Input from "~components/General/Input";
 import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
-import ResourcePopup from "~components/SearchDropdowns/ResourcePopup";
+import ResourceDropdown from "~components/SearchDropdowns/ResourceDropdown";
 
 // functions
 import {
@@ -66,7 +66,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
       }
       popup = (
         <div ref={node}>
-          <ResourcePopup
+          <ResourceDropdown
             hits={results}
             setInputValue={setInputValue}
             hidePopup={() => setIsVisible(false)}

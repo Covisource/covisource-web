@@ -75,7 +75,7 @@ const Navbar = () => {
                     {!user ? (
                       <Button
                         href="/login"
-                        className="bg-gray-50 ct-text-color rounded-md ct-font-mont font-semibold text-sm py-2"
+                        className="ct-bg-dark ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
                       >
                         Login
                       </Button>
@@ -103,7 +103,7 @@ const Navbar = () => {
         {!user ? (
           <Button
             href="/login"
-            className="bg-gray-50 ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
+            className="ct-bg-dark ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
           >
             Login
           </Button>
