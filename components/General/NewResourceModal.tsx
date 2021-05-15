@@ -18,16 +18,26 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           &#8203;
         </span>
         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-          <Dialog.Title
-            as="h3"
-            className="text-lg font-medium leading-6 text-gray-900"
-          >
-            Payment successful
-          </Dialog.Title>
+          <div className="flex items-center justify-between border-b border-gray-300 pb-3">
+            <div>
+              <Dialog.Title
+                as="h3"
+                className="text-xl ct-font-mont ct-text-color-1 font-bold"
+              >
+                Upload A Resource
+              </Dialog.Title>
+              <span className="text-sm">Step 1 - Basic Details</span>
+            </div>
+            <span className="text-xs font-bold h-12 w-12 border-2 border-gray-900 rounded-full grid place-items-center">
+              1 of 3
+            </span>
+          </div>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
-              Your payment has been successfully submitted. We’ve sent your an
-              email with all of the details of your order.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem
+              quaerat beatae iure aliquam sunt harum. Eaque deserunt incidunt
+              voluptates? Ducimus nobis soluta repudiandae repellendus tenetur
+              distinctio necessitatibus, aspernatur consectetur vitae.
             </p>
           </div>
 
