@@ -35,7 +35,7 @@ const Search = () => {
         loader={true}
         searchType="resource"
         inputPlaceholder="Find Resources..."
-        inputId="navbarLocationSearch"
+        inputId="navbarResourceSearch"
       />
     </div>
   );
