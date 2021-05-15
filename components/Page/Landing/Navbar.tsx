@@ -96,9 +96,7 @@ const Navbar = () => {
 
       <div className="hidden lg:flex items-center gap-6">
         <i className="far fa-search text-lg ct-text-color-1"></i>
-        <Link href="/create">
-          <i className="far fa-plus text-lg ct-text-color-1 cursor-pointer"></i>
-        </Link>
+        <i className="far fa-plus text-lg ct-text-color-1 cursor-pointer"></i>
 
         {!user ? (
           <Button
