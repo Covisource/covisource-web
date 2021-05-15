@@ -11,10 +11,11 @@ const Search = () => {
 
   return (
     <div
-      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-lg"
+      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-muted rounded-xl"
       id="searchbar_home"
     >
       <SearchablePopup
+        containerClassName=" w-1/3"
         inputClassName="border-r border-gray-400 ct-location_search"
         inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900"
         inputPrepend={
@@ -28,7 +29,7 @@ const Search = () => {
         inputId="navbarLocationSearch"
       />
       <SearchablePopup
-        inputClassName="w-2/3"
+        containerClassName="w-2/3"
         inputSubClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-900"
         inputPrepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
         loader={true}

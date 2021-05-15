@@ -17,9 +17,10 @@ import { useHereContext } from "~contexts/HereContext";
 
 interface Props {
   inputId?: string;
-  inputClassName: string;
+  inputClassName?: string;
   inputSubClassName?: string;
-  inputPlaceholder: string;
+  inputPlaceholder?: string;
+  containerClassName?: string;
   inputPrepend?: any;
   inputAppend?: any;
   inputValue?: string;
@@ -111,7 +112,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
   }, [isVisible]);
 
   return (
-    <div className="relative w-1/3">
+    <div className={`relative ${props.containerClassName}`}>
       <Input
         placeholder={props.inputPlaceholder}
         className={props.inputClassName}

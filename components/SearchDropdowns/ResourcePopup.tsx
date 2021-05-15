@@ -8,7 +8,7 @@ const ResourcePopup = ({ hits, setInputValue, hidePopup }) => {
   return (
     <div
       className={
-        "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden bg-gray-200 w-80 locationSearchPopup"
+        "absolute top-16 rounded-lg max-h-52 overflow-y-auto overflow-x-hidden bg-gray-200 w-full locationSearchPopup"
       }
     >
       {hits.length > 0
