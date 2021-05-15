@@ -2,7 +2,7 @@ import axios from "axios";
 import { debounce } from "debounce";
 
 // schemas
-import HitSchema from "schema/HitSchema";
+import LocationHit from "~schema/LocationHitSchema";
 
 const locationSearchHandler = debounce(
   async (e, setResults, setLoading, hereToken) => {
@@ -20,9 +20,9 @@ const locationSearchHandler = debounce(
             },
           }
         );
-        const toInsert: HitSchema[] = [];
+        const toInsert: LocationHit[] = [];
 
-        (res.data.items as HitSchema[]).forEach((location) => {
+        (res.data.items as LocationHit[]).forEach((location) => {
           if (location.position || location.access?.length > 0) {
             toInsert.push(location);
           }

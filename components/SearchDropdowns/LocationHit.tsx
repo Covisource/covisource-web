@@ -2,10 +2,6 @@
 import React from "react";
 import Cookies from "js-cookie";
 
-// session imports
-import { useSession } from "next-auth/client";
-import SessionSchema from "schema/SessionSchema";
-
 interface Props {
   title: string;
   address: string;
@@ -15,8 +11,6 @@ interface Props {
 }
 
 const Hit = (props: Props) => {
-  const user: SessionSchema = useSession()[0] as any;
-
   const handleHitClick = async () => {
     Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
     Cookies.set("coviUserLocationLat", props.coordinates[1].toString());

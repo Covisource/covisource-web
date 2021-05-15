@@ -6,10 +6,6 @@ import LocationHit from "~components/SearchDropdowns/LocationHit";
 
 // schemas
 import LocationHitSchema from "~schema/LocationHitSchema";
-import SessionSchema from "~schema/SessionSchema";
-
-// session
-import { useSession } from "next-auth/client";
 
 const LocationPopup = ({
   hits,
@@ -18,7 +14,6 @@ const LocationPopup = ({
   setInputValue,
   hidePopup,
 }) => {
-  const user: SessionSchema = useSession()[0] as any;
 
   const autoDetectLocation = () => {
     if ("geolocation" in navigator) {
