@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Button from "~components/General/Button";
 import NavItem from "./NavItem";
 import { Menu } from "@headlessui/react";
+import Link from "next/link";
 
 // session
 import { useSession } from "next-auth/client";
@@ -95,7 +96,9 @@ const Navbar = () => {
 
       <div className="hidden lg:flex items-center gap-6">
         <i className="far fa-search text-lg ct-text-color-1"></i>
-        <i className="far fa-plus text-lg ct-text-color-1"></i>
+        <Link href="/create">
+          <i className="far fa-plus text-lg ct-text-color-1 cursor-pointer"></i>
+        </Link>
 
         {!user ? (
           <Button
