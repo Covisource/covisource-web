@@ -3,8 +3,8 @@ import React from "react";
 import Cookies from "js-cookie";
 
 // components
-import Input from "~components/General/Input";
-import SearchablePopup from "~components/General/SearchablePopup";
+import Input from "~components/Input";
+import SearchablePopup from "~components/SearchablePopup";
 
 const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");

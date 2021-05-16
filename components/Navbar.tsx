@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // components
-import Button from "~components/General/Button";
+import Button from "~components/Button";
 import NavItem from "./NavItem";
 import { Menu } from "@headlessui/react";
 import Link from "next/link";

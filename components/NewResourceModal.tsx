@@ -1,9 +1,9 @@
 import { Dialog } from "@headlessui/react";
 
 // components
-import Input from "~components/General/Input";
-import Button from "~components/General/Button";
-import SearchablePopup from "~components/General/SearchablePopup";
+import Input from "~components/Input";
+import Button from "~components/Button";
+import SearchablePopup from "~components/SearchablePopup";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   console.log(isOpen);

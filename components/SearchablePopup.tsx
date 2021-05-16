@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 
 // components
-import Input from "~components/General/Input";
+import Input from "~components/Input";
 import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
 import ResourceDropdown from "~components/SearchDropdowns/ResourceDropdown";
 

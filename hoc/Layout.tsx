@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 // components
-import HomeNavbar from "~components/Page/Landing/Navbar";
-import NewResourceModal from "~components/General/NewResourceModal";
+import HomeNavbar from "~components/Navbar";
+import NewResourceModal from "~components/NewResourceModal";
 
 const Layout = ({ children, page }) => {
   let [isResourceModalOpen, setIsResourceModalOpen] = useState(false);
