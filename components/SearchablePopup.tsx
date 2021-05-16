@@ -85,6 +85,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
           className={
             "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
           }
+          ref={node}
         >
           {results.length > 0 && results}
         </div>
