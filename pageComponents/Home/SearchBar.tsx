@@ -37,8 +37,8 @@ const Search = () => {
         searchHandler={async (e) => {
           const toReturn = [];
           const locations = await locationSearchHandler(e, hereToken);
-          (locations as LocationHitSchema[]).map((location) => {
-            toReturn.push(<div>{location.address}</div>);
+          (locations as LocationHitSchema[])?.map((location) => {
+            toReturn.push(<span className="bg-white">{location.address.label}</span>);
           });
           return toReturn;
         }}

@@ -32,7 +32,6 @@ const SearchablePopup: React.FC<Props> = (props) => {
     setLoading(false);
   };
 
-  console.log("from the actuall component", results);
   // Close popup when clicked outside of
   const node = useRef(null);
 
@@ -87,9 +86,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
             "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
           }
         >
-          {results.map((Elem) => {
-            <Elem />
-          })}
+          {results.length > 0 && results}
         </div>
       ) : (
         ""
