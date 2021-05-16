@@ -6,6 +6,7 @@ interface Props {
   title: string;
   address: string;
   coordinates: number[];
+  setInputValue: any;
 }
 
 const Hit = (props: Props) => {
@@ -15,7 +16,7 @@ const Hit = (props: Props) => {
     Cookies.set("coviUserLocationDisplay", props.title);
 
     document.getElementById("homeLocationSearchPopup").style.display = "none";
-    (document.getElementById("homeLocationSearchInput") as any).value = props.title;
+    props.setInputValue(props.title);
   };
 
   return (

@@ -20,6 +20,9 @@ const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
   const hereToken = useHereContext();
 
+  // value state
+  const [locationInputValue, setLocationInputValue] = useState(userLocationInCookie || "")
+
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-dark rounded-xl"
@@ -33,7 +36,8 @@ const Search = () => {
           <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
         }
         inputAppend={<i className="fas fa-caret-down ct-text-color-3"></i>}
-        inputValue={userLocationInCookie || ""}
+        inputValue={locationInputValue}
+        setInputValue={setLocationInputValue}
         loader={true}
         inputPlaceholder="Enter a location"
         inputId="homeLocationSearchInput"
@@ -54,6 +58,7 @@ const Search = () => {
                     ? [location.position.lat, location.position.lng]
                     : [location.access[0].lat, location.access[0].lng]
                 }
+                setInputValue={setLocationInputValue} 
               />
             );
           });

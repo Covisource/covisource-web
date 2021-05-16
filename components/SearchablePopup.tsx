@@ -10,7 +10,8 @@ interface Props {
   inputPlaceholder?: string;
   inputPrepend?: any;
   inputAppend?: any;
-  inputValue?: string;
+  inputValue: string;
+  setInputValue: any;
   popupId?: string;
   popupClassName?: string;
 
@@ -21,7 +22,6 @@ interface Props {
 
 const SearchablePopup: React.FC<Props> = (props) => {
   // state
-  const [inputValue, setInputValue] = useState<string>(props.inputValue || "");
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
@@ -29,7 +29,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
   // Input Change Handler
   const handleInputChange = async (e) => {
     setLoading(true);
-    setInputValue(e.target.value);
+    props.setInputValue(e.target.value);
     const insertIntoResult = await props.searchHandler(e);
     setResults(insertIntoResult);
     setLoading(false);
@@ -63,7 +63,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
         className={props.inputClassName}
         subClassName={props.inputSubClassName}
         onChange={handleInputChange}
-        value={inputValue}
+        value={props.inputValue}
         id={props.inputId || ""}
         onFocus={() => setIsVisible(true)}
         prepend={
