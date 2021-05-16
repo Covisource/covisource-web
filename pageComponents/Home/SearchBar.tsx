@@ -14,14 +14,19 @@ import { useHereContext } from "~contexts/HereContext";
 import LocationHitSchema from "~schema/LocationHitSchema";
 
 // functions
-import { locationSearchHandler } from "~util/searchablePopupUtil";
+import {
+  autoDetectLocation,
+  locationSearchHandler,
+} from "~util/searchablePopupUtil";
 
 const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
   const hereToken = useHereContext();
 
   // value state
-  const [locationInputValue, setLocationInputValue] = useState(userLocationInCookie || "")
+  const [locationInputValue, setLocationInputValue] = useState(
+    userLocationInCookie || ""
+  );
 
   return (
     <div
@@ -58,10 +63,30 @@ const Search = () => {
                     ? [location.position.lat, location.position.lng]
                     : [location.access[0].lat, location.access[0].lng]
                 }
-                setInputValue={setLocationInputValue} 
+                setInputValue={setLocationInputValue}
               />
             );
           });
+
+          if (locations?.length < 1 || !locations) {
+            return [
+              <div
+                onClick={() => autoDetectLocation(setLocationInputValue as any)}
+                className="flex items-center gap-2 py-4 px-3 select-none hover:bg-gray-900 cursor-pointer "
+              >
+                <i className="fal fa-radar text-xl text-purple-400"></i>
+                <div className="flex flex-col justify-center gap-1">
+                  <span className="text-purple-400 font-semibold font-mont">
+                    Auto Detect Location
+                  </span>
+                  <span className="text-xs text-gray-400">
+                    Click Allow If Your Browser Prompts You
+                  </span>
+                </div>
+              </div>,
+            ];
+          }
+
           return toReturn;
         }}
       />
