@@ -13,6 +13,9 @@ const Hit = (props: Props) => {
     Cookies.set("coviUserLocationLong", props.coordinates[0].toString());
     Cookies.set("coviUserLocationLat", props.coordinates[1].toString());
     Cookies.set("coviUserLocationDisplay", props.title);
+
+    document.getElementById("homeLocationSearchPopup").style.display = "none";
+    (document.getElementById("homeLocationSearchInput") as any).value = props.title;
   };
 
   return (

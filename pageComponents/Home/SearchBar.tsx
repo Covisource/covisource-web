@@ -14,7 +14,7 @@ import { useHereContext } from "~contexts/HereContext";
 import LocationHitSchema from "~schema/LocationHitSchema";
 
 // functions
-import { locationSearchHandler } from "~util/searchBoxFunctions";
+import { locationSearchHandler } from "~util/searchablePopupUtil";
 
 const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
@@ -36,7 +36,8 @@ const Search = () => {
         inputValue={userLocationInCookie || ""}
         loader={true}
         inputPlaceholder="Enter a location"
-        inputId="navbarLocationSearch"
+        inputId="homeLocationSearchInput"
+        popupId="homeLocationSearchPopup"
         searchHandler={async (e) => {
           const toReturn = [];
           const locations = await locationSearchHandler(e, hereToken);

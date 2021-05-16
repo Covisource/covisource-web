@@ -11,6 +11,9 @@ interface Props {
   inputPrepend?: any;
   inputAppend?: any;
   inputValue?: string;
+  popupId?: string;
+  popupClassName?: string;
+
   searchHandler: any;
   containerClassName?: string;
   loader?: boolean;
@@ -85,6 +88,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
           className={
             "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
           }
+          id={props.popupId || ""}
           ref={node}
         >
           {results.length > 0 && results}
@@ -92,6 +96,10 @@ const SearchablePopup: React.FC<Props> = (props) => {
       ) : (
         ""
       )}
+      <span
+        className="simulateClickOnMeToCloseSearchPopups"
+        onClick={() => setIsVisible(false)}
+      ></span>
     </div>
   );
 };
