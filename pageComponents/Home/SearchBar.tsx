@@ -5,13 +5,16 @@ import Cookies from "js-cookie";
 // components
 import Input from "~components/Input";
 import SearchablePopup from "~components/SearchablePopup";
-import { locationSearchHandler } from "~util/searchBoxFunctions";
+import LocationHit from "~components/LocationHit";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
 
 // schema
 import LocationHitSchema from "~schema/LocationHitSchema";
+
+// functions
+import { locationSearchHandler } from "~util/searchBoxFunctions";
 
 const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
@@ -38,7 +41,20 @@ const Search = () => {
           const toReturn = [];
           const locations = await locationSearchHandler(e, hereToken);
           (locations as LocationHitSchema[])?.map((location) => {
-            toReturn.push(<span className="bg-white">{location.address.label}</span>);
+            toReturn.push(
+              <LocationHit
+                key={location.id}
+                address={location.address?.label
+                  .replace(", India", "")
+                  .replace(location.title + ",", "")}
+                title={location.title.replace(", India", "")}
+                coordinates={
+                  location.position
+                    ? [location.position.lat, location.position.lng]
+                    : [location.access[0].lat, location.access[0].lng]
+                }
+              />
+            );
           });
           return toReturn;
         }}

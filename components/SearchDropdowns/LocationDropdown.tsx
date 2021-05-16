@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 
 // components
-import LocationHit from "~components/SearchDropdowns/LocationHit";
+import LocationHit from "~components/LocationHit";
 
 // schemas
 import LocationHitSchema from "~schema/LocationHitSchema";
@@ -85,8 +85,6 @@ const LocationPopup = ({
                     ? [hit.position.lat, hit.position.lng]
                     : [hit.access[0].lat, hit.access[0].lng]
                 }
-                setInputValue={setInputValue}
-                hidePopup={hidePopup}
               />
             );
           })
