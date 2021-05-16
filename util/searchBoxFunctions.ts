@@ -4,40 +4,34 @@ import { debounce } from "debounce";
 // schemas
 import LocationHit from "~schema/LocationHitSchema";
 
-export const locationSearchHandler = debounce(
-  async (e, setResults, setLoading, hereToken) => {
-    const input = e.target.value;
+export const locationSearchHandler = debounce(async (e, hereToken) => {
+  const input = e.target.value;
+  let toReturn: LocationHit[] = [];
 
-    if (input.replace(" ", "").length > 0) {
-      try {
-        setLoading(true);
-        setResults([]);
-        const res = await axios.get(
-          `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${input}&in=countryCode:IND&at=-13.163068,-72.545128`,
-          {
-            headers: {
-              Authorization: "Bearer " + hereToken,
-            },
-          }
-        );
-        const toInsert: LocationHit[] = [];
+  if (input.replace(" ", "").length > 0) {
+    try {
+      const res = await axios.get(
+        `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${input}&in=countryCode:IND&at=-13.163068,-72.545128`,
+        {
+          headers: {
+            Authorization: "Bearer " + hereToken,
+          },
+        }
+      );
 
-        (res.data.items as LocationHit[]).forEach((location) => {
-          if (location.position || location.access?.length > 0) {
-            toInsert.push(location);
-          }
-        });
-        setResults(toInsert);
-        setLoading(false);
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      setResults([]);
+      (res.data.items as LocationHit[]).forEach((location) => {
+        if (location.position || location.access?.length > 0) {
+          toReturn.push(location);
+        }
+      });
+      return toReturn;
+    } catch (err) {
+      console.error(err);
     }
-  },
-  500
-);
+  } else {
+    return [];
+  }
+}, 500);
 
 export const resourceSearchHandler = debounce(
   async (e, setResults, setLoading) => {

@@ -14,7 +14,6 @@ interface Props {
   searchHandler: any;
   containerClassName?: string;
   loader?: boolean;
-  results?: any[];
 }
 
 const SearchablePopup: React.FC<Props> = (props) => {
@@ -25,13 +24,15 @@ const SearchablePopup: React.FC<Props> = (props) => {
   const [results, setResults] = useState([]);
 
   // Input Change Handler
-  const handleInputChange = (e) => {
+  const handleInputChange = async (e) => {
     setLoading(true);
     setInputValue(e.target.value);
-    setResults(props.searchHandler(e));
+    const insertIntoResult = await props.searchHandler(e);
+    setResults(insertIntoResult);
     setLoading(false);
   };
 
+  console.log("from the actuall component", results);
   // Close popup when clicked outside of
   const node = useRef(null);
 
@@ -86,7 +87,9 @@ const SearchablePopup: React.FC<Props> = (props) => {
             "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
           }
         >
-          {results.map((elem) => elem)}
+          {results.map((Elem) => {
+            <Elem />
+          })}
         </div>
       ) : (
         ""

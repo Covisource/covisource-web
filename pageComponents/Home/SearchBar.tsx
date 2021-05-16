@@ -5,9 +5,17 @@ import Cookies from "js-cookie";
 // components
 import Input from "~components/Input";
 import SearchablePopup from "~components/SearchablePopup";
+import { locationSearchHandler } from "~util/searchBoxFunctions";
+
+// contexts
+import { useHereContext } from "~contexts/HereContext";
+
+// schema
+import LocationHitSchema from "~schema/LocationHitSchema";
 
 const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
+  const hereToken = useHereContext();
 
   return (
     <div
@@ -26,9 +34,13 @@ const Search = () => {
         loader={true}
         inputPlaceholder="Enter a location"
         inputId="navbarLocationSearch"
-        searchHandler={(e) => {
-          console.log(`lol ur lookin for locations homie ${e.target.value}`);
-          return ["lol"];
+        searchHandler={async (e) => {
+          const toReturn = [];
+          const locations = await locationSearchHandler(e, hereToken);
+          (locations as LocationHitSchema[]).map((location) => {
+            toReturn.push(<div>{location.address}</div>);
+          });
+          return toReturn;
         }}
       />
       {/* <SearchablePopup
