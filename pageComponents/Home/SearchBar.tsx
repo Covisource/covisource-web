@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import Cookies from "js-cookie";
 
 // components
@@ -24,11 +24,14 @@ const Search = () => {
         inputAppend={<i className="fas fa-caret-down ct-text-color-3"></i>}
         inputValue={userLocationInCookie || ""}
         loader={true}
-        searchType="location"
         inputPlaceholder="Enter a location"
         inputId="navbarLocationSearch"
+        searchHandler={(e) => {
+          console.log(`lol ur lookin for locations homie ${e.target.value}`);
+          return ["lol"];
+        }}
       />
-      <SearchablePopup
+      {/* <SearchablePopup
         containerClassName="w-2/3"
         inputSubClassName="rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-100"
         inputPrepend={<i className="fal fa-search ct-text-color-3 text-lg"></i>}
@@ -36,7 +39,7 @@ const Search = () => {
         searchType="resource"
         inputPlaceholder="Find Resources..."
         inputId="navbarResourceSearch"
-      />
+      /> */}
     </div>
   );
 };

@@ -2,112 +2,54 @@ import React, { useRef, useState, useEffect } from "react";
 
 // components
 import Input from "~components/Input";
-import LocationPopup from "~components/SearchDropdowns/LocationDropdown";
-import ResourceDropdown from "~components/SearchDropdowns/ResourceDropdown";
-
-// functions
-import {
-  getAllResources,
-  locationSearchHandler,
-  resourceSearchHandler,
-} from "~util/searchBoxFunctions";
-
-// contexts
-import { useHereContext } from "~contexts/HereContext";
 
 interface Props {
   inputId?: string;
   inputClassName?: string;
   inputSubClassName?: string;
   inputPlaceholder?: string;
-  containerClassName?: string;
   inputPrepend?: any;
   inputAppend?: any;
   inputValue?: string;
-  searchType: "location" | "resource";
+  searchHandler: any;
+  containerClassName?: string;
   loader?: boolean;
+  results?: any[];
 }
 
 const SearchablePopup: React.FC<Props> = (props) => {
   // state
   const [inputValue, setInputValue] = useState<string>(props.inputValue || "");
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState([]);
 
-  // config
-  const node = useRef(null);
-  const hereToken = useHereContext();
-
-  let popup;
-  let inputChangeHandler;
-
-  switch (props.searchType) {
-    case "location":
-      popup = (
-        <div ref={node}>
-          <LocationPopup
-            hits={results}
-            loading={loading}
-            setLoading={setLoading}
-            setInputValue={setInputValue}
-            hidePopup={() => setIsVisible(false)}
-          />
-        </div>
-      );
-      inputChangeHandler = (e) => {
-        setInputValue(e.target.value);
-        locationSearchHandler(e, setResults, setLoading, hereToken);
-      };
-      break;
-    case "resource":
-      if (inputValue === "") {
-        getAllResources(setResults);
-      }
-      popup = (
-        <div ref={node}>
-          <ResourceDropdown
-            hits={results}
-            setInputValue={setInputValue}
-            hidePopup={() => setIsVisible(false)}
-          />
-        </div>
-      );
-      inputChangeHandler = (e) => {
-        setInputValue(e.target.value);
-        resourceSearchHandler(e, setResults, setLoading);
-      };
-      break;
-  }
+  // Input Change Handler
+  const handleInputChange = (e) => {
+    setLoading(true);
+    setInputValue(e.target.value);
+    setResults(props.searchHandler(e));
+    setLoading(false);
+  };
 
   // Close popup when clicked outside of
+  const node = useRef(null);
 
-  const handleClickOutsideForLocationPopup = (e) => {
+  const handleClickOutside = (e) => {
     if (node.current && node.current.contains(e.target)) {
-      // user clicks on the popup itself
       return;
     }
-    // user clicks outside of the popup
     setIsVisible(false);
   };
 
   useEffect(() => {
     if (isVisible) {
-      document.addEventListener(
-        "mousedown",
-        handleClickOutsideForLocationPopup
-      );
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutsideForLocationPopup
-      );
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutsideForLocationPopup
-      );
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isVisible]);
 
@@ -117,7 +59,7 @@ const SearchablePopup: React.FC<Props> = (props) => {
         placeholder={props.inputPlaceholder}
         className={props.inputClassName}
         subClassName={props.inputSubClassName}
-        onChange={inputChangeHandler}
+        onChange={handleInputChange}
         value={inputValue}
         id={props.inputId || ""}
         onFocus={() => setIsVisible(true)}
@@ -138,7 +80,17 @@ const SearchablePopup: React.FC<Props> = (props) => {
         append={props.inputAppend}
       />
 
-      {isVisible ? popup : ""}
+      {isVisible ? (
+        <div
+          className={
+            "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
+          }
+        >
+          {results.map((elem) => elem)}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

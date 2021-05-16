@@ -42,13 +42,12 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               subClassName="bg-gray-100"
               prepend={<i className="fal fa-text"></i>}
             />
-            <SearchablePopup
+            {/* <SearchablePopup
               inputSubClassName="text-sm font-medium bg-gray-100"
               inputPrepend={<i className="fal fa-search text-lg"></i>}
               loader={true}
-              searchType="resource"
               inputPlaceholder="Category"
-            />
+            /> */}
             <textarea
               className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
               placeholder="Description"
