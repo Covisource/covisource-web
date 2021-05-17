@@ -1,53 +1,84 @@
-import React, { useRef, useState, useEffect } from "react";
+import { debounce } from "debounce";
+import React, { useEffect, useRef, useState } from "react";
 
 // components
 import Input from "~components/Input";
 
-interface Props {
-  containerClassName?: string;
-
-  inputId?: string;
-  inputClassName?: string;
-  inputSubClassName?: string;
-  inputPlaceholder?: string;
-  inputPrepend?: any;
-  inputAppend?: any;
-
-  inputValue: string;
-  setInputValue: any;
-
-  popupId?: string;
-  popupClassName?: string;
-
-  searchHandler: any;
-  loader?: boolean;
+interface InputProps {
+  id?: string;
+  className?: string;
+  subClassName?: string;
+  placeholder?: string;
+  prepend?: any;
+  append?: any;
+  value?: any;
 }
 
-const SearchablePopup: React.FC<Props> = (props) => {
+interface DropdownProps {
+  id?: string;
+  className?: string;
+}
+
+interface SearchHandlerProps {
+  handler: any;
+  extraParams?: object;
+}
+
+interface WhenInputEmptyProps {
+  componentArray: any[];
+  componentClickHandler?: any;
+  extraParams?: object;
+}
+
+interface ResultClickHandlerProps {
+  handler: any;
+  extraParams?: object;
+}
+
+interface Props {
+  input?: InputProps;
+  dropdown?: DropdownProps;
+
+  searchHandler: SearchHandlerProps;
+  resultClickHandler: ResultClickHandlerProps;
+
+  loader?: boolean;
+  containerClassName?: string;
+
+  whenInputEmpty?: WhenInputEmptyProps;
+}
+
+const NewSearchablePopup: React.FC<Props> = (props) => {
   // state
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const [inputValue, setInputValue] = useState(props.input.value || "");
 
-  // Input Change Handler
-  const handleInputChange = async (e) => {
-    setLoading(true);
-    props.setInputValue(e.target.value);
-    const insertIntoResult = await props.searchHandler(e);
-    setResults(insertIntoResult);
-    setLoading(false);
-  };
+  // refs
+  const dropdownRef = useRef(null);
 
-  // Close popup when clicked outside of
-  const node = useRef(null);
-
+  // functions
   const handleClickOutside = (e) => {
-    if (node.current && node.current.contains(e.target)) {
+    if (dropdownRef.current && dropdownRef.current.contains(e.target)) {
       return;
     }
     setIsVisible(false);
   };
 
+  const handleSearch = (e) => {
+    setInputValue(e.target.value);
+    props.searchHandler.handler({
+      input: inputValue,
+      setLoading,
+      setInputValue,
+      setResults,
+      setIsVisible,
+      ...props.searchHandler.extraParams,
+    });
+  };
+
+  // use effects
   useEffect(() => {
     if (isVisible) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -59,16 +90,72 @@ const SearchablePopup: React.FC<Props> = (props) => {
     };
   }, [isVisible]);
 
+  let resultsToRender = [];
+
+  if (results.length > 0) {
+    resultsToRender = results.map((result) => {
+      return (
+        <div
+          className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer"
+          onClick={() => {
+            props.resultClickHandler.handler({
+              input: inputValue,
+              setLoading,
+              setInputValue,
+              setResults,
+              setIsVisible,
+              result,
+              ...props.resultClickHandler.extraParams,
+            });
+          }}
+        >
+          <span className="truncate">{result.heading}</span>
+          <span
+            className="truncate text-xs text-gray-300"
+            title={result.subHeading}
+          >
+            {result.subHeading}
+          </span>
+        </div>
+      );
+    });
+  }
+
+  if (inputValue === "") {
+    resultsToRender = props.whenInputEmpty?.componentArray.map((component) => {
+      return (
+        <div
+          onClick={() =>
+            props.whenInputEmpty?.componentClickHandler({
+              input: inputValue,
+              setLoading,
+              setInputValue,
+              setResults,
+              setIsVisible,
+              component,
+              ...props.searchHandler.extraParams,
+            })
+          }
+        >
+          {component}
+        </div>
+      );
+    });
+  }
+
   return (
     <div className={`relative ${props.containerClassName}`}>
       <Input
-        placeholder={props.inputPlaceholder}
-        className={props.inputClassName}
-        subClassName={props.inputSubClassName}
-        onChange={handleInputChange}
-        value={props.inputValue}
-        id={props.inputId || ""}
-        onFocus={() => setIsVisible(true)}
+        id={props.input.id}
+        className={props.input.className}
+        subClassName={props.input.subClassName}
+        placeholder={props.input.placeholder}
+        append={props.input.append}
+        value={inputValue}
+        onChange={handleSearch}
+        onFocus={() => {
+          setIsVisible(true);
+        }}
         prepend={
           props.loader && loading ? (
             <svg
@@ -80,31 +167,23 @@ const SearchablePopup: React.FC<Props> = (props) => {
               viewBox="0 0 24 24"
             ></svg>
           ) : (
-            props.inputPrepend
+            props.input.prepend
           )
         }
-        append={props.inputAppend}
       />
-
-      {isVisible ? (
+      {isVisible && (
         <div
-          className={
-            "absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80"
-          }
-          id={props.popupId || ""}
-          ref={node}
+          className={`absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80 ${
+            props.dropdown?.className || ""
+          }`}
+          id={props.dropdown?.id || ""}
+          ref={dropdownRef}
         >
-          {results.length > 0 && results}
+          {resultsToRender}
         </div>
-      ) : (
-        ""
       )}
-      <span
-        className="simulateClickOnMeToCloseSearchPopups"
-        onClick={() => setIsVisible(false)}
-      ></span>
     </div>
   );
 };
 
-export default SearchablePopup;
+export default NewSearchablePopup;
