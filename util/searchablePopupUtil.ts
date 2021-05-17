@@ -7,7 +7,7 @@ import LocationHit from "~schema/LocationHitSchema";
 
 export const locationSearchHandler = debounce(
   async (input, setLoading, setInputValue, setResults, { hereToken }) => {
-    let resultsToReturn = [];
+    let results = [];
 
     if (input.replace(" ", "").length > 0) {
       setLoading(true);
@@ -23,7 +23,7 @@ export const locationSearchHandler = debounce(
 
         (res.data.items as LocationHit[]).forEach((location) => {
           if (location.position || location.access?.length > 0) {
-            resultsToReturn.push({
+            results.push({
               heading: location.title,
               subHeading: location.address.label,
             });
@@ -34,7 +34,7 @@ export const locationSearchHandler = debounce(
       }
     }
 
-    setResults(resultsToReturn);
+    setResults(results);
     setLoading(false);
   },
   500

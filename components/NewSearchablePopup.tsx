@@ -24,6 +24,12 @@ interface SearchHandlerProps {
   extraParams?: object;
 }
 
+interface WhenInputEmptyProps {
+  componentArray: any[];
+  componentClickHandler?: any;
+  extraParams?: object;
+}
+
 interface Props {
   input?: InputProps;
   dropdown?: DropdownProps;
@@ -33,6 +39,8 @@ interface Props {
 
   loader?: boolean;
   containerClassName?: string;
+
+  whenInputEmpty?: WhenInputEmptyProps;
 }
 
 const NewSearchablePopup: React.FC<Props> = (props) => {
@@ -76,7 +84,48 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
     };
   }, [isVisible]);
 
-  console.log(results);
+  let resultsToRender = [];
+
+  if (results.length > 0) {
+    resultsToRender = results.map((result) => {
+      return (
+        <div
+          className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer"
+          // onClick={() => {
+          //   const toSet = props.resultClickHandler();
+          //   setInputValue(toSet);
+          // }}
+        >
+          <span className="truncate">{result.heading}</span>
+          <span
+            className="truncate text-xs text-gray-300"
+            title={result.subHeading}
+          >
+            {result.subHeading}
+          </span>
+        </div>
+      );
+    });
+  }
+
+  if (inputValue === "") {
+    resultsToRender = props.whenInputEmpty?.componentArray.map((component) => {
+      return (
+        <div
+          onClick={() =>
+            props.whenInputEmpty?.componentClickHandler(
+              setLoading,
+              setInputValue,
+              props.whenInputEmpty.extraParams
+            )
+          }
+        >
+          {component}
+        </div>
+      );
+    });
+  }
+
   return (
     <div className={`relative ${props.containerClassName}`}>
       <Input
@@ -113,26 +162,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
           id={props.dropdown?.id || ""}
           ref={dropdownRef}
         >
-          {results.length > 0 &&
-            results.map((result) => {
-              return (
-                <div
-                  className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer"
-                  // onClick={() => {
-                  //   const toSet = props.resultClickHandler();
-                  //   setInputValue(toSet);
-                  // }}
-                >
-                  <span className="truncate">{result.heading}</span>
-                  <span
-                    className="truncate text-xs text-gray-300"
-                    title={result.subHeading}
-                  >
-                    {result.subHeading}
-                  </span>
-                </div>
-              );
-            })}
+          {resultsToRender}
         </div>
       )}
     </div>
