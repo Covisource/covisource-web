@@ -51,6 +51,7 @@ export const locationSearchHandler = debounce(
 
 export const resourceSearchHandler = debounce(
   async ({ input, setResults, setLoading }) => {
+    let resources;
     if (input.replace(" ", "").length > 0) {
       try {
         setLoading(true);
@@ -64,26 +65,27 @@ export const resourceSearchHandler = debounce(
         if (!res.success) {
           return console.error(res.message);
         }
-        const resources = [];
+        resources = [];
 
         res.data.forEach((resource) => {
           resources.push({
             heading: resource.name,
           });
         });
-        setResults(resources);
-        setLoading(false);
       } catch (err) {
         console.error(err);
       }
     } else {
-      getAllResources(setResults);
+      resources = getAllResources();
     }
+    
+    setLoading(false);
+    setResults(resources);
   },
   500
 );
 
-export const getAllResources = async (setResults) => {
+export const getAllResources = async () => {
   const res = await axios
     .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory`)
     .then((res) => res.data);
@@ -100,7 +102,7 @@ export const getAllResources = async (setResults) => {
     });
   });
 
-  setResults(resources);
+  return resources;
 };
 
 export const autoDetectLocation = ({
