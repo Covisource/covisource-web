@@ -102,6 +102,22 @@ const Search = () => {
           extraParams: { hereToken },
         }}
         loader={true}
+        whenInputEmpty={{
+          componentArray: [
+            <div className="flex items-center gap-2 py-4 px-3 select-none hover:bg-gray-900 cursor-pointer ">
+              <i className="fal fa-radar text-xl text-purple-400"></i>
+              <div className="flex flex-col justify-center gap-1">
+                <span className="text-purple-400 font-semibold font-mont">
+                  Auto Detect Location
+                </span>
+                <span className="text-xs text-gray-400">
+                  Click Allow If Your Browser Prompts You
+                </span>
+              </div>
+            </div>,
+          ],
+          componentClickHandler: {autoDetectLocation}
+        }}
       />
       {/* <SearchablePopup
         containerClassName="w-2/3"
