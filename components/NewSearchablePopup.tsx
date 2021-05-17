@@ -90,6 +90,20 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
         onFocus={() => {
           setIsVisible(true);
         }}
+        prepend={
+          props.loader && loading ? (
+            <svg
+              className="animate-spin h-4 w-4 rounded-full border-2 border-purple-500 border-opacity-50"
+              style={{
+                borderRightColor: "#E5E7EB",
+                borderTopColor: "#E5E7EB",
+              }}
+              viewBox="0 0 24 24"
+            ></svg>
+          ) : (
+            props.input.prepend
+          )
+        }
       />
       {isVisible && (
         <div

@@ -90,6 +90,9 @@ const Search = () => {
           className: "border-r border-gray-400 ct-location_search",
           subClassName:
             "ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-100",
+          prepend: (
+            <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
+          ),
           append: <i className="fas fa-caret-down ct-text-color-3"></i>,
           placeholder: "Enter a location",
           value: userLocationInCookie || "",
