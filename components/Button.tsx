@@ -12,18 +12,17 @@ const Button = (props: Props) => {
   if (props.href) {
     return (
       <Link href={props.href}>
-        <a
-          className={`flex items-center content-center justify-center px-4 cursor-pointer select-none ${props.className}`}
-          // onClick={props.onClick || ""}
+        <span
+          className={`grid place-items-center p-4 cursor-pointer select-none ${props.className}`}
         >
           {props.children}
-        </a>
+        </span>
       </Link>
     );
   } else {
     return (
       <a
-        className={`flex items-center content-center justify-center px-4 cursor-pointer select-none ${props.className}`}
+        className={`inline-flex p-4 px-7 cursor-pointer select-none ${props.className}`}
         onClick={props.onClick}
       >
         {props.children}

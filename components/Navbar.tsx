@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 // components
-import Button from "~components/General/Button";
+import Button from "~components/Button";
 import NavItem from "./NavItem";
 import { Menu } from "@headlessui/react";
+import Link from "next/link";
 
 // session
 import { useSession } from "next-auth/client";
@@ -11,7 +12,7 @@ import { useSession } from "next-auth/client";
 // schema
 import SessionSchema from "~schema/SessionSchema";
 
-const Navbar = () => {
+const Navbar = ({ setIsResourceModalOpen }) => {
   const user: SessionSchema = useSession()[0] as any;
 
   return (
@@ -74,7 +75,7 @@ const Navbar = () => {
                     {!user ? (
                       <Button
                         href="/login"
-                        className="bg-gray-50 ct-text-color rounded-md ct-font-mont font-semibold text-sm py-2"
+                        className="ct-bg-dark ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
                       >
                         Login
                       </Button>
@@ -95,12 +96,15 @@ const Navbar = () => {
 
       <div className="hidden lg:flex items-center gap-6">
         <i className="far fa-search text-lg ct-text-color-1"></i>
-        <i className="far fa-plus text-lg ct-text-color-1"></i>
+        <i
+          className="far fa-plus text-lg ct-text-color-1 cursor-pointer"
+          onClick={() => setIsResourceModalOpen(true)}
+        ></i>
 
         {!user ? (
           <Button
             href="/login"
-            className="bg-gray-50 ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
+            className="ct-bg-dark ct-text-color-3 rounded-md ct-font-mont font-semibold text-sm py-2"
           >
             Login
           </Button>

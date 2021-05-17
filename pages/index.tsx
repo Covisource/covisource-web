@@ -1,6 +1,6 @@
 import Layout from "~hoc/Layout";
 import React, { useEffect } from "react";
-import SearchBar from "~components/Page/Landing/SearchBar";
+import SearchBar from "pageComponents/Home/SearchBar";
 import TextLoop from "react-text-loop";
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
           </span>
           <TextLoop>
             {changingWords.map((word, index) => (
-              <span className="ct-text-grad ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
+              <span key={index} className="ct-text-grad ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
                 {word}
               </span>
             ))}

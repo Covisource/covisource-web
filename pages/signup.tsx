@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Input from "~components/General/Input";
-import Button from "~components/General/Button";
-import SocialProvider from "~components/Page/Login/SocialProvider";
+import Input from "~components/Input";
+import Button from "~components/Button";
+import SocialProvider from "pageComponents/Auth/SocialProvider";
 import Link from "next/link";
 
 const login = () => {

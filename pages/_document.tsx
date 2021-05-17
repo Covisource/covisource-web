@@ -32,7 +32,7 @@ class MyDocument extends Document {
             href="favicon/apple-touch-icon.png"
           />
         </Head>
-        <body className="ct-bg text-gray-50">
+        <body className="ct-bg ct-text-color-1">
           <Main />
           <NextScript />
         </body>
