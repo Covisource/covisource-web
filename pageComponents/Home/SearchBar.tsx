@@ -101,6 +101,7 @@ const Search = () => {
           function: locationSearchHandler,
           extraParams: { hereToken },
         }}
+        loader={true}
       />
       {/* <SearchablePopup
         containerClassName="w-2/3"

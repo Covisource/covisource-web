@@ -10,6 +10,7 @@ export const locationSearchHandler = debounce(
     let resultsToReturn = [];
 
     if (input.replace(" ", "").length > 0) {
+      setLoading(true);
       try {
         const res = await axios.get(
           `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${input}&in=countryCode:IND&at=-13.163068,-72.545128`,
@@ -28,13 +29,13 @@ export const locationSearchHandler = debounce(
             });
           }
         });
-        setResults(resultsToReturn);
       } catch (err) {
         console.error(err);
       }
-    } else {
-      setResults(resultsToReturn);
     }
+
+    setResults(resultsToReturn);
+    setLoading(false);
   },
   500
 );
