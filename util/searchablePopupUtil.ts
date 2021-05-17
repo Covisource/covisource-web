@@ -26,6 +26,15 @@ export const locationSearchHandler = debounce(
             results.push({
               heading: location.title,
               subHeading: location.address.label,
+              coordinates: location.position
+                ? {
+                    lat: location.position.lat,
+                    long: location.position.lng,
+                  }
+                : {
+                    lat: location.access[0].lat,
+                    long: location.access[0].lng,
+                  },
             });
           }
         });

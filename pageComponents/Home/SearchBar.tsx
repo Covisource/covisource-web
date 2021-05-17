@@ -118,6 +118,22 @@ const Search = () => {
           ],
           componentClickHandler: autoDetectLocation,
         }}
+        resultClickHandler={{
+          handler: ({ result, setInputValue, setIsVisible }) => {
+            Cookies.set(
+              "coviUserLocationLong",
+              result.coordinates.long.toString()
+            );
+            Cookies.set(
+              "coviUserLocationLat",
+              result.coordinates.lat.toString()
+            );
+            Cookies.set("coviUserLocationDisplay", result.title);
+
+            setInputValue(result.heading);
+            setIsVisible(false);
+          },
+        }}
       />
       {/* <SearchablePopup
         containerClassName="w-2/3"

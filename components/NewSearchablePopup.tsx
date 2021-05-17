@@ -30,12 +30,17 @@ interface WhenInputEmptyProps {
   extraParams?: object;
 }
 
+interface ResultClickHandlerProps {
+  handler: any;
+  extraParams?: object;
+}
+
 interface Props {
   input?: InputProps;
   dropdown?: DropdownProps;
 
   searchHandler: SearchHandlerProps;
-  // resultClickHandler: any;
+  resultClickHandler: ResultClickHandlerProps;
 
   loader?: boolean;
   containerClassName?: string;
@@ -64,10 +69,11 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
   const handleSearch = (e) => {
     setInputValue(e.target.value);
     props.searchHandler.handler({
-      input: e.target.value,
+      input: inputValue,
       setLoading,
       setInputValue,
       setResults,
+      setIsVisible,
       ...props.searchHandler.extraParams,
     });
   };
@@ -91,10 +97,17 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
       return (
         <div
           className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer"
-          // onClick={() => {
-          //   const toSet = props.resultClickHandler();
-          //   setInputValue(toSet);
-          // }}
+          onClick={() => {
+            props.resultClickHandler.handler({
+              input: inputValue,
+              setLoading,
+              setInputValue,
+              setResults,
+              setIsVisible,
+              result,
+              ...props.resultClickHandler.extraParams,
+            });
+          }}
         >
           <span className="truncate">{result.heading}</span>
           <span
@@ -114,10 +127,12 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
         <div
           onClick={() =>
             props.whenInputEmpty?.componentClickHandler({
+              input: inputValue,
               setLoading,
               setInputValue,
+              setResults,
               setIsVisible,
-              ...props.whenInputEmpty.extraParams,
+              ...props.searchHandler.extraParams,
             })
           }
         >
