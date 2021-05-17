@@ -1,79 +1,51 @@
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 
+// functions
 import {
-  getAllResources,
-  resourceSearchHandler,
+  autoDetectLocation,
+  locationSearchHandler,
 } from "~util/searchablePopupUtil";
 
 /// components
-import SearchablePopup from "~components/SearchablePopup"
-import Input from "~components/Input"
+import SearchablePopup from "~components/SearchablePopup";
+import Input from "~components/Input";
 
-const Position1 = () => {
-  const [allResources, setAllResources] = useState([]);
+// contexts
+import { useHereContext } from "~contexts/HereContext";
 
-  useEffect(() => {
-    const getResources = async () => {
-      setAllResources((await getAllResources()) || []);
-    };
-    getResources();
-  });
+const Position2 = () => {
+  const hereToken = useHereContext();
 
   return (
     <>
       <div className="mt-5 flex flex-col gap-2">
-        <Input
-          placeholder="Title"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-text"></i>}
-        />
-
         <SearchablePopup
           input={{
             subClassName: "bg-gray-100",
-            prepend: <i className="fal fa-search"></i>,
-            placeholder: "Find Resources...",
+            prepend: <i className="fal fa-map-marker-alt"></i>,
+            append: <i className="fas fa-caret-down"></i>,
+            placeholder: "Enter a location",
           }}
           searchHandler={{
-            handler: resourceSearchHandler,
+            handler: locationSearchHandler,
+            extraParams: { hereToken },
           }}
+          loader={true}
           resultClickHandler={{
-            handler: ({ result, setInputValue, setIsVisible }) => {
-              setInputValue(result.heading);
-              setIsVisible(false);
-            },
-          }}
-          whenInputEmpty={{
-            componentArray: allResources.map((resource: any) => {
-              return (
-                <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
-                  <span className="truncate resource" title={resource.heading}>
-                    {resource.heading}
-                  </span>
-                </div>
-              );
-            }),
-            componentClickHandler: ({
-              component,
-              setInputValue,
-              setIsVisible,
-            }) => {
-              setInputValue(component.props.children.props.title);
-              setIsVisible(false);
-
-              console.log(component);
-            },
+            handler: ({ result, setInputValue, setIsVisible }) => {},
           }}
         />
 
-        <textarea
-          className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
-          placeholder="Description"
-        ></textarea>
+        <Input
+          type="tel"
+          placeholder="Phone"
+          subClassName="bg-gray-100"
+          prepend={<i className="fal fa-phone"></i>}
+        />
       </div>
     </>
   );
 };
 
-export default Position1;
+export default Position2;

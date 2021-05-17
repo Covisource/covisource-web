@@ -27,7 +27,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         </span>
 
         {/* Actual Content */}
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-y-auto">
           <div className="flex items-center justify-between border-b border-gray-300 pb-3">
             <div>
               <Dialog.Title
@@ -50,7 +50,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           {/* Buttons */}
           {position === 1 && <Position1 />}
           {position === 2 && <Position2 />}
-          {position === 3 && <Position3 />}
+          {position === 3 && <Position3/>}
 
           {/* Toggler Buttons */}
           <div className="mt-4 w-full flex items-center gap-2 justify-end">

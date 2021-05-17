@@ -3,15 +3,10 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 // components
-import Input from "~components/Input";
 import SearchablePopup from "~components/SearchablePopup";
-import LocationHit from "~components/LocationHit";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
-
-// schema
-import LocationHitSchema from "~schema/LocationHitSchema";
 
 // functions
 import {

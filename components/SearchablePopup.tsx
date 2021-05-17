@@ -173,7 +173,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
       />
       {isVisible && (
         <div
-          className={`absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80 ${
+          className={`absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80 z-50 ${
             props.dropdown?.className || ""
           }`}
           id={props.dropdown?.id || ""}
