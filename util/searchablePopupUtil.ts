@@ -101,9 +101,14 @@ export const getAllResources = async (setResults) => {
   setResults(resources);
 };
 
-export const autoDetectLocation = ({ setInputValue, setIsVisible }) => {
+export const autoDetectLocation = ({
+  setInputValue,
+  setIsVisible,
+  setLoading,
+}) => {
   if ("geolocation" in navigator) {
     setIsVisible(false);
+    setLoading(true);
     navigator.geolocation.getCurrentPosition(async (position) => {
       try {
         const res = await fetch(
@@ -122,6 +127,7 @@ export const autoDetectLocation = ({ setInputValue, setIsVisible }) => {
       } catch (err) {
         console.error(err);
       }
+      setLoading(false);
     });
   } else {
     console.log("Auto location is not available.");
