@@ -20,7 +20,7 @@ interface DropdownProps {
 }
 
 interface SearchHandlerProps {
-  function: any;
+  handler: any;
   extraParams?: object;
 }
 
@@ -63,13 +63,13 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
 
   const handleSearch = (e) => {
     setInputValue(e.target.value);
-    props.searchHandler.function(
-      e.target.value,
+    props.searchHandler.handler({
+      input: e.target.value,
       setLoading,
       setInputValue,
       setResults,
-      props.searchHandler.extraParams
-    );
+      ...props.searchHandler.extraParams,
+    });
   };
 
   // use effects
@@ -113,11 +113,12 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
       return (
         <div
           onClick={() =>
-            props.whenInputEmpty?.componentClickHandler(
+            props.whenInputEmpty?.componentClickHandler({
               setLoading,
               setInputValue,
-              props.whenInputEmpty.extraParams
-            )
+              setIsVisible,
+              ...props.whenInputEmpty.extraParams,
+            })
           }
         >
           {component}

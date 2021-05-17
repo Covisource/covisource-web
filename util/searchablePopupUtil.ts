@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import LocationHit from "~schema/LocationHitSchema";
 
 export const locationSearchHandler = debounce(
-  async (input, setLoading, setInputValue, setResults, { hereToken }) => {
+  async ({ input, setLoading, setResults, hereToken }) => {
     let results = [];
 
     if (input.replace(" ", "").length > 0) {
@@ -92,10 +92,9 @@ export const getAllResources = async (setResults) => {
   setResults(resources);
 };
 
-export const autoDetectLocation = (props) => {
+export const autoDetectLocation = ({ setInputValue, setIsVisible }) => {
   if ("geolocation" in navigator) {
-    document.getElementById("homeLocationSearchPopup").style.display = "none";
-
+    setIsVisible(false);
     navigator.geolocation.getCurrentPosition(async (position) => {
       try {
         const res = await fetch(
@@ -110,7 +109,7 @@ export const autoDetectLocation = (props) => {
         Cookies.set("coviUserLocationDisplay", res.display_name);
 
         // set the input value to the title of what they select
-        props.setInputValue(res.display_name);
+        setInputValue(res.display_name);
       } catch (err) {
         console.error(err);
       }

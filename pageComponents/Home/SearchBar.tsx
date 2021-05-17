@@ -98,7 +98,7 @@ const Search = () => {
           value: userLocationInCookie || "",
         }}
         searchHandler={{
-          function: locationSearchHandler,
+          handler: locationSearchHandler,
           extraParams: { hereToken },
         }}
         loader={true}
@@ -116,7 +116,7 @@ const Search = () => {
               </div>
             </div>,
           ],
-          componentClickHandler: {autoDetectLocation}
+          componentClickHandler: autoDetectLocation,
         }}
       />
       {/* <SearchablePopup
