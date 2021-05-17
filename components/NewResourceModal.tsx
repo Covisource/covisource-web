@@ -4,9 +4,22 @@ import { Dialog } from "@headlessui/react";
 import Input from "~components/Input";
 import Button from "~components/Button";
 import SearchablePopup from "~components/SearchablePopup";
+import {
+  getAllResources,
+  resourceSearchHandler,
+} from "~util/searchablePopupUtil";
+import { useEffect, useState } from "react";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
-  console.log(isOpen);
+  const [allResources, setAllResources] = useState([]);
+
+  useEffect(() => {
+    const getResources = async () => {
+      setAllResources((await getAllResources()) || []);
+    };
+    getResources();
+  });
+
   return (
     <Dialog
       as="div"
@@ -42,12 +55,48 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               subClassName="bg-gray-100"
               prepend={<i className="fal fa-text"></i>}
             />
-            {/* <SearchablePopup
-              inputSubClassName="text-sm font-medium bg-gray-100"
-              inputPrepend={<i className="fal fa-search text-lg"></i>}
-              loader={true}
-              inputPlaceholder="Category"
-            /> */}
+
+            <SearchablePopup
+              input={{
+                subClassName: "bg-gray-100",
+                prepend: <i className="fal fa-search"></i>,
+                placeholder: "Find Resources...",
+              }}
+              searchHandler={{
+                handler: resourceSearchHandler,
+              }}
+              resultClickHandler={{
+                handler: ({ result, setInputValue, setIsVisible }) => {
+                  setInputValue(result.heading);
+                  setIsVisible(false);
+                },
+              }}
+              whenInputEmpty={{
+                componentArray: allResources.map((resource: any) => {
+                  return (
+                    <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
+                      <span
+                        className="truncate resource"
+                        title={resource.heading}
+                      >
+                        {resource.heading}
+                      </span>
+                    </div>
+                  );
+                }),
+                componentClickHandler: ({
+                  component,
+                  setInputValue,
+                  setIsVisible,
+                }) => {
+                  setInputValue(component.props.children.props.title);
+                  setIsVisible(false);
+
+                  console.log(component);
+                },
+              }}
+            />
+
             <textarea
               className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
               placeholder="Description"

@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 // components
 import Input from "~components/Input";
-import NewSearchablePopup from "~components/NewSearchablePopup";
+import SearchablePopup from "~components/SearchablePopup";
 import LocationHit from "~components/LocationHit";
 
 // contexts
@@ -38,7 +38,7 @@ const SearchBar = () => {
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-dark rounded-xl"
       id="searchbar_home"
     >
-      <NewSearchablePopup
+      <SearchablePopup
         input={{
           className: "border-r border-gray-400 ct-location_search",
           subClassName:
@@ -88,10 +88,10 @@ const SearchBar = () => {
           },
         }}
       />
-      <NewSearchablePopup
+      <SearchablePopup
         containerClassName="w-2/3"
         input={{
-          className: "border-r border-gray-400 ct-location_search",
+          className: "ct-location_search",
           subClassName:
             "rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-100",
           prepend: <i className="fal fa-search ct-text-color-3 text-lg"></i>,
