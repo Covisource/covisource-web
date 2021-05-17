@@ -3,6 +3,8 @@ import { Dialog } from "@headlessui/react";
 
 // positions
 import Position1 from "localComponents/NewResourceModal/Position1";
+import Position2 from "localComponents/NewResourceModal/Position2";
+import Position3 from "localComponents/NewResourceModal/Position3";
 
 // buttons
 import Button from "~components/Button";
@@ -43,6 +45,8 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
           {/* Buttons */}
           {position === 1 && <Position1 />}
+          {position === 2 && <Position2 />}
+          {position === 3 && <Position3/>}
 
           {/* Toggler Buttons */}
           <div className="mt-4 w-full text-right">
@@ -64,7 +68,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             )}
             {position === 3 && (
               <Button
-                className="ct-bg-accent ct-text-color-3 rounded-lg"
+                className="ct-bg-grad ct-text-color-3 rounded-lg"
                 onClick={() => {}}
               >
                 Finish
