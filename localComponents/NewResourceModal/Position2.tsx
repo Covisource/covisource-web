@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Dialog } from "@headlessui/react";
-import mapbox from "mapbox-gl";
+import ReactMapGl from "react-map-gl";
 
 // functions
 import {
@@ -19,39 +19,26 @@ const Position2 = () => {
   const hereToken = useHereContext();
 
   // mapbox config
-  mapbox.accessToken = process.env.NEXT_PUBLIC_MABOX_TOKEN;
 
-  const mapRef = useRef(null);
-  const mapContainerRef = useRef(null);
-
-  const [long, setLong] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
-
-  // initialize map
-  useEffect(() => {
-    if (mapRef.current) return; // initialize map only once
-    mapRef.current = new mapbox.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
-      center: [long, lat],
-      zoom: zoom,
-    });
-  });
-
-  // handle map movement
-  useEffect(() => {
-    if (!mapRef.current) return; // wait for map to initialize
-    mapRef.current.on("move", () => {
-      setLong(mapRef.current.getCenter().lng.toFixed(4));
-      setLat(mapRef.current.getCenter().lat.toFixed(4));
-      setZoom(mapRef.current.getZoom().toFixed(2));
-    });
+  const [mapConfig, setMapConfig] = useState({
+    latitude: 20.5937,
+    longitude: 78.9629,
+    zoom: 7,
+    width: "full",
+    height: "20rem",
   });
 
   return (
     <>
       <div className="mt-5 flex flex-col gap-2">
+        <ReactMapGl
+          {...mapConfig}
+          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MABOX_TOKEN}
+          onViewportChange={(newConfig) => setMapConfig(newConfig)}
+          mapStyle="mapbox://styles/fullstackslayer/ckot5udo10j7f17lkzeaf566l"
+          className="rounded-xl"
+        ></ReactMapGl>
+
         <SearchablePopup
           input={{
             subClassName: "bg-gray-100",
@@ -67,15 +54,6 @@ const Position2 = () => {
           resultClickHandler={{
             handler: ({ result, setInputValue, setIsVisible }) => {},
           }}
-        />
-
-        <div ref={mapContainerRef} className="rounded-lg" />
-
-        <Input
-          type="tel"
-          placeholder="Phone"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-phone"></i>}
         />
       </div>
     </>

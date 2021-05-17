@@ -38,7 +38,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               </Dialog.Title>
               <span className="text-sm">
                 {position === 1 && "Step 1 - Basic Details"}
-                {position === 2 && "Step 2 - Location and Contact"}
+                {position === 2 && "Step 2 - Location"}
                 {position === 3 && "Step 3 - Extra Parameters"}
               </span>
             </div>
@@ -57,7 +57,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             {position > 1 && (
               <Button
                 className="rounded-lg bg-gray-200"
-                onClick={() => setPosition((cur) => cur - 1)}
+                onClick={() => setPosition((curr) => curr - 1)}
               >
                 Previous
               </Button>

@@ -7,8 +7,8 @@ import {
 } from "~util/searchablePopupUtil";
 
 /// components
-import SearchablePopup from "~components/SearchablePopup"
-import Input from "~components/Input"
+import SearchablePopup from "~components/SearchablePopup";
+import Input from "~components/Input";
 
 const Position1 = () => {
   const [allResources, setAllResources] = useState([]);
@@ -29,11 +29,18 @@ const Position1 = () => {
           prepend={<i className="fal fa-text"></i>}
         />
 
+        <Input
+          type="tel"
+          placeholder="Phone"
+          subClassName="bg-gray-100"
+          prepend={<i className="fal fa-phone"></i>}
+        />
+
         <SearchablePopup
           input={{
             subClassName: "bg-gray-100",
             prepend: <i className="fal fa-search"></i>,
-            placeholder: "Find Resources...",
+            placeholder: "Choose a resource",
           }}
           searchHandler={{
             handler: resourceSearchHandler,
