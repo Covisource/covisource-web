@@ -50,9 +50,7 @@ export const locationSearchHandler = debounce(
 );
 
 export const resourceSearchHandler = debounce(
-  async (e, setResults, setLoading) => {
-    const input = e.target.value;
-
+  async ({ input, setResults, setLoading }) => {
     if (input.replace(" ", "").length > 0) {
       try {
         setLoading(true);
@@ -66,12 +64,14 @@ export const resourceSearchHandler = debounce(
         if (!res.success) {
           return console.error(res.message);
         }
-        const toInsert = [];
+        const resources = [];
 
         res.data.forEach((resource) => {
-          toInsert.push(resource);
+          resources.push({
+            heading: resource.name,
+          });
         });
-        setResults(toInsert);
+        setResults(resources);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -95,7 +95,9 @@ export const getAllResources = async (setResults) => {
   const resources = [];
 
   res.data.forEach((resource) => {
-    resources.push(resource);
+    resources.push({
+      heading: resource.name,
+    });
   });
 
   setResults(resources);
