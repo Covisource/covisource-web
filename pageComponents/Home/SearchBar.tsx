@@ -107,16 +107,24 @@ const SearchBar = () => {
           },
         }}
         whenInputEmpty={{
-          componentArray: allResources.map((resource: any) => {
+          componentArray: allResources.map((resource: any, index) => {
             return (
               <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
-                <span className="truncate">{resource.heading}</span>
+                <span className="truncate resource" title={resource.heading}>
+                  {resource.heading}
+                </span>
               </div>
             );
           }),
-          componentClickHandler: ({ result, setInputValue, setIsVisible }) => {
-            setInputValue(result.heading);
+          componentClickHandler: ({
+            component,
+            setInputValue,
+            setIsVisible,
+          }) => {
+            setInputValue(component.props.children.props.title);
             setIsVisible(false);
+
+            console.log(component);
           },
         }}
       />

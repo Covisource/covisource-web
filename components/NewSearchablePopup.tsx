@@ -132,6 +132,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
               setInputValue,
               setResults,
               setIsVisible,
+              component,
               ...props.searchHandler.extraParams,
             })
           }
