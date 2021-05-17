@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 // components
-import HomeNavbar from "~components/Navbar";
+
+import Navbar from "~components/Navbar";
 import NewResourceModal from "~components/NewResourceModal";
 
 const Layout = ({ children, page }) => {
@@ -11,7 +12,7 @@ const Layout = ({ children, page }) => {
     <>
       <div className="h-screen">
         {page === "home" ? (
-          <HomeNavbar setIsResourceModalOpen={setIsResourceModalOpen} />
+          <Navbar setIsResourceModalOpen={setIsResourceModalOpen} />
         ) : (
           ""
         )}

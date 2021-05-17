@@ -1,24 +1,14 @@
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-// components
-import Input from "~components/Input";
+// positions
+import Position1 from "localComponents/NewResourceModal/Position1";
+
+// buttons
 import Button from "~components/Button";
-import SearchablePopup from "~components/SearchablePopup";
-import {
-  getAllResources,
-  resourceSearchHandler,
-} from "~util/searchablePopupUtil";
-import { useEffect, useState } from "react";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
-  const [allResources, setAllResources] = useState([]);
-
-  useEffect(() => {
-    const getResources = async () => {
-      setAllResources((await getAllResources()) || []);
-    };
-    getResources();
-  });
+  const [position, setPosition] = useState(1);
 
   return (
     <Dialog
@@ -30,10 +20,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       <div className="min-h-screen px-4 text-center">
         <Dialog.Overlay className="fixed inset-0" />
 
-        {/* This element is to trick the browser into centering the modal contents. */}
         <span className="inline-block h-screen align-middle" aria-hidden="true">
           &#8203;
         </span>
+
+        {/* Actual Content */}
         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
           <div className="flex items-center justify-between border-b border-gray-300 pb-3">
             <div>
@@ -46,67 +37,39 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               <span className="text-sm">Step 1 - Basic Details</span>
             </div>
             <span className="text-xs font-bold h-12 w-12 border-2 border-gray-900 rounded-full grid place-items-center">
-              1 of 3
+              {position} of 3
             </span>
           </div>
-          <div className="mt-5 flex flex-col gap-2">
-            <Input
-              placeholder="Title"
-              subClassName="bg-gray-100"
-              prepend={<i className="fal fa-text"></i>}
-            />
 
-            <SearchablePopup
-              input={{
-                subClassName: "bg-gray-100",
-                prepend: <i className="fal fa-search"></i>,
-                placeholder: "Find Resources...",
-              }}
-              searchHandler={{
-                handler: resourceSearchHandler,
-              }}
-              resultClickHandler={{
-                handler: ({ result, setInputValue, setIsVisible }) => {
-                  setInputValue(result.heading);
-                  setIsVisible(false);
-                },
-              }}
-              whenInputEmpty={{
-                componentArray: allResources.map((resource: any) => {
-                  return (
-                    <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
-                      <span
-                        className="truncate resource"
-                        title={resource.heading}
-                      >
-                        {resource.heading}
-                      </span>
-                    </div>
-                  );
-                }),
-                componentClickHandler: ({
-                  component,
-                  setInputValue,
-                  setIsVisible,
-                }) => {
-                  setInputValue(component.props.children.props.title);
-                  setIsVisible(false);
+          {/* Buttons */}
+          {position === 1 && <Position1 />}
 
-                  console.log(component);
-                },
-              }}
-            />
-
-            <textarea
-              className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
-              placeholder="Description"
-            ></textarea>
-          </div>
-
+          {/* Toggler Buttons */}
           <div className="mt-4 w-full text-right">
-            <Button className="ct-bg-accent ct-text-color-3 rounded-lg">
-              Next
-            </Button>
+            {position > 1 && (
+              <Button
+                className="rounded-lg"
+                onClick={() => setPosition((cur) => cur - 1)}
+              >
+                Previous
+              </Button>
+            )}
+            {position < 3 && (
+              <Button
+                className="ct-bg-accent ct-text-color-3 rounded-lg"
+                onClick={() => setPosition((curr) => curr + 1)}
+              >
+                Next
+              </Button>
+            )}
+            {position === 3 && (
+              <Button
+                className="ct-bg-accent ct-text-color-3 rounded-lg"
+                onClick={() => {}}
+              >
+                Finish
+              </Button>
+            )}
           </div>
         </div>
       </div>

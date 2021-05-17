@@ -6,27 +6,30 @@ interface Props {
   onClick?: any;
   children: any;
   className?: string;
+  disabled?: boolean;
 }
 
 const Button = (props: Props) => {
   if (props.href) {
     return (
       <Link href={props.href}>
-        <span
+        <button
           className={`grid place-items-center p-4 cursor-pointer select-none ${props.className}`}
+          disabled={props.disabled}
         >
           {props.children}
-        </span>
+        </button>
       </Link>
     );
   } else {
     return (
-      <a
+      <button
         className={`inline-flex p-4 px-7 cursor-pointer select-none ${props.className}`}
         onClick={props.onClick}
+        disabled={props.disabled}
       >
         {props.children}
-      </a>
+      </button>
     );
   }
 };
