@@ -33,7 +33,7 @@ const Position2 = () => {
       <div className="mt-5 flex flex-col gap-2">
         <ReactMapGl
           {...mapConfig}
-          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MABOX_TOKEN}
+          mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
           onViewportChange={(newConfig) => setMapConfig(newConfig)}
           mapStyle="mapbox://styles/fullstackslayer/ckot5udo10j7f17lkzeaf566l"
           className="rounded-xl"
@@ -52,7 +52,15 @@ const Position2 = () => {
           }}
           loader={true}
           resultClickHandler={{
-            handler: ({ result, setInputValue, setIsVisible }) => {},
+            handler: ({ result, setInputValue, setIsVisible }) => {
+              setInputValue(result.heading);
+              setIsVisible(false);
+              setMapConfig((curr) => ({
+                ...curr,
+                latitude: result.coordinates.lat,
+                longitude: result.coordinates.long,
+              }));
+            },
           }}
         />
       </div>
