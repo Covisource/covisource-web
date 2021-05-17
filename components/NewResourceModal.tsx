@@ -36,7 +36,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               >
                 Upload A Resource
               </Dialog.Title>
-              <span className="text-sm">Step 1 - Basic Details</span>
+              <span className="text-sm">
+                {position === 1 && "Step 1 - Basic Details"}
+                {position === 2 && "Step 2 - Location and Contact"}
+                {position === 3 && "Step 3 - Extra Parameters"}
+              </span>
             </div>
             <span className="text-xs font-bold h-12 w-12 border-2 border-gray-900 rounded-full grid place-items-center">
               {position} of 3
@@ -46,13 +50,13 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           {/* Buttons */}
           {position === 1 && <Position1 />}
           {position === 2 && <Position2 />}
-          {position === 3 && <Position3/>}
+          {position === 3 && <Position3 />}
 
           {/* Toggler Buttons */}
-          <div className="mt-4 w-full text-right">
+          <div className="mt-4 w-full flex items-center gap-2 justify-end">
             {position > 1 && (
               <Button
-                className="rounded-lg"
+                className="rounded-lg bg-gray-200"
                 onClick={() => setPosition((cur) => cur - 1)}
               >
                 Previous
@@ -71,7 +75,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
                 className="ct-bg-grad ct-text-color-3 rounded-lg"
                 onClick={() => {}}
               >
-                Finish
+                Submit
               </Button>
             )}
           </div>
