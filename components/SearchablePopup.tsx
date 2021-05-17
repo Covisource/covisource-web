@@ -4,19 +4,22 @@ import React, { useRef, useState, useEffect } from "react";
 import Input from "~components/Input";
 
 interface Props {
+  containerClassName?: string;
+
   inputId?: string;
   inputClassName?: string;
   inputSubClassName?: string;
   inputPlaceholder?: string;
   inputPrepend?: any;
   inputAppend?: any;
+
   inputValue: string;
   setInputValue: any;
+
   popupId?: string;
   popupClassName?: string;
 
   searchHandler: any;
-  containerClassName?: string;
   loader?: boolean;
 }
 

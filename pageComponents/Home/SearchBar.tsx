@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 // components
 import Input from "~components/Input";
-import SearchablePopup from "~components/SearchablePopup";
+import NewSearchablePopup from "~components/NewSearchablePopup";
 import LocationHit from "~components/LocationHit";
 
 // contexts
@@ -23,20 +23,15 @@ const Search = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
   const hereToken = useHereContext();
 
-  // value state
-  const [locationInputValue, setLocationInputValue] = useState(
-    userLocationInCookie || ""
-  );
-
   return (
     <div
       className="flex items-center shadow-2xl transition-all mb-10 ct-bg-dark rounded-xl"
       id="searchbar_home"
     >
-      <SearchablePopup
-        containerClassName=" w-1/3"
-        inputClassName="border-r border-gray-400 ct-location_search"
-        inputSubClassName="ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-100"
+      {/* <SearchablePopup
+        containerClassName="w-1/3"
+        inputClassName=""
+        inputSubClassName=""
         inputPrepend={
           <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
         }
@@ -44,7 +39,7 @@ const Search = () => {
         inputValue={locationInputValue}
         setInputValue={setLocationInputValue}
         loader={true}
-        inputPlaceholder="Enter a location"
+        inputPlaceholder=""
         inputId="homeLocationSearchInput"
         popupId="homeLocationSearchPopup"
         searchHandler={async (e) => {
@@ -71,7 +66,7 @@ const Search = () => {
           if (locations?.length < 1 || !locations) {
             return [
               <div
-                onClick={() => autoDetectLocation(setLocationInputValue as any)}
+                onClick={() => autoDetectLocation(setLocationInputValue)}
                 className="flex items-center gap-2 py-4 px-3 select-none hover:bg-gray-900 cursor-pointer "
               >
                 <i className="fal fa-radar text-xl text-purple-400"></i>
@@ -88,6 +83,20 @@ const Search = () => {
           }
 
           return toReturn;
+        }}
+      /> */}
+      <NewSearchablePopup
+        input={{
+          className: "border-r border-gray-400 ct-location_search",
+          subClassName:
+            "ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-100",
+          append: <i className="fas fa-caret-down ct-text-color-3"></i>,
+          placeholder: "Enter a location",
+          value: userLocationInCookie || "",
+        }}
+        searchHandler={{
+          function: locationSearchHandler,
+          extraParams: { hereToken },
         }}
       />
       {/* <SearchablePopup

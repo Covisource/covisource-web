@@ -5,34 +5,39 @@ import Cookies from "js-cookie";
 // schemas
 import LocationHit from "~schema/LocationHitSchema";
 
-export const locationSearchHandler = debounce(async (e, hereToken) => {
-  const input = e.target.value;
-  let toReturn: LocationHit[] = [];
+export const locationSearchHandler = debounce(
+  async (input, setLoading, setInputValue, setResults, { hereToken }) => {
+    let resultsToReturn = [];
 
-  if (input.replace(" ", "").length > 0) {
-    try {
-      const res = await axios.get(
-        `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${input}&in=countryCode:IND&at=-13.163068,-72.545128`,
-        {
-          headers: {
-            Authorization: "Bearer " + hereToken,
-          },
-        }
-      );
+    if (input.replace(" ", "").length > 0) {
+      try {
+        const res = await axios.get(
+          `https://autocomplete.search.hereapi.com/v1/autosuggest?q=${input}&in=countryCode:IND&at=-13.163068,-72.545128`,
+          {
+            headers: {
+              Authorization: "Bearer " + hereToken,
+            },
+          }
+        );
 
-      (res.data.items as LocationHit[]).forEach((location) => {
-        if (location.position || location.access?.length > 0) {
-          toReturn.push(location);
-        }
-      });
-      return toReturn;
-    } catch (err) {
-      console.error(err);
+        (res.data.items as LocationHit[]).forEach((location) => {
+          if (location.position || location.access?.length > 0) {
+            resultsToReturn.push({
+              heading: location.title,
+              subHeading: location.address.label,
+            });
+          }
+        });
+        setResults(resultsToReturn);
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      setResults(resultsToReturn);
     }
-  } else {
-    return [];
-  }
-}, 500);
+  },
+  500
+);
 
 export const resourceSearchHandler = debounce(
   async (e, setResults, setLoading) => {
@@ -86,7 +91,7 @@ export const getAllResources = async (setResults) => {
   setResults(resources);
 };
 
-export const autoDetectLocation = ({ setInputValue }) => {
+export const autoDetectLocation = (props) => {
   if ("geolocation" in navigator) {
     document.getElementById("homeLocationSearchPopup").style.display = "none";
 
@@ -104,7 +109,7 @@ export const autoDetectLocation = ({ setInputValue }) => {
         Cookies.set("coviUserLocationDisplay", res.display_name);
 
         // set the input value to the title of what they select
-        setInputValue(res.display_name);
+        props.setInputValue(res.display_name);
       } catch (err) {
         console.error(err);
       }
