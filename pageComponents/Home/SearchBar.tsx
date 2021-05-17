@@ -128,7 +128,7 @@ const Search = () => {
               "coviUserLocationLat",
               result.coordinates.lat.toString()
             );
-            Cookies.set("coviUserLocationDisplay", result.title);
+            Cookies.set("coviUserLocationDisplay", result.heading);
 
             setInputValue(result.heading);
             setIsVisible(false);
