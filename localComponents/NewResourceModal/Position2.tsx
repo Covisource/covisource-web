@@ -42,10 +42,7 @@ const Position2 = ({ formData, setFormData }) => {
           <SearchablePopup
             input={{
               className: "m-3",
-              subClassName: "bg-transparent bg-opacity-80",
-              style: {
-                backdropFilter: "blur(20px)",
-              },
+              subClassName: "bg-white",
               prepend: <i className="fal fa-map-marker-alt"></i>,
               append: <i className="fas fa-caret-down"></i>,
               placeholder: "Enter a location",
@@ -78,6 +75,15 @@ const Position2 = ({ formData, setFormData }) => {
                   })),
                   500
                 );
+              },
+            }}
+            dropdown={{
+              className: "bg-white mx-3",
+              result: {
+                containerClassName:
+                  "border-b border-gray-100 hover:bg-gray-100",
+                headingClassName: "ct-text-color-1",
+                subHeadingClassName: "text-gray-300",
               },
             }}
           />

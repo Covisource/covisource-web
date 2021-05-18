@@ -15,9 +15,16 @@ interface InputProps {
   style?: object;
 }
 
+interface ResultProps {
+  containerClassName?: string;
+  headingClassName?: string;
+  subHeadingClassName?: string;
+}
+
 interface DropdownProps {
   id?: string;
   className?: string;
+  result?: ResultProps;
 }
 
 interface SearchHandlerProps {
@@ -97,7 +104,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
     resultsToRender = results.map((result) => {
       return (
         <div
-          className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer"
+          className={`flex flex-col justify-center gap-1 py-4 px-3 select-none cursor-pointer ${props.dropdown?.result.containerClassName}`}
           onClick={() => {
             props.resultClickHandler.handler({
               input: inputValue,
@@ -110,9 +117,9 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
             });
           }}
         >
-          <span className="truncate">{result.heading}</span>
+          <span className={`truncate ${props.dropdown?.result.headingClassName}`}>{result.heading}</span>
           <span
-            className="truncate text-xs text-gray-300"
+            className={`truncate text-xs text-gray-300 ${props.dropdown?.result.subHeadingClassName}`}
             title={result.subHeading}
           >
             {result.subHeading}
@@ -175,7 +182,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
       />
       {isVisible && (
         <div
-          className={`absolute top-16 rounded-lg max-h-96 overflow-y-auto overflow-x-hidden ct-bg-dark w-80 z-50 ${
+          className={`absolute top-16 rounded-lg overflow-y-auto overflow-x-hidden z-50 ${
             props.dropdown?.className || ""
           }`}
           id={props.dropdown?.id || ""}
