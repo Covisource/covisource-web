@@ -12,6 +12,7 @@ interface InputProps {
   prepend?: any;
   append?: any;
   value?: any;
+  style?: object;
 }
 
 interface DropdownProps {
@@ -156,6 +157,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
         onFocus={() => {
           setIsVisible(true);
         }}
+        style={props.input.style}
         prepend={
           props.loader && loading ? (
             <svg

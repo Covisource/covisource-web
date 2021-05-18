@@ -26,7 +26,7 @@ const Position2 = ({ formData, setFormData }) => {
     longitude: 78.9629,
     zoom: 7,
     width: "full",
-    height: "20rem",
+    height: "25rem",
   });
 
   return (
@@ -38,46 +38,50 @@ const Position2 = ({ formData, setFormData }) => {
           onViewportChange={(newConfig) => setMapConfig(newConfig)}
           mapStyle="mapbox://styles/fullstackslayer/ckot5udo10j7f17lkzeaf566l"
           className="rounded-xl"
-        ></ReactMapGl>
+        >
+          <SearchablePopup
+            input={{
+              className: "m-3",
+              subClassName: "bg-transparent bg-opacity-80",
+              style: {
+                backdropFilter: "blur(20px)",
+              },
+              prepend: <i className="fal fa-map-marker-alt"></i>,
+              append: <i className="fas fa-caret-down"></i>,
+              placeholder: "Enter a location",
+            }}
+            searchHandler={{
+              handler: locationSearchHandler,
+              extraParams: { hereToken },
+            }}
+            loader={true}
+            resultClickHandler={{
+              handler: ({ result, setInputValue, setIsVisible }) => {
+                setInputValue(result.heading);
+                setIsVisible(false);
+                setMapConfig((curr) => ({
+                  ...curr,
+                  latitude: result.coordinates.lat,
+                  longitude: result.coordinates.long,
+                }));
 
-        <SearchablePopup
-          input={{
-            subClassName: "bg-gray-100",
-            prepend: <i className="fal fa-map-marker-alt"></i>,
-            append: <i className="fas fa-caret-down"></i>,
-            placeholder: "Enter a location",
-          }}
-          searchHandler={{
-            handler: locationSearchHandler,
-            extraParams: { hereToken },
-          }}
-          loader={true}
-          resultClickHandler={{
-            handler: ({ result, setInputValue, setIsVisible }) => {
-              setInputValue(result.heading);
-              setIsVisible(false);
-              setMapConfig((curr) => ({
-                ...curr,
-                latitude: result.coordinates.lat,
-                longitude: result.coordinates.long,
-              }));
-
-              debounce(
-                setFormData((cur) => ({
-                  ...cur,
-                  location: {
-                    coordinates: {
-                      lat: result.coordinates.lat,
-                      long: result.coordinates.long,
+                debounce(
+                  setFormData((cur) => ({
+                    ...cur,
+                    location: {
+                      coordinates: {
+                        lat: result.coordinates.lat,
+                        long: result.coordinates.long,
+                      },
+                      displayName: result.heading,
                     },
-                    displayName: result.heading,
-                  },
-                })),
-                500
-              );
-            },
-          }}
-        />
+                  })),
+                  500
+                );
+              },
+            }}
+          />
+        </ReactMapGl>
       </div>
     </>
   );
