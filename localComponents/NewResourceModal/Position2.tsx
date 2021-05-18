@@ -14,8 +14,9 @@ import Input from "~components/Input";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
+import { debounce } from "debounce";
 
-const Position2 = () => {
+const Position2 = ({ formData, setFormData }) => {
   const hereToken = useHereContext();
 
   // mapbox config
@@ -60,6 +61,20 @@ const Position2 = () => {
                 latitude: result.coordinates.lat,
                 longitude: result.coordinates.long,
               }));
+
+              debounce(
+                setFormData((cur) => ({
+                  ...cur,
+                  location: {
+                    coordinates: {
+                      lat: result.coordinates.lat,
+                      long: result.coordinates.long,
+                    },
+                    displayName: result.heading,
+                  },
+                })),
+                500
+              );
             },
           }}
         />

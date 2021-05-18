@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 
 // positions
@@ -28,6 +28,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     },
     customParams: {},
   });
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
   return (
     <Dialog
       as="div"
@@ -83,7 +88,9 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           {position === 1 && (
             <Position1 formData={formData} setFormData={setFormData} />
           )}
-          {position === 2 && <Position2 />}
+          {position === 2 && (
+            <Position2 formData={formData} setFormData={setFormData} />
+          )}
           {position === 3 && <Position3 />}
 
           {/* Toggler Buttons */}
