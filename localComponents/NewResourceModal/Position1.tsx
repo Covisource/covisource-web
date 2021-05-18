@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 
 import {
@@ -9,8 +9,9 @@ import {
 /// components
 import SearchablePopup from "~components/SearchablePopup";
 import Input from "~components/Input";
+import { debounce } from "debounce";
 
-const Position1 = () => {
+const Position1 = ({ formData, setFormData }) => {
   const [allResources, setAllResources] = useState([]);
 
   useEffect(() => {
@@ -20,6 +21,9 @@ const Position1 = () => {
     getResources();
   });
 
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
   return (
     <>
       <div className="mt-5 flex flex-col gap-2">
@@ -27,6 +31,14 @@ const Position1 = () => {
           placeholder="Title"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-text"></i>}
+          onChange={debounce(
+            (e) =>
+              setFormData((cur) => ({
+                ...cur,
+                title: e.target.value,
+              })),
+            500
+          )}
         />
 
         <Input
@@ -34,6 +46,14 @@ const Position1 = () => {
           placeholder="Phone"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-phone"></i>}
+          onChange={debounce(
+            (e) =>
+              setFormData((cur) => ({
+                ...cur,
+                phone: e.target.value,
+              })),
+            500
+          )}
         />
 
         <SearchablePopup
@@ -46,9 +66,17 @@ const Position1 = () => {
             handler: resourceSearchHandler,
           }}
           resultClickHandler={{
-            handler: ({ result, setInputValue, setIsVisible }) => {
+            handler: ({ result, input, setInputValue, setIsVisible }) => {
               setInputValue(result.heading);
               setIsVisible(false);
+              debounce(
+                setFormData((cur) => ({
+                  ...cur,
+                  resource: input,
+                })),
+                500
+              );
+              console.log("data", formData);
             },
           }}
           whenInputEmpty={{
@@ -62,6 +90,7 @@ const Position1 = () => {
               );
             }),
             componentClickHandler: ({
+              input,
               component,
               setInputValue,
               setIsVisible,
@@ -69,7 +98,14 @@ const Position1 = () => {
               setInputValue(component.props.children.props.title);
               setIsVisible(false);
 
-              console.log(component);
+              debounce(
+                setFormData((cur) => ({
+                  ...cur,
+                  resource: component.props.children.props.title,
+                })),
+                500
+              );
+              console.log("data", formData);
             },
           }}
         />
@@ -77,10 +113,18 @@ const Position1 = () => {
         <textarea
           className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
           placeholder="Description"
+          onChange={debounce(
+            (e) =>
+              setFormData((cur) => ({
+                ...cur,
+                description: e.target.value,
+              })),
+            500
+          )}
         ></textarea>
       </div>
     </>
   );
 };
 
-export default Position1;
+export default React.memo(Position1);

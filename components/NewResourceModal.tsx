@@ -9,9 +9,25 @@ import Position3 from "localComponents/NewResourceModal/Position3";
 // buttons
 import Button from "~components/Button";
 
+// styles
+import styles from "~styles/NewResourceModal.module.css";
+
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const [position, setPosition] = useState(1);
-
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    phone: "",
+    resource: "",
+    location: {
+      coordinates: {
+        latitude: "",
+        longitude: "",
+      },
+      displayName: "",
+    },
+    customParams: {},
+  });
   return (
     <Dialog
       as="div"
@@ -42,15 +58,33 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
                 {position === 3 && "Step 3 - Extra Parameters"}
               </span>
             </div>
-            <span className="text-xs font-bold h-12 w-12 border-2 border-gray-900 rounded-full grid place-items-center">
+            {/* <div
+              className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center"
+            >
               {position} of 3
-            </span>
+            </div> */}
+
+            <div className="relative inline-block">
+              <div className={styles.progressCircle}>
+                <div
+                  className={styles.segment}
+                  style={{ transform: "rotate(0deg) skew(0deg)" }}
+                ></div>
+                <div
+                  className={styles.segment}
+                  style={{ transform: "rotate(90deg) skew(0deg)" }}
+                ></div>
+              </div>
+              <div className={styles.progressInner}></div>
+            </div>
           </div>
 
           {/* Buttons */}
-          {position === 1 && <Position1 />}
+          {position === 1 && (
+            <Position1 formData={formData} setFormData={setFormData} />
+          )}
           {position === 2 && <Position2 />}
-          {position === 3 && <Position3/>}
+          {position === 3 && <Position3 />}
 
           {/* Toggler Buttons */}
           <div className="mt-4 w-full flex items-center gap-2 justify-end">
