@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Dialog } from "@headlessui/react";
 
 import {
   getAllResources,
@@ -69,32 +68,35 @@ const Position1 = ({ formData, setFormData }) => {
               debounce(
                 setFormData((cur) => ({
                   ...cur,
-                  resource: input,
+                  resource: result.heading,
+                  extraParameters: result.extraParameters,
                 })),
                 500
               );
-              console.log("data", formData);
             },
           }}
           whenInputEmpty={{
             componentArray: allResources.map((resource: any) => {
               return (
                 <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
-                  <span className="truncate resource" title={resource.heading}>
+                  <span
+                    className="truncate resource"
+                    title={resource.heading}
+                    id={`newResourceModal_dropdown_resource_${resource._id}`}
+                  >
                     {resource.heading}
                   </span>
                 </div>
               );
             }),
             componentClickHandler: ({
-              input,
               component,
               setInputValue,
               setIsVisible,
             }) => {
               setInputValue(component.props.children.props.title);
               setIsVisible(false);
-
+              console.log(component.props.children.props.id);
               debounce(
                 setFormData((cur) => ({
                   ...cur,

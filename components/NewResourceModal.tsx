@@ -26,7 +26,8 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       },
       displayName: "",
     },
-    customParams: {},
+    price: "",
+    extraParameters: [],
   });
 
   useEffect(() => {
@@ -91,7 +92,9 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           {position === 2 && (
             <Position2 formData={formData} setFormData={setFormData} />
           )}
-          {position === 3 && <Position3 />}
+          {position === 3 && (
+            <Position3 formData={formData} setFormData={setFormData} />
+          )}
 
           {/* Toggler Buttons */}
           <div className="mt-4 w-full flex items-center gap-2 justify-end">

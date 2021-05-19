@@ -2,9 +2,6 @@ import axios from "axios";
 import { debounce } from "debounce";
 import Cookies from "js-cookie";
 
-// schemas
-import LocationHit from "~schema/LocationHitSchema";
-
 export const locationSearchHandler = debounce(
   async ({ input, setLoading, setResults, hereToken }) => {
     let results = [];
@@ -21,7 +18,7 @@ export const locationSearchHandler = debounce(
           }
         );
 
-        (res.data.items as LocationHit[]).forEach((location) => {
+        res.data.items.forEach((location) => {
           if (location.position || location.access?.length > 0) {
             results.push({
               heading: location.title,
@@ -69,6 +66,7 @@ export const resourceSearchHandler = debounce(
 
         res.data.forEach((resource) => {
           resources.push({
+            ...resource,
             heading: resource.name,
           });
         });
@@ -78,7 +76,7 @@ export const resourceSearchHandler = debounce(
     } else {
       resources = getAllResources();
     }
-    
+
     setLoading(false);
     setResults(resources);
   },
@@ -98,6 +96,7 @@ export const getAllResources = async () => {
 
   res.data.forEach((resource) => {
     resources.push({
+      ...resource,
       heading: resource.name,
     });
   });
