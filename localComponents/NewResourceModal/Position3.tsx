@@ -19,6 +19,17 @@ const Position3 = ({ formData, setFormData }) => {
             500
           )}
         />
+
+        {formData.extraParameters.map((param) => {
+          return (
+            <Input
+              type={param.type}
+              placeholder={param.name}
+              subClassName="bg-gray-100"
+              prepend={<i className={`${param.icon}`}></i>}
+            />
+          );
+        })}
       </div>
     </>
   );
