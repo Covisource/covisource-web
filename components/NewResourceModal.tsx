@@ -1,24 +1,38 @@
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 
-// components
-import Input from "~components/Input";
+// positions
+import Position1 from "localComponents/NewResourceModal/Position1";
+import Position2 from "localComponents/NewResourceModal/Position2";
+import Position3 from "localComponents/NewResourceModal/Position3";
+
+// buttons
 import Button from "~components/Button";
-import SearchablePopup from "~components/SearchablePopup";
-import {
-  getAllResources,
-  resourceSearchHandler,
-} from "~util/searchablePopupUtil";
-import { useEffect, useState } from "react";
+
+// styles
+import styles from "~styles/NewResourceModal.module.css";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
-  const [allResources, setAllResources] = useState([]);
+  const [position, setPosition] = useState(1);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    phone: "",
+    resource: "",
+    location: {
+      coordinates: {
+        latitude: "",
+        longitude: "",
+      },
+      displayName: "",
+    },
+    price: "",
+    extraParameters: [],
+  });
 
   useEffect(() => {
-    const getResources = async () => {
-      setAllResources((await getAllResources()) || []);
-    };
-    getResources();
-  });
+    console.log(formData);
+  }, [formData]);
 
   return (
     <Dialog
@@ -30,11 +44,12 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       <div className="min-h-screen px-4 text-center">
         <Dialog.Overlay className="fixed inset-0" />
 
-        {/* This element is to trick the browser into centering the modal contents. */}
         <span className="inline-block h-screen align-middle" aria-hidden="true">
           &#8203;
         </span>
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+
+        {/* Actual Content */}
+        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-y-auto">
           <div className="flex items-center justify-between border-b border-gray-300 pb-3">
             <div>
               <Dialog.Title
@@ -43,70 +58,70 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               >
                 Upload A Resource
               </Dialog.Title>
-              <span className="text-sm">Step 1 - Basic Details</span>
+              <span className="text-sm">
+                {position === 1 && "Step 1 - Basic Details"}
+                {position === 2 && "Step 2 - Location"}
+                {position === 3 && "Step 3 - Extra Parameters"}
+              </span>
             </div>
-            <span className="text-xs font-bold h-12 w-12 border-2 border-gray-900 rounded-full grid place-items-center">
-              1 of 3
-            </span>
-          </div>
-          <div className="mt-5 flex flex-col gap-2">
-            <Input
-              placeholder="Title"
-              subClassName="bg-gray-100"
-              prepend={<i className="fal fa-text"></i>}
-            />
+            {/* <div
+              className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center"
+            >
+              {position} of 3
+            </div> */}
 
-            <SearchablePopup
-              input={{
-                subClassName: "bg-gray-100",
-                prepend: <i className="fal fa-search"></i>,
-                placeholder: "Find Resources...",
-              }}
-              searchHandler={{
-                handler: resourceSearchHandler,
-              }}
-              resultClickHandler={{
-                handler: ({ result, setInputValue, setIsVisible }) => {
-                  setInputValue(result.heading);
-                  setIsVisible(false);
-                },
-              }}
-              whenInputEmpty={{
-                componentArray: allResources.map((resource: any) => {
-                  return (
-                    <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
-                      <span
-                        className="truncate resource"
-                        title={resource.heading}
-                      >
-                        {resource.heading}
-                      </span>
-                    </div>
-                  );
-                }),
-                componentClickHandler: ({
-                  component,
-                  setInputValue,
-                  setIsVisible,
-                }) => {
-                  setInputValue(component.props.children.props.title);
-                  setIsVisible(false);
-
-                  console.log(component);
-                },
-              }}
-            />
-
-            <textarea
-              className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
-              placeholder="Description"
-            ></textarea>
+            <div className="relative inline-block">
+              <div className={styles.progressCircle}>
+                <div
+                  className={styles.segment}
+                  style={{ transform: "rotate(0deg) skew(0deg)" }}
+                ></div>
+                <div
+                  className={styles.segment}
+                  style={{ transform: "rotate(90deg) skew(0deg)" }}
+                ></div>
+              </div>
+              <div className={styles.progressInner}></div>
+            </div>
           </div>
 
-          <div className="mt-4 w-full text-right">
-            <Button className="ct-bg-accent ct-text-color-3 rounded-lg">
-              Next
-            </Button>
+          {/* Buttons */}
+          {position === 1 && (
+            <Position1 formData={formData} setFormData={setFormData} />
+          )}
+          {position === 2 && (
+            <Position2 formData={formData} setFormData={setFormData} />
+          )}
+          {position === 3 && (
+            <Position3 formData={formData} setFormData={setFormData} />
+          )}
+
+          {/* Toggler Buttons */}
+          <div className="mt-4 w-full flex items-center gap-2 justify-end">
+            {position > 1 && (
+              <Button
+                className="rounded-lg bg-gray-200"
+                onClick={() => setPosition((curr) => curr - 1)}
+              >
+                Previous
+              </Button>
+            )}
+            {position < 3 && (
+              <Button
+                className="ct-bg-accent ct-text-color-3 rounded-lg"
+                onClick={() => setPosition((curr) => curr + 1)}
+              >
+                Next
+              </Button>
+            )}
+            {position === 3 && (
+              <Button
+                className="ct-bg-grad ct-text-color-3 rounded-lg"
+                onClick={() => {}}
+              >
+                Submit
+              </Button>
+            )}
           </div>
         </div>
       </div>

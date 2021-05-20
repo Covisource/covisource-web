@@ -3,15 +3,10 @@ import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 // components
-import Input from "~components/Input";
 import SearchablePopup from "~components/SearchablePopup";
-import LocationHit from "~components/LocationHit";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
-
-// schema
-import LocationHitSchema from "~schema/LocationHitSchema";
 
 // functions
 import {
@@ -35,18 +30,18 @@ const SearchBar = () => {
 
   return (
     <div
-      className="flex items-center shadow-2xl transition-all mb-10 ct-bg-dark rounded-xl"
+      className="flex items-center shadow-2xl transition-all mb-10 bg-gray-300 rounded-xl"
       id="searchbar_home"
     >
       <SearchablePopup
         input={{
           className: "border-r border-gray-400 ct-location_search",
           subClassName:
-            "ct-text-color-3 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-100",
+            "ct-text-color-1 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900",
           prepend: (
-            <i className="fad fa-map-marker-alt ct-text-color-3 text-2xl"></i>
+            <i className="fad fa-map-marker-alt ct-text-color-1 text-2xl"></i>
           ),
-          append: <i className="fas fa-caret-down ct-text-color-3"></i>,
+          append: <i className="fas fa-caret-down ct-text-color-1"></i>,
           placeholder: "Enter a location",
           value: userLocationInCookie || "",
         }}
@@ -93,8 +88,8 @@ const SearchBar = () => {
         input={{
           className: "ct-location_search",
           subClassName:
-            "rounded-l-none ct-text-color-3 text-sm font-medium bg-transparent placeholder-gray-100",
-          prepend: <i className="fal fa-search ct-text-color-3 text-lg"></i>,
+            "rounded-l-none ct-text-color-1 text-sm font-medium bg-transparent placeholder-gray-900",
+          prepend: <i className="fal fa-search ct-text-color-1 text-lg"></i>,
           placeholder: "Find Resources...",
         }}
         searchHandler={{

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "~components/Input";
 import Button from "~components/Button";
-import SocialProvider from "pageComponents/Auth/SocialProvider";
+import SocialProvider from "localComponents/Auth/SocialProvider";
 import Link from "next/link";
 
 const login = () => {

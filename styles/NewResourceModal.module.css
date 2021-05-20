@@ -1,0 +1,28 @@
+.progressCircle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  background: transparent;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: blue;
+  transform-origin: 0 0;
+}
+
+.progressInner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  transform: translateX(-50%) translateY(-50%);
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: inset rgba(34, 36, 38, 0.15) 0px 0px 3px 2px;
+}

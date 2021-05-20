@@ -43,13 +43,14 @@ export default NextAuth({
             console.log("User exists");
             return true; // we can let the login continue, because the user exists, and can login
           }
-          return `/signin-error?message=${res.mesage}`;
+          
+          // handle error
         } else {
           console.log("User Created");
           return true;
         }
       } else {
-        return "/signin-error";
+        // handle error
       }
     },
     async jwt(token, user, account, profile, isNewUser) {
