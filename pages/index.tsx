@@ -16,6 +16,8 @@ export default function Home() {
     "Staples",
   ];
 
+  console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory`);
+
   return (
     <Layout page="home">
       <div className="flex flex-col justify-center h-full lg:w-3/5">
@@ -25,7 +27,10 @@ export default function Home() {
           </span>
           <TextLoop>
             {changingWords.map((word, index) => (
-              <span key={index} className="ct-text-grad ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
+              <span
+                key={index}
+                className="ct-text-grad ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl"
+              >
                 {word}
               </span>
             ))}
