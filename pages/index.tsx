@@ -16,12 +16,11 @@ export default function Home() {
     "Staples",
   ];
 
-  console.log(`${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory`);
-
   return (
     <Layout page="home">
       <div className="flex flex-col justify-center h-full lg:w-3/5">
         <div className=" mb-4">
+          {process.env.NEXT_PUBLIC_SERVER_URL}
           <span className="ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
             Find{" "}
           </span>
