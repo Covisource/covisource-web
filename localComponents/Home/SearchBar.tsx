@@ -105,7 +105,7 @@ const SearchBar = () => {
         whenInputEmpty={{
           componentArray: allResources.map((resource: any, index) => {
             return (
-              <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
+              <div key={index} className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
                 <span className="truncate resource" title={resource.heading}>
                   {resource.heading}
                 </span>
