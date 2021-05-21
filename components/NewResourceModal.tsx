@@ -98,7 +98,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
           {/* Toggler Buttons */}
           <div className="mt-4 w-full flex items-center gap-2 justify-end">
-            {position > 1 && (
+            {position > 1 && position < 4 && (
               <Button
                 className="rounded-lg bg-gray-200"
                 onClick={() => setPosition((curr) => curr - 1)}
