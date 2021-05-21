@@ -11,6 +11,7 @@ import Button from "~components/Button";
 
 // styles
 import styles from "~styles/NewResourceModal.module.css";
+import axios from "axios";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const [position, setPosition] = useState(1);
@@ -18,11 +19,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     title: "",
     description: "",
     phone: "",
-    resource: "",
+    category: "",
     location: {
       coordinates: {
-        latitude: "",
-        longitude: "",
+        lat: "",
+        long: "",
       },
       displayName: "",
     },
@@ -30,9 +31,21 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     extraParameters: [],
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  const handleSubmit = async () => {
+    try {
+      const res = await axios({
+        method: "POST",
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
+        data: {
+          resource: { ...formData },
+        },
+      });
+      console.log(res);
+    } catch (err) {
+      console.error(err);
+      // handle error
+    }
+  };
 
   return (
     <Dialog
@@ -117,7 +130,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             {position === 3 && (
               <Button
                 className="ct-bg-grad ct-text-color-3 rounded-lg"
-                onClick={() => {}}
+                onClick={handleSubmit}
               >
                 Submit
               </Button>

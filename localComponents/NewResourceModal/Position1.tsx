@@ -27,14 +27,13 @@ const Position1 = ({ formData, setFormData }) => {
           placeholder="Title"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-text"></i>}
-          onChange={debounce(
-            (e) =>
-              setFormData((cur) => ({
-                ...cur,
-                title: e.target.value,
-              })),
-            500
-          )}
+          value={formData.title}
+          onChange={(e) =>
+            setFormData((cur) => ({
+              ...cur,
+              title: e.target.value,
+            }))
+          }
         />
 
         <Input
@@ -42,14 +41,13 @@ const Position1 = ({ formData, setFormData }) => {
           placeholder="Phone"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-phone"></i>}
-          onChange={debounce(
-            (e) =>
-              setFormData((cur) => ({
-                ...cur,
-                phone: e.target.value,
-              })),
-            500
-          )}
+          value={formData.phone}
+          onChange={(e) =>
+            setFormData((cur) => ({
+              ...cur,
+              phone: e.target.value,
+            }))
+          }
         />
 
         <SearchablePopup
@@ -57,22 +55,20 @@ const Position1 = ({ formData, setFormData }) => {
             subClassName: "bg-gray-100",
             prepend: <i className="fal fa-search"></i>,
             placeholder: "Choose a resource",
+            value: formData.category,
           }}
           searchHandler={{
             handler: resourceSearchHandler,
           }}
           resultClickHandler={{
-            handler: ({ result, input, setInputValue, setIsVisible }) => {
+            handler: ({ result, setInputValue, setIsVisible }) => {
               setInputValue(result.heading);
               setIsVisible(false);
-              debounce(
-                setFormData((cur) => ({
-                  ...cur,
-                  resource: result.heading,
-                  extraParameters: result.extraParameters,
-                })),
-                500
-              );
+              setFormData((cur) => ({
+                ...cur,
+                category: result._id,
+                extraParameters: result.extraParameters,
+              }));
             },
           }}
           whenInputEmpty={{
@@ -96,15 +92,12 @@ const Position1 = ({ formData, setFormData }) => {
             }) => {
               setInputValue(component.props.children.props.title);
               setIsVisible(false);
-              console.log(component.props.children.props.id);
-              debounce(
-                setFormData((cur) => ({
-                  ...cur,
-                  resource: component.props.children.props.title,
-                })),
-                500
-              );
-              console.log("data", formData);
+              setFormData((cur) => ({
+                ...cur,
+                category: component.props.children.props.id.split(
+                  "newResourceModal_dropdown_resource_"
+                )[1],
+              }));
             },
           }}
         />
@@ -112,14 +105,13 @@ const Position1 = ({ formData, setFormData }) => {
         <textarea
           className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
           placeholder="Description"
-          onChange={debounce(
-            (e) =>
-              setFormData((cur) => ({
-                ...cur,
-                description: e.target.value,
-              })),
-            500
-          )}
+          value={formData.description}
+          onChange={(e) =>
+            setFormData((cur) => ({
+              ...cur,
+              description: e.target.value,
+            }))
+          }
         ></textarea>
       </div>
     </>
