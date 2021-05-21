@@ -7,12 +7,9 @@
 <br>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.0--beta-green"> <img src="https://img.shields.io/github/license/Covisource/covisource-web?color=pink"> <img src="https://img.shields.io/tokei/lines/github/Covisource/covisource-web?color=white&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/electric-package-manager/electric?color=%230xfffff"> <img src="https://img.shields.io/github/repo-size/electric-package-manager/electric?color=orange">
+ <img src="https://img.shields.io/github/license/Covisource/covisource-web?color=pink"> <img src="https://img.shields.io/tokei/lines/github/Covisource/covisource-web?color=white&label=lines%20of%20code"> <img src="https://img.shields.io/github/languages/top/Covisource/covisource-web?color=%230xfffff"> <img src="https://img.shields.io/github/repo-size/Covisource/covisource-web?color=orange">
 </p>
 <br>
-
-![CoviSource Website](https://user-images.githubusercontent.com/63039748/119088926-7896d900-ba1a-11eb-989c-31a7a82c5921.png)
-
 
 ## Authors
 [fullstackslayer](https://www.github.com/fullstackslayer) - Founder And Developer Of CoviSource
