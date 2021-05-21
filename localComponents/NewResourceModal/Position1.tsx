@@ -27,6 +27,7 @@ const Position1 = ({ formData, setFormData }) => {
           placeholder="Title"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-text"></i>}
+          value={formData.title}
           onChange={(e) =>
             setFormData((cur) => ({
               ...cur,
@@ -40,6 +41,7 @@ const Position1 = ({ formData, setFormData }) => {
           placeholder="Phone"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-phone"></i>}
+          value={formData.phone}
           onChange={(e) =>
             setFormData((cur) => ({
               ...cur,
@@ -53,6 +55,7 @@ const Position1 = ({ formData, setFormData }) => {
             subClassName: "bg-gray-100",
             prepend: <i className="fal fa-search"></i>,
             placeholder: "Choose a resource",
+            value: formData.resource
           }}
           searchHandler={{
             handler: resourceSearchHandler,
@@ -100,6 +103,7 @@ const Position1 = ({ formData, setFormData }) => {
         <textarea
           className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
           placeholder="Description"
+          value={formData.description}
           onChange={(e) =>
             setFormData((cur) => ({
               ...cur,

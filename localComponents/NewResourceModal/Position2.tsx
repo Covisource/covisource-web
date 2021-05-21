@@ -46,6 +46,7 @@ const Position2 = ({ formData, setFormData }) => {
               prepend: <i className="fal fa-map-marker-alt"></i>,
               append: <i className="fas fa-caret-down"></i>,
               placeholder: "Enter a location",
+              value: formData.location.displayName,
             }}
             searchHandler={{
               handler: locationSearchHandler,
@@ -56,8 +57,8 @@ const Position2 = ({ formData, setFormData }) => {
               handler: ({ result, setInputValue, setIsVisible }) => {
                 setInputValue(result.heading);
                 setIsVisible(false);
-                setMapConfig((curr) => ({
-                  ...curr,
+                setMapConfig((cur) => ({
+                  ...cur,
                   latitude: result.coordinates.lat,
                   longitude: result.coordinates.long,
                 }));
