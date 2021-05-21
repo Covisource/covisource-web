@@ -55,7 +55,7 @@ const Position1 = ({ formData, setFormData }) => {
             subClassName: "bg-gray-100",
             prepend: <i className="fal fa-search"></i>,
             placeholder: "Choose a resource",
-            value: formData.resource
+            value: formData.category,
           }}
           searchHandler={{
             handler: resourceSearchHandler,
@@ -66,7 +66,7 @@ const Position1 = ({ formData, setFormData }) => {
               setIsVisible(false);
               setFormData((cur) => ({
                 ...cur,
-                resource: result.heading,
+                category: result._id,
                 extraParameters: result.extraParameters,
               }));
             },
@@ -94,7 +94,9 @@ const Position1 = ({ formData, setFormData }) => {
               setIsVisible(false);
               setFormData((cur) => ({
                 ...cur,
-                resource: component.props.children.props.title,
+                category: component.props.children.props.id.split(
+                  "newResourceModal_dropdown_resource_"
+                )[1],
               }));
             },
           }}
