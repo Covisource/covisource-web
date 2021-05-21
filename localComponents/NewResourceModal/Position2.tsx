@@ -48,6 +48,15 @@ const Position2 = ({ formData, setFormData }) => {
               placeholder: "Enter a location",
               value: formData.location.displayName,
             }}
+            dropdown={{
+              className: "bg-white mx-3 shadow-xl",
+              result: {
+                containerClassName:
+                  "border-b border-gray-100 hover:bg-gray-100",
+                headingClassName: "ct-text-color-1",
+                subHeadingClassName: "text-gray-300",
+              },
+            }}
             searchHandler={{
               handler: locationSearchHandler,
               extraParams: { hereToken },
@@ -72,15 +81,6 @@ const Position2 = ({ formData, setFormData }) => {
                     displayName: result.heading,
                   },
                 }));
-              },
-            }}
-            dropdown={{
-              className: "bg-white mx-3",
-              result: {
-                containerClassName:
-                  "border-b border-gray-100 hover:bg-gray-100",
-                headingClassName: "ct-text-color-1",
-                subHeadingClassName: "text-gray-300",
               },
             }}
           />

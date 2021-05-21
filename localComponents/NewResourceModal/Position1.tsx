@@ -60,6 +60,14 @@ const Position1 = ({ formData, setFormData }) => {
           searchHandler={{
             handler: resourceSearchHandler,
           }}
+          dropdown={{
+            className: "bg-white w-full shadow-xl",
+            result: {
+              containerClassName: "border-b border-gray-100 hover:bg-gray-100",
+              headingClassName: "ct-text-color-1",
+              subHeadingClassName: "text-gray-300",
+            },
+          }}
           resultClickHandler={{
             handler: ({ result, setInputValue, setIsVisible }) => {
               setInputValue(result.heading);
@@ -74,7 +82,7 @@ const Position1 = ({ formData, setFormData }) => {
           whenInputEmpty={{
             componentArray: allResources.map((resource: any) => {
               return (
-                <div className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
+                <div className="flex flex-col justify-center gap-1 py-4 px-3 ct-text-color-1 select-none border-b border-gray-100 hover:bg-gray-100 cursor-pointer">
                   <span
                     className="truncate resource"
                     title={resource.heading}

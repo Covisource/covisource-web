@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
+import axios from "axios";
 
 // positions
 import Position1 from "~localComponents/NewResourceModal/Position1";
@@ -8,10 +9,6 @@ import Position3 from "~localComponents/NewResourceModal/Position3";
 
 // buttons
 import Button from "~components/Button";
-
-// styles
-import styles from "~styles/NewResourceModal.module.css";
-import axios from "axios";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const initialFormData = {
@@ -85,24 +82,10 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
                 {position === 3 && "Step 3 - Extra Parameters"}
               </span>
             </div>
-            {/* <div
+            <div
               className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center"
             >
               {position} of 3
-            </div> */}
-
-            <div className="relative inline-block">
-              <div className={styles.progressCircle}>
-                <div
-                  className={styles.segment}
-                  style={{ transform: "rotate(0deg) skew(0deg)" }}
-                ></div>
-                <div
-                  className={styles.segment}
-                  style={{ transform: "rotate(90deg) skew(0deg)" }}
-                ></div>
-              </div>
-              <div className={styles.progressInner}></div>
             </div>
           </div>
 
