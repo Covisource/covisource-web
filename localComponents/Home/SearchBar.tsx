@@ -16,6 +16,7 @@ import {
   resourceSearchHandler,
 } from "~util/searchablePopupUtil";
 
+
 const SearchBar = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
   const hereToken = useHereContext();
