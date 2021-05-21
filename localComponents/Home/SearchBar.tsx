@@ -46,6 +46,14 @@ const SearchBar = () => {
           placeholder: "Enter a location",
           value: userLocationInCookie || "",
         }}
+        dropdown={{
+          className: "bg-gray-300 w-72 shadow-xl",
+          result: {
+            containerClassName: "border-b border-gray-200 hover:bg-gray-200",
+            headingClassName: "ct-text-color-1",
+            subHeadingClassName: "text-gray-500",
+          },
+        }}
         searchHandler={{
           handler: locationSearchHandler,
           extraParams: { hereToken },
@@ -53,7 +61,7 @@ const SearchBar = () => {
         loader={true}
         whenInputEmpty={{
           componentArray: [
-            <div className="flex items-center gap-2 py-4 px-3 select-none hover:bg-gray-900 cursor-pointer ">
+            <div className="flex items-center gap-2 py-4 px-3 select-none hover:bg-gray-200 cursor-pointer ">
               <i className="fal fa-radar text-xl text-purple-400"></i>
               <div className="flex flex-col justify-center gap-1">
                 <span className="text-purple-400 font-semibold font-mont">
@@ -93,6 +101,14 @@ const SearchBar = () => {
           prepend: <i className="fal fa-search ct-text-color-1 text-lg"></i>,
           placeholder: "Find Resources...",
         }}
+        dropdown={{
+          className: "bg-gray-300 w-full shadow-xl",
+          result: {
+            containerClassName: "border-b border-gray-200 hover:bg-gray-200",
+            headingClassName: "ct-text-color-1",
+            subHeadingClassName: "text-gray-500",
+          },
+        }}
         searchHandler={{
           handler: resourceSearchHandler,
         }}
@@ -105,7 +121,7 @@ const SearchBar = () => {
         whenInputEmpty={{
           componentArray: allResources.map((resource: any, index) => {
             return (
-              <div key={index} className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-700 ct-text-color-3 select-none hover:bg-gray-900 cursor-pointer">
+              <div key={index} className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-200 ct-text-color-1 select-none hover:bg-gray-200 cursor-pointer">
                 <span className="truncate resource" title={resource.heading}>
                   {resource.heading}
                 </span>
