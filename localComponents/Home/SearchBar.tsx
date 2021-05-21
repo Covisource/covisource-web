@@ -21,12 +21,12 @@ const SearchBar = () => {
   const hereToken = useHereContext();
   const [allResources, setAllResources] = useState([]);
 
-  // useEffect(() => {
-  //   const getResources = async () => {
-  //     setAllResources((await getAllResources()) || []);
-  //   };
-  //   getResources();
-  // });
+  useEffect(() => {
+    const getResources = async () => {
+      setAllResources((await getAllResources()) || []);
+    };
+    getResources();
+  }, []);
 
   return (
     <div
