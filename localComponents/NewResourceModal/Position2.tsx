@@ -61,20 +61,16 @@ const Position2 = ({ formData, setFormData }) => {
                   latitude: result.coordinates.lat,
                   longitude: result.coordinates.long,
                 }));
-
-                debounce(
-                  setFormData((cur) => ({
-                    ...cur,
-                    location: {
-                      coordinates: {
-                        lat: result.coordinates.lat,
-                        long: result.coordinates.long,
-                      },
-                      displayName: result.heading,
+                setFormData((cur) => ({
+                  ...cur,
+                  location: {
+                    coordinates: {
+                      lat: result.coordinates.lat,
+                      long: result.coordinates.long,
                     },
-                  })),
-                  500
-                );
+                    displayName: result.heading,
+                  },
+                }));
               },
             }}
             dropdown={{

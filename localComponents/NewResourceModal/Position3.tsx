@@ -10,14 +10,12 @@ const Position3 = ({ formData, setFormData }) => {
           placeholder="Price"
           subClassName="bg-gray-100"
           prepend={<i className="fal fa-rupee-sign"></i>}
-          onChange={debounce(
-            (e) =>
-              setFormData((cur) => ({
-                ...cur,
-                price: e.target.value,
-              })),
-            500
-          )}
+          onChange={(e) =>
+            setFormData((cur) => ({
+              ...cur,
+              price: e.target.value,
+            }))
+          }
         />
 
         {formData.extraParameters.map((param) => {
