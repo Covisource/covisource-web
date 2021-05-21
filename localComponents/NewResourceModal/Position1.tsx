@@ -13,12 +13,12 @@ import { debounce } from "debounce";
 const Position1 = ({ formData, setFormData }) => {
   const [allResources, setAllResources] = useState([]);
 
-  useEffect(() => {
-    const getResources = async () => {
-      setAllResources((await getAllResources()) || []);
-    };
-    getResources();
-  });
+  // useEffect(() => {
+  //   const getResources = async () => {
+  //     setAllResources((await getAllResources()) || []);
+  //   };
+  //   getResources();
+  // });
 
   return (
     <>
