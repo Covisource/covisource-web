@@ -100,7 +100,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
 
   let resultsToRender = [];
 
-  if (results.length > 0) {
+  if (results?.length > 0) {
     resultsToRender = results.map((result) => {
       return (
         <div

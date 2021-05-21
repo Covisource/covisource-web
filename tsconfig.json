@@ -17,7 +17,7 @@
     "paths": {
       "~util/*": ["util/*"],
       "~components/*": ["components/*"],
-      "~pageComponents/*": ["pageComponents/*"],
+      "~localComponents/*": ["localComponents/*"],
       "~styles/*": ["styles/*"], 
       "~hoc/*": ["hoc/*"],
       "~contexts/*": ["contexts/*"],
