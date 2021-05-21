@@ -22,8 +22,8 @@ const Position2 = ({ formData, setFormData }) => {
   // mapbox config
 
   const [mapConfig, setMapConfig] = useState({
-    latitude: 20.5937,
-    longitude: 78.9629,
+    latitude: formData.location.coordinates.lat || 20.5937,
+    longitude: formData.location.coordinates.long || 78.9629,
     zoom: 7,
     width: "full",
     height: "25rem",
