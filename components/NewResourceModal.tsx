@@ -42,7 +42,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         // success
 
         setPosition(1);
-        setFormData(initialFormData);
+        // setFormData(initialFormData);
         setIsOpen(false);
       }
     } catch (err) {
