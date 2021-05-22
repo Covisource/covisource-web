@@ -1,6 +1,6 @@
 import Layout from "~hoc/Layout";
 import React, { useEffect } from "react";
-import SearchBar from "localComponents/Home/SearchBar";
+import SearchBar from "~localComponents/Home/SearchBar";
 import TextLoop from "react-text-loop";
 
 export default function Home() {

@@ -11,11 +11,8 @@ const Layout = ({ children, page }) => {
   return (
     <>
       <div className="h-screen">
-        {page === "home" ? (
-          <Navbar setIsResourceModalOpen={setIsResourceModalOpen} />
-        ) : (
-          ""
-        )}
+        <Navbar setIsResourceModalOpen={setIsResourceModalOpen} />
+        
         <div
           className="overflow-auto"
           style={{

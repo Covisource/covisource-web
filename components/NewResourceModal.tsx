@@ -1,21 +1,17 @@
 import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
+import axios from "axios";
 
 // positions
-import Position1 from "localComponents/NewResourceModal/Position1";
-import Position2 from "localComponents/NewResourceModal/Position2";
-import Position3 from "localComponents/NewResourceModal/Position3";
+import Position1 from "~localComponents/NewResourceModal/Position1";
+import Position2 from "~localComponents/NewResourceModal/Position2";
+import Position3 from "~localComponents/NewResourceModal/Position3";
 
 // buttons
 import Button from "~components/Button";
 
-// styles
-import styles from "~styles/NewResourceModal.module.css";
-import axios from "axios";
-
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
-  const [position, setPosition] = useState(1);
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     title: "",
     description: "",
     phone: "",
@@ -29,7 +25,9 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     },
     price: "",
     extraParameters: [],
-  });
+  };
+  const [position, setPosition] = useState(1);
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleSubmit = async () => {
     try {
@@ -40,7 +38,13 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           resource: { ...formData },
         },
       });
-      console.log(res);
+      if (res) {
+        // success
+
+        setPosition(1);
+        setFormData(initialFormData);
+        setIsOpen(false);
+      }
     } catch (err) {
       console.error(err);
       // handle error
@@ -63,6 +67,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
         {/* Actual Content */}
         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-y-auto">
+          {/* Header */}
           <div className="flex items-center justify-between border-b border-gray-300 pb-3">
             <div>
               <Dialog.Title
@@ -77,24 +82,10 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
                 {position === 3 && "Step 3 - Extra Parameters"}
               </span>
             </div>
-            {/* <div
+            <div
               className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center"
             >
               {position} of 3
-            </div> */}
-
-            <div className="relative inline-block">
-              <div className={styles.progressCircle}>
-                <div
-                  className={styles.segment}
-                  style={{ transform: "rotate(0deg) skew(0deg)" }}
-                ></div>
-                <div
-                  className={styles.segment}
-                  style={{ transform: "rotate(90deg) skew(0deg)" }}
-                ></div>
-              </div>
-              <div className={styles.progressInner}></div>
             </div>
           </div>
 
