@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 
 // components
 import SearchablePopup from "~components/SearchablePopup";
+import Button from "~components/Button";
 
 // contexts
 import { useHereContext } from "~contexts/HereContext";
@@ -16,11 +17,11 @@ import {
   resourceSearchHandler,
 } from "~util/searchablePopupUtil";
 
-
 const SearchBar = () => {
   const userLocationInCookie = Cookies.get("coviUserLocationDisplay");
   const hereToken = useHereContext();
   const [allResources, setAllResources] = useState([]);
+  const [selectedResource, setSelectedResource] = useState("");
 
   useEffect(() => {
     const getResources = async () => {
@@ -31,7 +32,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className="flex items-center shadow-2xl transition-all mb-10 bg-gray-300 rounded-xl"
+      className="relative flex items-center shadow-2xl transition-all mb-10 bg-white rounded-xl"
       id="searchbar_home"
     >
       <SearchablePopup
@@ -115,13 +116,17 @@ const SearchBar = () => {
         resultClickHandler={{
           handler: ({ result, setInputValue, setIsVisible }) => {
             setInputValue(result.heading);
+            setSelectedResource(result.heading);
             setIsVisible(false);
           },
         }}
         whenInputEmpty={{
           componentArray: allResources.map((resource: any, index) => {
             return (
-              <div key={index} className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-200 ct-text-color-1 select-none hover:bg-gray-200 cursor-pointer">
+              <div
+                key={index}
+                className="flex flex-col justify-center gap-1 py-4 px-3 border-b border-gray-200 ct-text-color-1 select-none hover:bg-gray-200 cursor-pointer"
+              >
                 <span className="truncate resource" title={resource.heading}>
                   {resource.heading}
                 </span>
@@ -134,12 +139,21 @@ const SearchBar = () => {
             setIsVisible,
           }) => {
             setInputValue(component.props.children.props.title);
+            setSelectedResource(component.props.children.props.title);
             setIsVisible(false);
 
             console.log(component);
           },
         }}
       />
+      <Button
+        className="bg-purple-600 absolute right-2 py-3 rounded-md text-gray-200"
+        href={`${process.env.NEXT_PUBLIC_BASE_URL}/${
+          selectedResource.toLowerCase() || ""
+        }`}
+      >
+        Search
+      </Button>
     </div>
   );
 };
