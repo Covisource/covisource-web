@@ -25,8 +25,8 @@ const Navbar = ({ setIsResourceModalOpen, page }) => {
         <i className="far fa-search"></i>
         <NavItem title="Home" active={page === "home"} link="/" />
         <NavItem title="Donate" active={page === "donate"} link="/donate" />
-        <NavItem title="Partner" active={page === "partner"} link="/partner" />
-        <NavItem title="About" active={page === "about"} link="/about" />
+        <NavItem title="Resources" active={page === "resources"} link="/resources" />
+        <NavItem title="Connect" active={page === "connect"} link="/connect" />
       </div>
 
       {/* Logo */}

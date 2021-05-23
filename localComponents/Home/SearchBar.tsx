@@ -41,7 +41,7 @@ const SearchBar = () => {
           subClassName:
             "ct-text-color-1 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900",
           prepend: (
-            <i className="fad fa-map-marker-alt ct-text-color-1 text-2xl"></i>
+            <i className="fas fa-map-marker-alt ct-text-color-1 text-xl"></i>
           ),
           append: <i className="fas fa-caret-down ct-text-color-1"></i>,
           placeholder: "Enter a location",
@@ -99,7 +99,7 @@ const SearchBar = () => {
           className: "ct-location_search",
           subClassName:
             "rounded-l-none ct-text-color-1 text-sm font-medium bg-transparent placeholder-gray-900",
-          prepend: <i className="fal fa-search ct-text-color-1 text-lg"></i>,
+          prepend: <i className="fas fa-shapes ct-text-color-1 text-lg"></i>,
           placeholder: "Find Resources...",
         }}
         dropdown={{
@@ -147,12 +147,12 @@ const SearchBar = () => {
         }}
       />
       <Button
-        className="ct-bg-accent absolute right-2 py-3 rounded-md text-gray-200"
+        className="ct-bg-accent absolute right-2 py-4 rounded-xl text-gray-200"
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/${
           selectedResource.toLowerCase() || ""
         }`}
       >
-        Search
+        <i className="far fa-search"></i>
       </Button>
     </div>
   );
