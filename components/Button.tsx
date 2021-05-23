@@ -14,7 +14,7 @@ const Button = (props: Props) => {
     return (
       <Link href={props.href}>
         <button
-          className={`grid place-items-center p-4 cursor-pointer select-none ${props.className}`}
+          className={`grid place-items-center py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
           disabled={props.disabled}
         >
           {props.children}
@@ -24,7 +24,7 @@ const Button = (props: Props) => {
   } else {
     return (
       <button
-        className={`inline-flex p-4 px-7 cursor-pointer select-none ${props.className}`}
+        className={`inline-flex py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
         onClick={props.onClick}
         disabled={props.disabled}
       >

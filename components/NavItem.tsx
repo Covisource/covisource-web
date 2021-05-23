@@ -5,8 +5,8 @@ const NavItem = ({ title, link, active }) => {
   return (
     <Link href={link}>
       <a
-        className={`text-md cursor-pointer select-none font-semibold ${
-          active ? "ct-text-color-main" : "ct-text-color-muted"
+        className={`text-md cursor-pointer select-none font-bold ${
+          active ? "ct-text-main" : "ct-text-muted"
         }`}
       >
         {title}
