@@ -32,18 +32,17 @@ const SearchBar = () => {
 
   return (
     <div
-      className="relative flex items-center shadow-2xl transition-all mb-10 bg-white rounded-xl"
+      className="relative hidden md:flex items-center ct-shadow transition-all mb-10 bg-white rounded-xl md:w-144 lg:w-160 h-18"
       id="searchbar_home"
     >
       <SearchablePopup
         input={{
-          className: "border-r border-gray-400 ct-location_search",
-          subClassName:
-            "ct-text-color-1 text-sm font-medium rounded-r-none bg-transparent placeholder-gray-900",
+          className: "w-full",
+          subClassName: "ct-text-color-1 text-sm font-medium bg-transparent",
           prepend: (
-            <i className="fad fa-map-marker-alt ct-text-color-1 text-2xl"></i>
+            <i className="fas fa-map-marker-alt ct-text-color-1 text-xl"></i>
           ),
-          append: <i className="fas fa-caret-down ct-text-color-1"></i>,
+          heading: "Location",
           placeholder: "Enter a location",
           value: userLocationInCookie || "",
         }}
@@ -92,15 +91,15 @@ const SearchBar = () => {
             setIsVisible(false);
           },
         }}
+        containerClassName="w-1/3"
       />
+      <span className="h-9 ct-bg-muted ml-1" style={{ width: "1px" }}></span>
       <SearchablePopup
-        containerClassName="w-2/3"
         input={{
-          className: "ct-location_search",
-          subClassName:
-            "rounded-l-none ct-text-color-1 text-sm font-medium bg-transparent placeholder-gray-900",
-          prepend: <i className="fal fa-search ct-text-color-1 text-lg"></i>,
-          placeholder: "Find Resources...",
+          subClassName: "ct-text-color-1 text-sm font-medium bg-transparent",
+          prepend: <i className="fas fa-shapes ct-text-color-1 text-lg"></i>,
+          heading: "Resource",
+          placeholder: "Choose a Resource",
         }}
         dropdown={{
           className: "bg-gray-300 w-full shadow-xl",
@@ -145,14 +144,15 @@ const SearchBar = () => {
             console.log(component);
           },
         }}
+        containerClassName="w-2/3"
       />
       <Button
-        className="bg-purple-600 absolute right-2 py-3 rounded-md text-gray-200"
+        className="ct-bg-accent absolute right-2 py-4 rounded-xl text-gray-200"
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/${
           selectedResource.toLowerCase() || ""
         }`}
       >
-        Search
+        <i className="far fa-search"></i>
       </Button>
     </div>
   );
