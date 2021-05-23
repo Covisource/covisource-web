@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <Layout page="home">
-      <div className="flex flex-col items-center h-full pt-28">
+      <div className="flex flex-col items-center h-full pt-28 relative">
         {/* Heading */}
         <div className="text-center mb-7">
           <span className="ct-font-mont font-bold text-6xl">
@@ -47,6 +47,9 @@ export default function Home() {
 
         {/* Search Bar */}
         <SearchBar />
+
+        {/* Scroll Indicator */}
+        <i className="far fa-arrow-down ct-text-main text-2xl absolute bottom-3 animate-bounce"></i>
       </div>
     </Layout>
   );
