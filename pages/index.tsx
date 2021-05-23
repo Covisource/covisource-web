@@ -46,7 +46,7 @@ export default function Home() {
         </p>
 
         {/* Search Bar */}
-        {/* <SearchBar /> */}
+        <SearchBar />
       </div>
     </Layout>
   );

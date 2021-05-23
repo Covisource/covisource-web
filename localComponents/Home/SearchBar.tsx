@@ -32,7 +32,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className="relative flex items-center shadow-2xl transition-all mb-10 bg-white rounded-xl"
+      className="relative flex items-center ct-shadow transition-all mb-10 bg-white rounded-xl w-160"
       id="searchbar_home"
     >
       <SearchablePopup
@@ -147,7 +147,7 @@ const SearchBar = () => {
         }}
       />
       <Button
-        className="bg-purple-600 absolute right-2 py-3 rounded-md text-gray-200"
+        className="ct-bg-accent absolute right-2 py-3 rounded-md text-gray-200"
         href={`${process.env.NEXT_PUBLIC_BASE_URL}/${
           selectedResource.toLowerCase() || ""
         }`}
