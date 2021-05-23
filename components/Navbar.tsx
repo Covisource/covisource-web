@@ -17,7 +17,7 @@ const Navbar = ({ setIsResourceModalOpen, page }) => {
 
   return (
     <div
-      className="flex items-center justify-between px-6 py-3"
+      className="flex items-center justify-between px-6 py-4"
       style={{ borderBottom: "1px solid #F3F3F4" }}
     >
       {/* Nav Links */}
@@ -30,7 +30,7 @@ const Navbar = ({ setIsResourceModalOpen, page }) => {
       </div>
 
       {/* Logo */}
-      <div>
+      <div className="absolute left-1/2" style={{ marginLeft: "-30px" }}>
         <img src="/logo-sm.png" alt="Covisource" className="h-12 w-12" />
       </div>
 

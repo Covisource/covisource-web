@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <Layout page="home">
-      <div className="flex flex-col items-center h-full pt-20">
+      <div className="flex flex-col items-center h-full pt-28">
         {/* Heading */}
         <div className="text-center mb-7">
           <span className="ct-font-mont font-bold text-6xl">
@@ -41,9 +41,12 @@ export default function Home() {
         </div>
 
         {/* Description */}
-        <p className="ct-text-muted text-center text-xl font-semibold">
+        <p className="ct-text-muted text-center text-xl font-semibold mb-10">
           Join the millions of Indian's using CoviSource to save lives.
         </p>
+
+        {/* Search Bar */}
+        {/* <SearchBar /> */}
       </div>
     </Layout>
   );
