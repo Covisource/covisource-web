@@ -15,6 +15,10 @@
   background-color: #ffffff;
 }
 
+.ct-bg-muted {
+  background-color: #bebebe;
+}
+
 .ct-bg-dark {
   background-color: #080B3D;
 }
@@ -33,6 +37,10 @@
 
 .ct-text-inverted {
   color: #FBFBFB;
+}
+
+.ct-placeholder-muted::placeholder {
+  color: #838383;
 }
 
 .ct-shadow {

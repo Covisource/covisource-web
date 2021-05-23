@@ -22,9 +22,7 @@ export default function Home() {
       <div className="flex flex-col items-center h-full pt-28 relative">
         {/* Heading */}
         <div className="text-center mb-7">
-          <span className="ct-font-mont font-bold text-6xl">
-            Find{" "}
-          </span>
+          <span className="ct-font-mont font-bold text-6xl">Find </span>
           <TextLoop>
             {changingWords.map((word, index) => (
               <span
@@ -42,7 +40,7 @@ export default function Home() {
 
         {/* Description */}
         <p className="ct-text-muted text-center text-xl font-semibold mb-10">
-          Join the millions of Indian's using CoviSource to save lives.
+          The Number One platform for all your needs to fight the virus.
         </p>
 
         {/* Search Bar */}
