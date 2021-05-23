@@ -40,11 +40,11 @@
 }
 
 .ct-bg-grad {
-  background: linear-gradient(180deg, #00ADFF 0%, #4563CB 36.98%);
+  background: linear-gradient(180deg, #00ADFF, #4563CB);
 }
 
 .ct-text-grad {
-  background: linear-gradient(180deg, #00ADFF 0%, #4563CB 36.98%);
+  background: linear-gradient(180deg, #00ADFF, #4563CB);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

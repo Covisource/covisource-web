@@ -14,34 +14,36 @@ export default function Home() {
     "Tocilizumab",
     "Ventilators",
     "Staples",
+    "Vaccines",
   ];
 
   return (
     <Layout page="home">
-      <div className="flex flex-col justify-center h-full lg:w-3/5">
-        <div className=" mb-4">
-          <span className="ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
+      <div className="flex flex-col items-center h-full pt-20">
+        {/* Heading */}
+        <div className="text-center mb-7">
+          <span className="ct-font-mont font-bold text-6xl">
             Find{" "}
           </span>
           <TextLoop>
             {changingWords.map((word, index) => (
               <span
                 key={index}
-                className="ct-text-grad ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl"
+                className="ct-text-grad ct-font-mont font-bold text-6xl"
               >
                 {word}
               </span>
             ))}
           </TextLoop>{" "}
-          <span className="ct-font-mont font-bold text-4xl lg:text-5xl 2xl:text-6xl">
-            <br /> From Anywhere In <br /> India.
+          <span className="ct-font-mont font-bold text-6xl">
+            <br /> From Anywhere In India.
           </span>
         </div>
-        <p className="ct-font-mont ct-text-color-2 font-semibold text-md leading-5 mb-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque placeat
-          nemo animi, numquam nulla
+
+        {/* Description */}
+        <p className="ct-text-muted text-center text-xl font-semibold">
+          Join the millions of Indian's using CoviSource to save lives.
         </p>
-        <SearchBar />
       </div>
     </Layout>
   );

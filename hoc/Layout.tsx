@@ -16,10 +16,10 @@ const Layout = ({ children, page }) => {
         <div
           className="overflow-auto"
           style={{
-            height: "calc(100vh - 4.5rem)",
+            height: "calc(100vh - 4.8rem)",
           }}
         >
-          {/* <div className="container mx-auto h-full w-full px-4">{children}</div> */}
+          <div className="container mx-auto h-full w-full px-4">{children}</div>
         </div>
       </div>
       <NewResourceModal
