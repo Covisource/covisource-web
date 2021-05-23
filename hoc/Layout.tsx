@@ -11,7 +11,7 @@ const Layout = ({ children, page }) => {
   return (
     <>
       <div className="h-screen">
-        <Navbar setIsResourceModalOpen={setIsResourceModalOpen} />
+        <Navbar setIsResourceModalOpen={setIsResourceModalOpen} page={page} />
         
         <div
           className="overflow-auto"
@@ -19,7 +19,7 @@ const Layout = ({ children, page }) => {
             height: "calc(100vh - 4.5rem)",
           }}
         >
-          <div className="container mx-auto h-full w-full px-4">{children}</div>
+          {/* <div className="container mx-auto h-full w-full px-4">{children}</div> */}
         </div>
       </div>
       <NewResourceModal

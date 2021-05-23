@@ -1,46 +1,38 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 
 * {
-  font-family: "Raleway", "sans-serif";
+  font-family: "Nunito", "sans-serif";
   line-height: 14px;
   letter-spacing: 0em;
   font-weight: 400;
 }
 
-.ct-font-mont {
-  font-family: "Montserrat", "sans-serif";
-}
-
 .ct-bg {
-  background-color: #e9ecf1;
-}
-
-.ct-bg-semilight {
-  background-color: #dedede;
+  background-color: #ffffff;
 }
 
 .ct-bg-dark {
-  background-color: #374151;
+  background-color: #080B3D;
 }
 
 .ct-bg-accent {
   background-color: #6f74e7;
 }
 
-.ct-text-color-1 {
-  color: #374151;
+.ct-text-color-main {
+  color: #080B3D;
 }
 
-.ct-text-color-2 {
-  color: #515151;
+.ct-text-color-muted {
+  color: #838383;
 }
 
-.ct-text-color-3 {
-  color: #f7f7f7;
+.ct-text-color-inverted {
+  color: #FBFBFB;
 }
 
 .ct-shadow {
@@ -48,18 +40,14 @@
 }
 
 .ct-bg-grad {
-  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
+  background: linear-gradient(180deg, #00ADFF 0%, #4563CB 36.98%);
 }
 
 .ct-text-grad {
-  background: linear-gradient(90.6deg, #7472f1 -15.55%, #2e99b0 126.94%);
+  background: linear-gradient(180deg, #00ADFF 0%, #4563CB 36.98%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.ct-circle-sep {
-  font-size: 5px;
 }
 
 ::-webkit-scrollbar {
