@@ -13,6 +13,7 @@ interface InputProps {
   append?: any;
   value?: any;
   style?: object;
+  heading?: string;
 }
 
 interface ResultProps {
@@ -117,7 +118,11 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
             });
           }}
         >
-          <span className={`truncate ${props.dropdown?.result.headingClassName}`}>{result.heading}</span>
+          <span
+            className={`truncate ${props.dropdown?.result.headingClassName}`}
+          >
+            {result.heading}
+          </span>
           <span
             className={`truncate text-xs text-gray-300 ${props.dropdown?.result.subHeadingClassName}`}
             title={result.subHeading}
@@ -160,6 +165,7 @@ const NewSearchablePopup: React.FC<Props> = (props) => {
         placeholder={props.input.placeholder}
         append={props.input.append}
         value={inputValue}
+        heading={props.input.heading}
         onChange={handleSearch}
         onFocus={() => {
           setIsVisible(true);

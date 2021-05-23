@@ -5,6 +5,7 @@ interface Props {
   subClassName?: string;
   prepend?: any;
   append?: any;
+  heading?: any;
   placeholder?: string;
   id?: string;
   onChange?: any;
@@ -21,7 +22,7 @@ interface Props {
 const Input = (props: Props) => {
   return (
     <div
-      className={"relative flex items-center " + props.className}
+      className={`relative flex items-center ${props.className}`}
       style={props.style}
     >
       {props.prepend ? (
@@ -29,22 +30,29 @@ const Input = (props: Props) => {
       ) : (
         ""
       )}
-      <input
-        type={props.type || "text"}
-        name={props.name}
-        onChange={props.onChange}
-        onKeyDown={props.onKeyDown}
-        onFocus={props.onFocus}
-        onBlur={props.onBlur}
-        placeholder={props.placeholder || ""}
-        value={props.value}
-        id={props.id || ""}
-        autoComplete="off"
-        style={props.subStyle}
-        className={`w-full font-semibold border-none rounded-lg h-14 focus:ring-0 text-sm ${
-          props.prepend ? "pl-10" : ""
-        } ${props.append ? "pr-8" : ""} ${props.subClassName || ""}`}
-      />
+      <div
+        className={`flex flex-col gap-1 w-full ${props.prepend ? "pl-10" : ""} ${
+          props.append ? "pr-8" : ""
+        }`}
+      >
+        <h1 className="font-bold">{props.heading}</h1>
+        <input
+          type={props.type || "text"}
+          name={props.name}
+          onChange={props.onChange}
+          onKeyDown={props.onKeyDown}
+          onFocus={props.onFocus}
+          onBlur={props.onBlur}
+          placeholder={props.placeholder || ""}
+          value={props.value}
+          id={props.id || ""}
+          autoComplete="off"
+          style={props.subStyle}
+          className={`p-0 w-full font-semibold border-none focus:ring-0 text-sm ct-text-muted ct-placeholder-muted ${
+            props.subClassName || ""
+          }`}
+        />
+      </div>
       {props.append ? (
         <div className="absolute right-2">{props.append}</div>
       ) : (
