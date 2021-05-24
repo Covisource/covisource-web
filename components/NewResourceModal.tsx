@@ -4,7 +4,8 @@ import axios from "axios";
 
 // components
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
-
+import Header from "~localComponents/NewResourceModal/Header";
+import SideBar from "~localComponents/NewResourceModal/SideBar";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const initialFormData = {
@@ -54,43 +55,29 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       onClose={() => setIsOpen(false)}
     >
       <div className="min-h-screen px-4 text-center">
+        {/* Closes the modal when clicked outside of */}
         <Dialog.Overlay className="fixed inset-0" />
 
+        {/* Centers the Modal */}
         <span className="inline-block h-screen align-middle" aria-hidden="true">
           &#8203;
         </span>
 
         {/* Actual Content */}
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-y-auto">
-          {/* Header */}
-          {/* <div className="flex items-center justify-between border-b border-gray-300 pb-3">
-            <div>
-              <Dialog.Title
-                as="h3"
-                className="text-xl ct-font-mont ct-text-color-1 font-bold"
-              >
-                Upload A Resource
-              </Dialog.Title>
-              <span className="text-sm">
-                {position === 1 && "Step 1 - Basic Details"}
-                {position === 2 && "Step 2 - Location"}
-                {position === 3 && "Step 3 - Extra Parameters"}
-              </span>
-            </div>
-            <div className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center">
-              {position} of 3
-            </div>
-          </div> */}
+        <div className="bg-white rounded-lg inline-flex w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
+          <SideBar />
 
-          {/* Positions */}
-          
+          <div className="w-full">
+            <Header position={position} />
 
-          {/* Toggler Buttons */}
-          <TogglerButtons
-            position={position}
-            setPosition={setPosition}
-            handleSubmit={handleSubmit}
-          />
+            {/* Positions */}
+
+            <TogglerButtons
+              position={position}
+              setPosition={setPosition}
+              handleSubmit={handleSubmit}
+            />
+          </div>
         </div>
       </div>
     </Dialog>
