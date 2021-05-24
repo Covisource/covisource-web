@@ -77,7 +77,7 @@ const PositionText = ({ pos, currentPos, text }) => {
         {text}
       </span>
       <div
-        className={`h-0.5 w-8 self-center ${pos >= 4 && "hidden"}`}
+        className={`h-0.5 w-10 self-center ${pos >= 4 && "hidden"}`}
         style={{
           backgroundColor:
             currentPos < pos

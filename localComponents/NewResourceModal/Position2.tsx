@@ -41,11 +41,13 @@ const Position2 = ({ formData, setFormData }) => {
         >
           <SearchablePopup
             input={{
-              className: "m-3 shadow-xl",
-              subClassName: "bg-white",
+              placeholder: "Enter Location",
+              heading: "Location",
+              className: "bg-white shadow-xl bg-opacity-85 p-3 m-3 rounded-lg",
+              subClassName:
+                "ct-text-color-1 text-sm font-medium bg-transparent",
               prepend: <i className="fal fa-map-marker-alt"></i>,
               append: <i className="fas fa-caret-down"></i>,
-              placeholder: "Enter a location",
               value: formData.location.displayName,
             }}
             dropdown={{
