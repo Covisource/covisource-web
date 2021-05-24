@@ -65,11 +65,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         </span>
 
         {/* Actual Content */}
-        <div className="bg-white rounded-lg inline-flex w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
+        <div className="bg-white rounded-lg inline-flex w-full max-w-xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
           <SideBar />
 
           <div className="w-full">
-            <Header position={position} />
+            <Header position={position} setPosition={setPosition} />
 
             <Positions
               formData={formData}
