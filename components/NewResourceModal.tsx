@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import axios from "axios";
 
-// positions
-import Position1 from "~localComponents/NewResourceModal/Position1";
-import Position2 from "~localComponents/NewResourceModal/Position2";
-import Position3 from "~localComponents/NewResourceModal/Position3";
+// components
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 
-// buttons
-import Button from "~components/Button";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const initialFormData = {
@@ -88,15 +83,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           </div> */}
 
           {/* Positions */}
-          {/* {position === 1 && (
-            <Position1 formData={formData} setFormData={setFormData} />
-          )}
-          {position === 2 && (
-            <Position2 formData={formData} setFormData={setFormData} />
-          )}
-          {position === 3 && (
-            <Position3 formData={formData} setFormData={setFormData} />
-          )} */}
+          
 
           {/* Toggler Buttons */}
           <TogglerButtons
