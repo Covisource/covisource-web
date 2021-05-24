@@ -5,7 +5,6 @@ import axios from "axios";
 // components
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 import Header from "~localComponents/NewResourceModal/Header";
-import SideBar from "~localComponents/NewResourceModal/SideBar";
 import Positions from "~localComponents/NewResourceModal/Positions";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
@@ -66,8 +65,6 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
         {/* Actual Content */}
         <div className="bg-white rounded-lg inline-flex w-full max-w-xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
-          <SideBar />
-
           <div className="w-full">
             <Header position={position} setPosition={setPosition} />
 
