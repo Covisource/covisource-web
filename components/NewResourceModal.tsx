@@ -6,6 +6,7 @@ import axios from "axios";
 import Position1 from "~localComponents/NewResourceModal/Position1";
 import Position2 from "~localComponents/NewResourceModal/Position2";
 import Position3 from "~localComponents/NewResourceModal/Position3";
+import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 
 // buttons
 import Button from "~components/Button";
@@ -40,7 +41,6 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       });
       if (res) {
         // success
-
         setPosition(1);
         setFormData(initialFormData);
         setIsOpen(false);
@@ -68,7 +68,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         {/* Actual Content */}
         <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-gray-300 pb-3">
+          {/* <div className="flex items-center justify-between border-b border-gray-300 pb-3">
             <div>
               <Dialog.Title
                 as="h3"
@@ -85,10 +85,10 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             <div className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center">
               {position} of 3
             </div>
-          </div>
+          </div> */}
 
-          {/* Buttons */}
-          {position === 1 && (
+          {/* Positions */}
+          {/* {position === 1 && (
             <Position1 formData={formData} setFormData={setFormData} />
           )}
           {position === 2 && (
@@ -96,35 +96,14 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           )}
           {position === 3 && (
             <Position3 formData={formData} setFormData={setFormData} />
-          )}
+          )} */}
 
           {/* Toggler Buttons */}
-          <div className="mt-4 w-full flex items-center gap-2 justify-end">
-            {position > 1 && (
-              <Button
-                className="rounded-lg bg-gray-200"
-                onClick={() => setPosition((curr) => curr - 1)}
-              >
-                Previous
-              </Button>
-            )}
-            {position < 3 && (
-              <Button
-                className="ct-bg-accent ct-text-color-3 rounded-lg"
-                onClick={() => setPosition((curr) => curr + 1)}
-              >
-                Next
-              </Button>
-            )}
-            {position === 3 && (
-              <Button
-                className="ct-bg-grad ct-text-color-3 rounded-lg"
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
-            )}
-          </div>
+          <TogglerButtons
+            position={position}
+            setPosition={setPosition}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </Dialog>
