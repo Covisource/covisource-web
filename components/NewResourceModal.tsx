@@ -82,9 +82,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
                 {position === 3 && "Step 3 - Extra Parameters"}
               </span>
             </div>
-            <div
-              className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center"
-            >
+            <div className="text-xs font-bold h-12 w-12 relative border-2 border-gray-900 rounded-full grid place-items-center">
               {position} of 3
             </div>
           </div>

@@ -23,9 +23,18 @@ const Navbar = ({ setIsResourceModalOpen, page }) => {
       {/* Nav Links */}
       <div className="flex items-center gap-5">
         <i className="far fa-search"></i>
+        <i
+          className="far fa-plus cursor-pointer"
+          onClick={() => setIsResourceModalOpen(true)}
+        ></i>
+
         <NavItem title="Home" active={page === "home"} link="/" />
         <NavItem title="Donate" active={page === "donate"} link="/donate" />
-        <NavItem title="Resources" active={page === "resources"} link="/resources" />
+        <NavItem
+          title="Resources"
+          active={page === "resources"}
+          link="/resources"
+        />
         <NavItem title="Connect" active={page === "connect"} link="/connect" />
       </div>
 
