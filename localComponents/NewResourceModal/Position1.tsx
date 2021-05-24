@@ -24,9 +24,11 @@ const Position1 = ({ formData, setFormData }) => {
     <>
       <div className="mt-5 flex flex-col gap-2">
         <Input
-          placeholder="Title"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-text"></i>}
+          placeholder="Enter Resource Title"
+          heading="Title"
+          className="ct-bg-muted p-3 rounded-lg"
+          subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+          prepend={<i className="fas fa-font-case"></i>}
           value={formData.title}
           onChange={(e) =>
             setFormData((cur) => ({
@@ -36,11 +38,13 @@ const Position1 = ({ formData, setFormData }) => {
           }
         />
 
-        <Input
+        {/* <Input
           type="tel"
-          placeholder="Phone"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-phone"></i>}
+          heading="Phone"
+          placeholder="Enter Phone Number"
+          className="ct-bg-muted p-3 rounded-lg"
+          subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+          prepend={<i className="fas fa-phone"></i>}
           value={formData.phone}
           onChange={(e) =>
             setFormData((cur) => ({
@@ -48,13 +52,15 @@ const Position1 = ({ formData, setFormData }) => {
               phone: e.target.value,
             }))
           }
-        />
+        /> */}
 
         <SearchablePopup
           input={{
-            subClassName: "bg-gray-100",
-            prepend: <i className="fal fa-search"></i>,
+            className: "ct-bg-muted p-3 rounded-lg",
+            subClassName: "ct-text-color-1 text-sm font-medium bg-transparent",
             placeholder: "Choose a resource",
+            heading: "Resource",
+            prepend: <i className="fas fa-shapes"></i>,
             value: formData.category,
           }}
           searchHandler={{
@@ -110,17 +116,23 @@ const Position1 = ({ formData, setFormData }) => {
           }}
         />
 
-        <textarea
-          className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
-          placeholder="Description"
-          value={formData.description}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              description: e.target.value,
-            }))
-          }
-        ></textarea>
+        <div className="relative flex ct-bg-muted p-3 rounded-lg">
+          <i className="fas fa-comment-alt-medical pt-2"></i>
+          <div className="flex flex-col gap-1 w-full ml-6">
+            <h1 className="font-bold">Description</h1>
+            <textarea
+              placeholder="Enter A Description"
+              value={formData.description}
+              className="p-0 w-full h-28 font-semibold border-none focus:ring-0 text-sm ct-text-muted ct-placeholder-muted bg-transparent resize-none"
+              onChange={(e) =>
+                setFormData((cur) => ({
+                  ...cur,
+                  description: e.target.value,
+                }))
+              }
+            ></textarea>
+          </div>
+        </div>
       </div>
     </>
   );

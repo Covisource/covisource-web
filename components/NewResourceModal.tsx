@@ -6,6 +6,7 @@ import axios from "axios";
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 import Header from "~localComponents/NewResourceModal/Header";
 import SideBar from "~localComponents/NewResourceModal/SideBar";
+import Positions from "~localComponents/NewResourceModal/Positions";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const initialFormData = {
@@ -70,7 +71,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           <div className="w-full">
             <Header position={position} />
 
-            {/* Positions */}
+            <Positions
+              formData={formData}
+              setFormData={setFormData}
+              position={position}
+            />
 
             <TogglerButtons
               position={position}
