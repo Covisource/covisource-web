@@ -38,22 +38,6 @@ const Position1 = ({ formData, setFormData }) => {
           }
         />
 
-        {/* <Input
-          type="tel"
-          heading="Phone"
-          placeholder="Enter Phone Number"
-          className="ct-bg-muted p-3 rounded-lg"
-          subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
-          prepend={<i className="fas fa-phone"></i>}
-          value={formData.phone}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              phone: e.target.value,
-            }))
-          }
-        /> */}
-
         <SearchablePopup
           input={{
             className: "ct-bg-muted p-3 rounded-lg",
@@ -115,6 +99,39 @@ const Position1 = ({ formData, setFormData }) => {
             },
           }}
         />
+
+        <div className="flex gap-1">
+          <Input
+            type="number"
+            heading="Quantity"
+            placeholder="Enter The Quantity"
+            className="ct-bg-muted p-3 rounded-lg w-1/2"
+            subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+            prepend={<i className="fas fa-tally"></i>}
+            value={formData.quantity}
+            onChange={(e) =>
+              setFormData((cur) => ({
+                ...cur,
+                quantity: e.target.value,
+              }))
+            }
+          />
+          <Input
+            type="number"
+            heading="Price"
+            placeholder="Enter The Price"
+            className="ct-bg-muted p-3 rounded-lg w-1/2"
+            subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+            prepend={<i className="fas fa-rupee-sign"></i>}
+            value={formData.price}
+            onChange={(e) =>
+              setFormData((cur) => ({
+                ...cur,
+                price: e.target.value,
+              }))
+            }
+          />
+        </div>
 
         <div className="relative flex ct-bg-muted p-3 rounded-lg">
           <i className="fas fa-comment-alt-medical pt-2"></i>
