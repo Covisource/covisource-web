@@ -29,13 +29,12 @@ const Position1 = ({ formData, setFormData }) => {
           className="ct-bg-muted p-3 rounded-lg"
           subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
           prepend={<i className="fas fa-font-case"></i>}
-          value={formData.title}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              title: e.target.value,
-            }))
-          }
+          value={formData.positionOne?.title}
+          onChange={(e) => {
+            const newFormData = { ...formData };
+            newFormData.positionOne.title = e.target.value;
+            setFormData(newFormData);
+          }}
         />
 
         <SearchablePopup
@@ -45,7 +44,7 @@ const Position1 = ({ formData, setFormData }) => {
             placeholder: "Choose a resource",
             heading: "Resource",
             prepend: <i className="fas fa-shapes"></i>,
-            value: formData.category,
+            value: formData.positionOne.category,
           }}
           searchHandler={{
             handler: resourceSearchHandler,
@@ -62,11 +61,11 @@ const Position1 = ({ formData, setFormData }) => {
             handler: ({ result, setInputValue, setIsVisible }) => {
               setInputValue(result.heading);
               setIsVisible(false);
-              setFormData((cur) => ({
-                ...cur,
-                category: result._id,
-                extraParameters: result.extraParameters,
-              }));
+
+              const newFormData = { ...formData };
+              newFormData.positionOne.category = result._id;
+              newFormData.positionOne.extraParameters = result.extraParameters;
+              setFormData(newFormData);
             },
           }}
           whenInputEmpty={{
@@ -90,12 +89,13 @@ const Position1 = ({ formData, setFormData }) => {
             }) => {
               setInputValue(component.props.children.props.title);
               setIsVisible(false);
-              setFormData((cur) => ({
-                ...cur,
-                category: component.props.children.props.id.split(
+
+              const newFormData = { ...formData };
+              newFormData.positionOne.category =
+                component.props.children.props.id.split(
                   "newResourceModal_dropdown_resource_"
-                )[1],
-              }));
+                )[1];
+              setFormData(newFormData);
             },
           }}
         />
@@ -108,13 +108,12 @@ const Position1 = ({ formData, setFormData }) => {
             className="ct-bg-muted p-3 rounded-lg w-1/2"
             subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
             prepend={<i className="fas fa-tally"></i>}
-            value={formData.quantity}
-            onChange={(e) =>
-              setFormData((cur) => ({
-                ...cur,
-                quantity: e.target.value,
-              }))
-            }
+            value={formData.positionOne?.quantity}
+            onChange={(e) => {
+              const newFormData = { ...formData };
+              newFormData.positionOne.quantity = e.target.value;
+              setFormData(newFormData);
+            }}
           />
           <Input
             type="number"
@@ -123,13 +122,12 @@ const Position1 = ({ formData, setFormData }) => {
             className="ct-bg-muted p-3 rounded-lg w-1/2"
             subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
             prepend={<i className="fas fa-rupee-sign"></i>}
-            value={formData.price}
-            onChange={(e) =>
-              setFormData((cur) => ({
-                ...cur,
-                price: e.target.value,
-              }))
-            }
+            value={formData.positionOne?.price}
+            onChange={(e) => {
+              const newFormData = { ...formData };
+              newFormData.positionOne.price = e.target.value;
+              setFormData(newFormData);
+            }}
           />
         </div>
 
@@ -139,14 +137,13 @@ const Position1 = ({ formData, setFormData }) => {
             <h1 className="font-bold">Description</h1>
             <textarea
               placeholder="Enter A Description"
-              value={formData.description}
               className="p-0 w-full h-28 font-semibold border-none focus:ring-0 text-sm ct-text-muted ct-placeholder-muted bg-transparent resize-none"
-              onChange={(e) =>
-                setFormData((cur) => ({
-                  ...cur,
-                  description: e.target.value,
-                }))
-              }
+              value={formData.positionOne?.description}
+              onChange={(e) => {
+                const newFormData = { ...formData };
+                newFormData.positionOne.description = e.target.value;
+                setFormData(newFormData);
+              }}
             ></textarea>
           </div>
         </div>

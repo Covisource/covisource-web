@@ -9,18 +9,24 @@ import Positions from "~localComponents/NewResourceModal/Positions";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const initialFormData = {
-    title: "",
-    description: "",
-    phone: "",
-    category: "",
-    location: {
-      coordinates: {
-        lat: "",
-        long: "",
-      },
-      displayName: "",
+    positionOne: {
+      title: "",
+      description: "",
+      phone: "",
+      category: "",
+      price: "",
+      quantity: "",
     },
-    price: "",
+    positionTwo: {
+      location: {
+        coordinates: {
+          lat: "",
+          long: "",
+        },
+        displayName: "",
+      },
+    },
+
     extraParameters: [],
   };
   const [position, setPosition] = useState(1);
@@ -66,7 +72,11 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         {/* Actual Content */}
         <div className="bg-white rounded-lg inline-flex w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
           <div className="w-full">
-            <Header position={position} setPosition={setPosition} setIsOpen={setIsOpen} />
+            <Header
+              position={position}
+              setPosition={setPosition}
+              setIsOpen={setIsOpen}
+            />
 
             <Positions
               formData={formData}

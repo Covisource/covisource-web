@@ -22,8 +22,8 @@ const Position2 = ({ formData, setFormData }) => {
   // mapbox config
 
   const [mapConfig, setMapConfig] = useState({
-    latitude: formData.location.coordinates.lat || 20.5937,
-    longitude: formData.location.coordinates.long || 78.9629,
+    latitude: formData.positionTwo.location.coordinates.lat || 20.5937,
+    longitude: formData.positionTwo.location.coordinates.long || 78.9629,
     zoom: 7,
     width: "full",
     height: "25rem",
@@ -48,7 +48,7 @@ const Position2 = ({ formData, setFormData }) => {
                 "ct-text-color-1 text-sm font-medium bg-transparent",
               prepend: <i className="fal fa-map-marker-alt"></i>,
               append: <i className="fas fa-caret-down"></i>,
-              value: formData.location.displayName,
+              value: formData.positionTwo.location.displayName,
             }}
             dropdown={{
               className: "bg-white mx-3 shadow-xl",
@@ -73,16 +73,14 @@ const Position2 = ({ formData, setFormData }) => {
                   latitude: result.coordinates.lat,
                   longitude: result.coordinates.long,
                 }));
-                setFormData((cur) => ({
-                  ...cur,
-                  location: {
-                    coordinates: {
-                      lat: result.coordinates.lat,
-                      long: result.coordinates.long,
-                    },
-                    displayName: result.heading,
-                  },
-                }));
+
+                const newFormData = { ...formData };
+                newFormData.positionTwo.location.coordinates = {
+                  lat: result.coordinates.lat,
+                  long: result.coordinates.long,
+                };
+                newFormData.positionTwo.location.displayName = result.heading;
+                setFormData(newFormData);
               },
             }}
           />
