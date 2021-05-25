@@ -12,7 +12,6 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     positionOne: {
       title: "",
       description: "",
-      phone: "",
       category: {
         name: "",
         id: "",
@@ -49,24 +48,41 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
   const handleSubmit = async () => {
     validate();
-    // try {
-    //   const res = await axios({
-    //     method: "POST",
-    //     url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
-    //     data: {
-    //       resource: { ...formData },
-    //     },
-    //   });
-    //   if (res) {
-    //     // success
-    //     setPosition(1);
-    //     setFormData(initialFormData);
-    //     setIsOpen(false);
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    //   // handle error
-    // }
+    try {
+      const res = await axios({
+        method: "POST",
+        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
+        data: {
+          resource: {
+            title: formData.positionOne.title,
+            category: formData.positionOne.category.id,
+            description: formData.positionOne.description || "",
+            price: formData.positionOne.price || "",
+            quantity: formData.positionOne.quantity || "",
+            location: {
+              displayName: formData.positionTwo.location.displayName,
+              coordinates: {
+                lat: formData.positionTwo.location.coordinates.lat,
+                long: formData.positionTwo.location.coordinates.long,
+              },
+            },
+            phone: formData.positionThree.phone || "",
+            email: formData.positionThree.email || "",
+            method: formData.positionThree.method,
+            extraParameters: formData.positionFour.extraParameters
+          },
+        },
+      });
+      if (res) {
+        // success
+        setPosition(1);
+        setFormData(initialFormData);
+        setIsOpen(false);
+      }
+    } catch (err) {
+      console.error(err);
+      // handle error
+    }
   };
 
   const validate = () => {
