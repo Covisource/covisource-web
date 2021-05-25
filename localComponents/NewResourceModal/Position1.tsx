@@ -9,8 +9,9 @@ import {
 import SearchablePopup from "~components/SearchablePopup";
 import Input from "~components/Input";
 import { debounce } from "debounce";
+import axios from "axios";
 
-const Position1 = ({ formData, setFormData }) => {
+const Position1 = ({ formData, setFormData, errs }) => {
   const [allResources, setAllResources] = useState([]);
 
   useEffect(() => {
@@ -24,38 +25,35 @@ const Position1 = ({ formData, setFormData }) => {
     <>
       <div className="mt-5 flex flex-col gap-2">
         <Input
-          placeholder="Title"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-text"></i>}
-          value={formData.title}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              title: e.target.value,
-            }))
-          }
+          placeholder="Enter Resource Title"
+          heading="Title"
+          className={`ct-bg-muted p-3 rounded-lg ${
+            Object.keys(errs.positionOne || {}).includes("title") &&
+            "border border-red-500 shadow-md"
+          }`}
+          subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+          prepend={<i className="fas fa-font-case"></i>}
+          value={formData.positionOne?.title}
+          onChange={(e) => {
+            const newFormData = { ...formData };
+            newFormData.positionOne.title = e.target.value;
+            setFormData(newFormData);
+          }}
         />
 
-        <Input
-          type="tel"
-          placeholder="Phone"
-          subClassName="bg-gray-100"
-          prepend={<i className="fal fa-phone"></i>}
-          value={formData.phone}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              phone: e.target.value,
-            }))
-          }
-        />
+        <ErrorText text={errs.positionOne?.title} />
 
         <SearchablePopup
           input={{
-            subClassName: "bg-gray-100",
-            prepend: <i className="fal fa-search"></i>,
+            className: `ct-bg-muted p-3 rounded-lg ${
+              Object.keys(errs.positionOne || {}).includes("category") &&
+              "border border-red-500 shadow-md"
+            }`,
+            subClassName: "ct-text-color-1 text-sm font-medium bg-transparent",
             placeholder: "Choose a resource",
-            value: formData.category,
+            heading: "Resource",
+            prepend: <i className="fas fa-shapes"></i>,
+            value: formData.positionOne.category.name,
           }}
           searchHandler={{
             handler: resourceSearchHandler,
@@ -72,11 +70,12 @@ const Position1 = ({ formData, setFormData }) => {
             handler: ({ result, setInputValue, setIsVisible }) => {
               setInputValue(result.heading);
               setIsVisible(false);
-              setFormData((cur) => ({
-                ...cur,
-                category: result._id,
-                extraParameters: result.extraParameters,
-              }));
+
+              const newFormData = { ...formData };
+              newFormData.positionOne.category.id = result._id;
+              newFormData.positionOne.category.name = result.heading;
+              newFormData.positionFour.extraParameters = result.extraParameters;
+              setFormData(newFormData);
             },
           }}
           whenInputEmpty={{
@@ -93,37 +92,101 @@ const Position1 = ({ formData, setFormData }) => {
                 </div>
               );
             }),
-            componentClickHandler: ({
+            componentClickHandler: async ({
               component,
               setInputValue,
               setIsVisible,
             }) => {
               setInputValue(component.props.children.props.title);
               setIsVisible(false);
-              setFormData((cur) => ({
-                ...cur,
-                category: component.props.children.props.id.split(
+
+              const newFormData = { ...formData };
+
+              newFormData.positionOne.category.name =
+                component.props.children.props.title;
+
+              newFormData.positionOne.category.id =
+                component.props.children.props.id.split(
                   "newResourceModal_dropdown_resource_"
-                )[1],
-              }));
+                )[1];
+
+              // set extra params
+
+              newFormData.positionFour.extraParameters = (
+                await axios.get(
+                  `${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory?q=${component.props.children.props.title}`
+                )
+              ).data.data[0].extraParameters;
+
+              setFormData(newFormData);
             },
           }}
         />
 
-        <textarea
-          className="font-semibold border-none focus:ring-0 text-sm bg-gray-100 h-32 w-full border-0 rounded-lg"
-          placeholder="Description"
-          value={formData.description}
-          onChange={(e) =>
-            setFormData((cur) => ({
-              ...cur,
-              description: e.target.value,
-            }))
-          }
-        ></textarea>
+        <ErrorText text={errs.positionOne?.category} />
+
+        <div className="flex gap-1">
+          <Input
+            type="number"
+            heading="Quantity"
+            placeholder="Enter The Quantity"
+            className="ct-bg-muted p-3 rounded-lg w-1/2"
+            subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+            prepend={<i className="fas fa-tally"></i>}
+            value={formData.positionOne?.quantity}
+            onChange={(e) => {
+              const newFormData = { ...formData };
+              newFormData.positionOne.quantity = e.target.value;
+              setFormData(newFormData);
+            }}
+          />
+          <Input
+            type="number"
+            heading="Price"
+            placeholder="Enter The Price"
+            className="ct-bg-muted p-3 rounded-lg w-1/2"
+            subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+            prepend={<i className="fas fa-rupee-sign"></i>}
+            value={formData.positionOne?.price}
+            onChange={(e) => {
+              const newFormData = { ...formData };
+              newFormData.positionOne.price = e.target.value;
+              setFormData(newFormData);
+            }}
+          />
+        </div>
+
+        <div className="relative flex ct-bg-muted p-3 rounded-lg">
+          <i className="fas fa-comment-alt-medical pt-2"></i>
+          <div className="flex flex-col gap-1 w-full ml-6">
+            <h1 className="font-bold">Description</h1>
+            <textarea
+              placeholder="Enter A Description"
+              className="p-0 w-full h-28 font-semibold border-none focus:ring-0 text-sm ct-text-muted ct-placeholder-muted bg-transparent resize-none"
+              value={formData.positionOne?.description}
+              onChange={(e) => {
+                const newFormData = { ...formData };
+                newFormData.positionOne.description = e.target.value;
+                setFormData(newFormData);
+              }}
+            ></textarea>
+          </div>
+        </div>
       </div>
     </>
   );
+};
+
+const ErrorText = ({ text }) => {
+  if (text) {
+    return (
+      <span className="text-red-500 text-sm font-bold flex items-center gap-2 ml-1">
+        <i className="fas fa-exclamation-triangle"></i>
+        {text || ""}
+      </span>
+    );
+  }
+  return <></>;
 };
 
 export default React.memo(Position1);
