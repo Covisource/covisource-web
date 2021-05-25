@@ -8,6 +8,12 @@ import Header from "~localComponents/NewResourceModal/Header";
 import Positions from "~localComponents/NewResourceModal/Positions";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
+  const phoneRegex = new RegExp(
+    "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
+  );
+  const emailRegex = new RegExp(
+    "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+  );
   const initialFormData = {
     positionOne: {
       title: "",
@@ -69,7 +75,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             phone: formData.positionThree.phone || "",
             email: formData.positionThree.email || "",
             method: formData.positionThree.method,
-            extraParameters: formData.positionFour.extraParameters
+            extraParameters: formData.positionFour.extraParameters,
           },
         },
       });
@@ -92,120 +98,125 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       }
     */
 
-    if (position === 1) {
-      if (!formData.positionOne.title) {
-        const newErrs: any = { ...errs };
-        newErrs.positionOne.title = "Please Fill Out This Field.";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionOne.title;
-        setErrs(newErrs);
-      }
-
-      if (!formData.positionOne.category.id) {
-        const newErrs: any = { ...errs };
-        newErrs.positionOne.category = "Please Fill Out This Field.";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionOne.category;
-        setErrs(newErrs);
-      }
-      // if everything is valid, return true
-      if (Object.keys(errs.positionOne).length === 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (position === 2) {
-      if (
-        !formData.positionTwo.location.coordinates ||
-        !formData.positionTwo.location.displayName
-      ) {
-        const newErrs: any = { ...errs };
-        newErrs.positionTwo.location = "Please Choose A Location";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionTwo.location;
-        setErrs(newErrs);
-      }
-
-      // if everything is valid, return true
-      if (Object.keys(errs.positionTwo).length === 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (position === 3) {
-      if (!formData.positionThree.method) {
-        const newErrs: any = { ...errs };
-        newErrs.positionThree.method = "Please Choose A Method";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionThree.method;
-        setErrs(newErrs);
-      }
-
-      if (
-        formData.positionThree.method === "email" &&
-        !formData.positionThree.email
-      ) {
-        const newErrs: any = { ...errs };
-        newErrs.positionThree.email = "Please Fill Out This Field.";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionThree.email;
-        setErrs(newErrs);
-      }
-
-      if (
-        formData.positionThree.method === "phone" &&
-        !formData.positionThree.phone
-      ) {
-        const newErrs: any = { ...errs };
-        newErrs.positionThree.phone = "Please Fill Out This Field.";
-        setErrs(newErrs);
-      } else {
-        const newErrs: any = { ...errs };
-        delete newErrs.positionThree.phone;
-        setErrs(newErrs);
-      }
-
-      // if everything is valid, return true
-      if (Object.keys(errs.positionThree).length === 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    if (position === 4) {
-      formData.positionFour.extraParameters.map((param) => {
-        if (param.isRequired && !param.value) {
+    switch (position) {
+      case 1:
+        if (!formData.positionOne.title) {
           const newErrs: any = { ...errs };
-          newErrs.positionFour[param.name] = "Please Fill Out This Field.";
+          newErrs.positionOne.title = "Please Fill Out This Field.";
           setErrs(newErrs);
         } else {
           const newErrs: any = { ...errs };
-          delete newErrs.positionFour[param.name];
+          delete newErrs.positionOne.title;
           setErrs(newErrs);
         }
-      });
 
-      // if everything is valid, return true
-      if (Object.keys(errs.positionFour).length === 0) {
-        return true;
-      } else {
-        return false;
-      }
+        if (!formData.positionOne.category.id) {
+          const newErrs: any = { ...errs };
+          newErrs.positionOne.category = "Please Fill Out This Field.";
+          setErrs(newErrs);
+        } else {
+          const newErrs: any = { ...errs };
+          delete newErrs.positionOne.category;
+          setErrs(newErrs);
+        }
+        // if everything is valid, return true
+        if (Object.keys(errs.positionOne).length === 0) {
+          return true;
+        } else {
+          return false;
+        }
+
+      case 2:
+        if (
+          !formData.positionTwo.location.coordinates ||
+          !formData.positionTwo.location.displayName
+        ) {
+          const newErrs: any = { ...errs };
+          newErrs.positionTwo.location = "Please Choose A Location";
+          setErrs(newErrs);
+        } else {
+          const newErrs: any = { ...errs };
+          delete newErrs.positionTwo.location;
+          setErrs(newErrs);
+        }
+
+        // if everything is valid, return true
+        if (Object.keys(errs.positionTwo).length === 0) {
+          return true;
+        } else {
+          return false;
+        }
+      case 3:
+        if (!formData.positionThree.method) {
+          const newErrs: any = { ...errs };
+          newErrs.positionThree.method = "Please Choose A Method";
+          setErrs(newErrs);
+        } else {
+          const newErrs: any = { ...errs };
+          delete newErrs.positionThree.method;
+          setErrs(newErrs);
+        }
+
+        switch (formData.positionThree.method) {
+          case "email":
+            if (!formData.positionThree.email) {
+              const newErrs: any = { ...errs };
+              newErrs.positionThree.email = "Please Fill Out This Field.";
+              setErrs(newErrs);
+            } else {
+              const newErrs: any = { ...errs };
+              delete newErrs.positionThree.email;
+              if (!emailRegex.test(formData.positionThree.email)) {
+                newErrs.positionThree.email = "Invalid Email Address";
+              }
+              setErrs(newErrs);
+            }
+            break;
+
+          case "phone":
+            if (!formData.positionThree.phone) {
+              const newErrs: any = { ...errs };
+              newErrs.positionThree.phone = "Please Fill Out This Field.";
+              setErrs(newErrs);
+            } else {
+              const newErrs: any = { ...errs };
+              delete newErrs.positionThree.phone;
+              if (!phoneRegex.test(formData.positionThree.phone)) {
+                newErrs.positionThree.phone = "Invalid Phone Number";
+              }
+              setErrs(newErrs);
+            }
+            break;
+        }
+
+        if (Object.keys(errs.positionThree).length === 0) {
+          // if everything is valid, return true
+          return true;
+        } else {
+          console.log("false");
+          console.log(errs.positionThree);
+          console.log(formData.positionThree.method);
+          return false;
+        }
+      case 4:
+        formData.positionFour.extraParameters.map((param) => {
+          if (param.isRequired && !param.value) {
+            const newErrs: any = { ...errs };
+            newErrs.positionFour[param.name] = "Please Fill Out This Field.";
+            setErrs(newErrs);
+          } else {
+            const newErrs: any = { ...errs };
+            delete newErrs.positionFour[param.name];
+            setErrs(newErrs);
+          }
+        });
+
+        // if everything is valid, return true
+        if (Object.keys(errs.positionFour).length === 0) {
+          return true;
+        } else {
+          return false;
+        }
     }
   };
 
