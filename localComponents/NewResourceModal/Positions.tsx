@@ -4,6 +4,7 @@ import React from "react";
 import Position1 from "~localComponents/NewResourceModal/Position1";
 import Position2 from "~localComponents/NewResourceModal/Position2";
 import Position3 from "~localComponents/NewResourceModal/Position3";
+import Position4 from "~localComponents/NewResourceModal/Position4";
 
 const Positions = ({ position, formData, setFormData }) => {
   let positionToReturn = <></>;
@@ -19,9 +20,14 @@ const Positions = ({ position, formData, setFormData }) => {
         <Position2 formData={formData} setFormData={setFormData} />
       );
       break;
-    case 2:
+    case 3:
       positionToReturn = (
         <Position3 formData={formData} setFormData={setFormData} />
+      );
+      break;
+    case 4:
+      positionToReturn = (
+        <Position4 formData={formData} setFormData={setFormData} />
       );
       break;
   }
