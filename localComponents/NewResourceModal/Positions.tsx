@@ -17,17 +17,17 @@ const Positions = ({ position, formData, setFormData, errs }) => {
       break;
     case 2:
       positionToReturn = (
-        <Position2 formData={formData} setFormData={setFormData} />
+        <Position2 formData={formData} setFormData={setFormData} errs={errs} />
       );
       break;
     case 3:
       positionToReturn = (
-        <Position3 formData={formData} setFormData={setFormData} />
+        <Position3 formData={formData} setFormData={setFormData} errs={errs} />
       );
       break;
     case 4:
       positionToReturn = (
-        <Position4 formData={formData} setFormData={setFormData} />
+        <Position4 formData={formData} setFormData={setFormData} errs={errs} />
       );
       break;
   }

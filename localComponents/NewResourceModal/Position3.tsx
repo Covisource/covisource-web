@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Input from "~components/Input";
 
-const Position3 = ({ formData, setFormData }) => {
+const Position3 = ({ formData, setFormData, errs }) => {
   const [contactOption, setContactOption] = useState("");
 
   return (

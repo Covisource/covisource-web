@@ -1,6 +1,6 @@
 import Input from "~components/Input";
 
-const Position4 = ({ formData, setFormData }) => {
+const Position4 = ({ formData, setFormData, errs }) => {
   return (
     <>
       <div className="mt-5 flex flex-col gap-2">

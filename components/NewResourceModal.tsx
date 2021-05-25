@@ -94,9 +94,27 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         delete newErrs.positionOne.category;
         setErrs(newErrs);
       }
-
       // if everything is valid, return true
       if (Object.keys(errs.positionOne).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (position === 2) {
+      if (!formData.positionTwo.location.coordinates || !formData.positionTwo.location.displayName) {
+        const newErrs: any = { ...errs };
+        newErrs.positionTwo.location = "Please Choose A Location";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionTwo.location;
+        setErrs(newErrs);
+      }
+
+      // if everything is valid, return true
+      if (Object.keys(errs.positionTwo).length === 0) {
         return true;
       } else {
         return false;

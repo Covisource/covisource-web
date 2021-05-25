@@ -16,7 +16,7 @@ import Input from "~components/Input";
 import { useHereContext } from "~contexts/HereContext";
 import { debounce } from "debounce";
 
-const Position2 = ({ formData, setFormData }) => {
+const Position2 = ({ formData, setFormData, errs }) => {
   const hereToken = useHereContext();
 
   // mapbox config
@@ -37,7 +37,10 @@ const Position2 = ({ formData, setFormData }) => {
           mapboxApiAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
           onViewportChange={(newConfig) => setMapConfig(newConfig)}
           mapStyle="mapbox://styles/fullstackslayer/ckot5udo10j7f17lkzeaf566l"
-          className="rounded-xl"
+          className={`rounded-xl ${
+            Object.keys(errs.positionTwo || {}).includes("location") &&
+            "border-2 border-red-500 shadow-lg"
+          }`}
         >
           <SearchablePopup
             input={{
@@ -85,9 +88,22 @@ const Position2 = ({ formData, setFormData }) => {
             }}
           />
         </ReactMapGl>
+        <ErrorText text={errs.positionTwo?.location} />
       </div>
     </>
   );
+};
+
+const ErrorText = ({ text }) => {
+  if (text) {
+    return (
+      <span className="text-red-500 text-sm font-bold flex items-center gap-2 ml-1">
+        <i className="fas fa-exclamation-triangle"></i>
+        {text || ""}
+      </span>
+    );
+  }
+  return <></>;
 };
 
 export default Position2;
