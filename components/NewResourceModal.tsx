@@ -39,7 +39,12 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   };
   const [position, setPosition] = useState(1);
   const [formData, setFormData] = useState(initialFormData);
-  const [errs, setErrs] = useState({});
+  const [errs, setErrs] = useState({
+    positionOne: {},
+    positionTwo: {},
+    positionThree: {},
+    positionFour: {},
+  });
 
   const handleSubmit = async () => {
     try {
@@ -65,20 +70,37 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const validate = () => {
     /*
       err convention: {
-        errLocation: errCode
+        errLocation: errorMessage
       }
     */
 
     if (position === 1) {
       if (!formData.positionOne.title) {
-        return setErrs((cur) => ({
-          ...cur,
-          title: "blank",
-        }));
+        const newErrs: any = { ...errs };
+        newErrs.positionOne.title = "Please Fill Out This Field.";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionOne.title;
+        setErrs(newErrs);
       }
 
-      // everything is valid
-      return true;
+      if (!formData.positionOne.category.id) {
+        const newErrs: any = { ...errs };
+        newErrs.positionOne.category = "Please Fill Out This Field.";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionOne.category;
+        setErrs(newErrs);
+      }
+
+      // if everything is valid, return true
+      if (Object.keys(errs.positionOne).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 

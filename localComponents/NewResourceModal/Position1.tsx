@@ -12,7 +12,7 @@ import { debounce } from "debounce";
 
 const Position1 = ({ formData, setFormData, errs }) => {
   const [allResources, setAllResources] = useState([]);
-  
+
   useEffect(() => {
     const getResources = async () => {
       setAllResources((await getAllResources()) || []);
@@ -26,7 +26,10 @@ const Position1 = ({ formData, setFormData, errs }) => {
         <Input
           placeholder="Enter Resource Title"
           heading="Title"
-          className="ct-bg-muted p-3 rounded-lg"
+          className={`ct-bg-muted p-3 rounded-lg ${
+            Object.keys(errs.positionOne || {}).includes("title") &&
+            "border border-red-500 shadow-md"
+          }`}
           subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
           prepend={<i className="fas fa-font-case"></i>}
           value={formData.positionOne?.title}
@@ -37,9 +40,14 @@ const Position1 = ({ formData, setFormData, errs }) => {
           }}
         />
 
+        <ErrorText text={errs.positionOne?.title} />
+
         <SearchablePopup
           input={{
-            className: "ct-bg-muted p-3 rounded-lg",
+            className: `ct-bg-muted p-3 rounded-lg ${
+              Object.keys(errs.positionOne || {}).includes("category") &&
+              "border border-red-500 shadow-md"
+            }`,
             subClassName: "ct-text-color-1 text-sm font-medium bg-transparent",
             placeholder: "Choose a resource",
             heading: "Resource",
@@ -104,6 +112,8 @@ const Position1 = ({ formData, setFormData, errs }) => {
           }}
         />
 
+        <ErrorText text={errs.positionOne?.category} />
+
         <div className="flex gap-1">
           <Input
             type="number"
@@ -154,6 +164,18 @@ const Position1 = ({ formData, setFormData, errs }) => {
       </div>
     </>
   );
+};
+
+const ErrorText = ({ text }) => {
+  if (text) {
+    return (
+      <span className="text-red-500 text-sm font-bold flex items-center gap-2 ml-1">
+        <i className="fas fa-exclamation-triangle"></i>
+        {text || ""}
+      </span>
+    );
+  }
+  return <></>;
 };
 
 export default React.memo(Position1);
