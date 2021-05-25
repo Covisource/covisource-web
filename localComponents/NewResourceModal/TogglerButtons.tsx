@@ -4,8 +4,7 @@ import axios from "axios";
 // Components
 import Button from "~components/Button";
 
-const TogglerButtons = ({ position, setPosition, handleSubmit }) => {
-
+const TogglerButtons = ({ position, setPosition, handleSubmit, validate }) => {
   return (
     <div className="mt-4 w-full flex items-center gap-2 justify-end">
       {position > 1 && (
@@ -19,7 +18,12 @@ const TogglerButtons = ({ position, setPosition, handleSubmit }) => {
       {position < 4 && (
         <Button
           className="ct-bg-accent ct-text-inverted px-7 py-4 rounded-md"
-          onClick={() => setPosition((curr) => curr + 1)}
+          onClick={() => {
+            // if the validation function returns true, increment the position
+            if (validate()) {
+              setPosition((curr) => curr + 1);
+            }
+          }}
         >
           Next
         </Button>

@@ -10,9 +10,9 @@ import SearchablePopup from "~components/SearchablePopup";
 import Input from "~components/Input";
 import { debounce } from "debounce";
 
-const Position1 = ({ formData, setFormData }) => {
+const Position1 = ({ formData, setFormData, errs }) => {
   const [allResources, setAllResources] = useState([]);
-
+  
   useEffect(() => {
     const getResources = async () => {
       setAllResources((await getAllResources()) || []);

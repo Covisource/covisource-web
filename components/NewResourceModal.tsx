@@ -39,6 +39,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   };
   const [position, setPosition] = useState(1);
   const [formData, setFormData] = useState(initialFormData);
+  const [errs, setErrs] = useState({});
 
   const handleSubmit = async () => {
     try {
@@ -58,6 +59,26 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     } catch (err) {
       console.error(err);
       // handle error
+    }
+  };
+
+  const validate = () => {
+    /*
+      err convention: {
+        errLocation: errCode
+      }
+    */
+
+    if (position === 1) {
+      if (!formData.positionOne.title) {
+        return setErrs((cur) => ({
+          ...cur,
+          title: "blank",
+        }));
+      }
+
+      // everything is valid
+      return true;
     }
   };
 
@@ -90,12 +111,14 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
               formData={formData}
               setFormData={setFormData}
               position={position}
+              errs={errs}
             />
 
             <TogglerButtons
               position={position}
               setPosition={setPosition}
               handleSubmit={handleSubmit}
+              validate={validate}
             />
           </div>
         </div>
