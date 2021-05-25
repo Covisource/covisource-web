@@ -5,15 +5,18 @@ const Position4 = ({ formData, setFormData }) => {
     <>
       <div className="mt-5 flex flex-col gap-2">
         {formData.positionFour.extraParameters?.map((param) => {
-          const indexInFormData = formData.positionFour.extraParameters.findIndex(
-            (formParam) => formParam.name === param.name
-          );
+          const indexInFormData =
+            formData.positionFour.extraParameters.findIndex(
+              (formParam) => formParam.name === param.name
+            );
 
           return (
             <Input
               type={param.type}
-              placeholder={param.name}
-              subClassName="bg-gray-100"
+              heading={param.name}
+              placeholder={`Enter ${param.name}`}
+              className="ct-bg-muted p-3 rounded-lg"
+              subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
               prepend={<i className={`${param.icon}`}></i>}
               value={
                 formData.positionFour.extraParameters[indexInFormData].value
