@@ -13,7 +13,10 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       title: "",
       description: "",
       phone: "",
-      category: "",
+      category: {
+        name: "",
+        id: "",
+      },
       price: "",
       quantity: "",
     },
@@ -26,8 +29,13 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         displayName: "",
       },
     },
-
-    extraParameters: [],
+    positionThree: {
+      email: "",
+      phone: "",
+    },
+    positionFour: {
+      extraParameters: [],
+    },
   };
   const [position, setPosition] = useState(1);
   const [formData, setFormData] = useState(initialFormData);

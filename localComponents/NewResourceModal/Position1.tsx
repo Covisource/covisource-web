@@ -44,7 +44,7 @@ const Position1 = ({ formData, setFormData }) => {
             placeholder: "Choose a resource",
             heading: "Resource",
             prepend: <i className="fas fa-shapes"></i>,
-            value: formData.positionOne.category,
+            value: formData.positionOne.category.name,
           }}
           searchHandler={{
             handler: resourceSearchHandler,
@@ -63,8 +63,9 @@ const Position1 = ({ formData, setFormData }) => {
               setIsVisible(false);
 
               const newFormData = { ...formData };
-              newFormData.positionOne.category = result._id;
-              newFormData.positionOne.extraParameters = result.extraParameters;
+              newFormData.positionOne.category.id = result._id;
+              newFormData.positionOne.category.name = result.heading;
+              newFormData.positionFour.extraParameters = result.extraParameters;
               setFormData(newFormData);
             },
           }}
@@ -91,10 +92,13 @@ const Position1 = ({ formData, setFormData }) => {
               setIsVisible(false);
 
               const newFormData = { ...formData };
-              newFormData.positionOne.category =
+              newFormData.positionOne.category.id =
                 component.props.children.props.id.split(
                   "newResourceModal_dropdown_resource_"
                 )[1];
+              newFormData.positionOne.category.name =
+                component.props.children.props.title;
+
               setFormData(newFormData);
             },
           }}
