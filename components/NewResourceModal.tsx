@@ -189,7 +189,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
     if (position === 4) {
       formData.positionFour.extraParameters.map((param) => {
-        if (param.required && !param.value) {
+        if (param.isRequired && !param.value) {
           const newErrs: any = { ...errs };
           newErrs.positionFour[param.name] = "Please Fill Out This Field.";
           setErrs(newErrs);

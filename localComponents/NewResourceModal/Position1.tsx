@@ -9,6 +9,7 @@ import {
 import SearchablePopup from "~components/SearchablePopup";
 import Input from "~components/Input";
 import { debounce } from "debounce";
+import axios from "axios";
 
 const Position1 = ({ formData, setFormData, errs }) => {
   const [allResources, setAllResources] = useState([]);
@@ -91,7 +92,7 @@ const Position1 = ({ formData, setFormData, errs }) => {
                 </div>
               );
             }),
-            componentClickHandler: ({
+            componentClickHandler: async ({
               component,
               setInputValue,
               setIsVisible,
@@ -100,12 +101,22 @@ const Position1 = ({ formData, setFormData, errs }) => {
               setIsVisible(false);
 
               const newFormData = { ...formData };
+
+              newFormData.positionOne.category.name =
+                component.props.children.props.title;
+
               newFormData.positionOne.category.id =
                 component.props.children.props.id.split(
                   "newResourceModal_dropdown_resource_"
                 )[1];
-              newFormData.positionOne.category.name =
-                component.props.children.props.title;
+
+              // set extra params
+
+              newFormData.positionFour.extraParameters = (
+                await axios.get(
+                  `${process.env.NEXT_PUBLIC_SERVER_URL}/category/findCategory?q=${component.props.children.props.title}`
+                )
+              ).data.data[0].extraParameters;
 
               setFormData(newFormData);
             },
