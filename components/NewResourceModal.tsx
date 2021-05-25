@@ -30,6 +30,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       },
     },
     positionThree: {
+      method: "",
       email: "",
       phone: "",
     },
@@ -103,7 +104,10 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
     }
 
     if (position === 2) {
-      if (!formData.positionTwo.location.coordinates || !formData.positionTwo.location.displayName) {
+      if (
+        !formData.positionTwo.location.coordinates ||
+        !formData.positionTwo.location.displayName
+      ) {
         const newErrs: any = { ...errs };
         newErrs.positionTwo.location = "Please Choose A Location";
         setErrs(newErrs);
@@ -115,6 +119,51 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
       // if everything is valid, return true
       if (Object.keys(errs.positionTwo).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (position === 3) {
+      if (!formData.positionThree.method) {
+        const newErrs: any = { ...errs };
+        newErrs.positionThree.method = "Please Choose A Method";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionThree.method;
+        setErrs(newErrs);
+      }
+
+      if (
+        formData.positionThree.method === "email" &&
+        !formData.positionThree.email
+      ) {
+        const newErrs: any = { ...errs };
+        newErrs.positionThree.email = "Please Fill Out This Field.";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionThree.email;
+        setErrs(newErrs);
+      }
+
+      if (
+        formData.positionThree.method === "phone" &&
+        !formData.positionThree.phone
+      ) {
+        const newErrs: any = { ...errs };
+        newErrs.positionThree.phone = "Please Fill Out This Field.";
+        setErrs(newErrs);
+      } else {
+        const newErrs: any = { ...errs };
+        delete newErrs.positionThree.phone;
+        setErrs(newErrs);
+      }
+
+      // if everything is valid, return true
+      if (Object.keys(errs.positionThree).length === 0) {
         return true;
       } else {
         return false;
