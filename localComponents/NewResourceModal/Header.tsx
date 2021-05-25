@@ -6,7 +6,10 @@ const Header = ({ position, setPosition, setIsOpen }) => {
       <div className="w-full">
         <div className="flex items-center justify-between w-full">
           <h3 className="text-xl ct-font-mont font-bold">Upload A Resource</h3>
-          <i className="fas fa-times cursor-pointer" onClick={() => setIsOpen(false)}></i>
+          <i
+            className="fas fa-times cursor-pointer"
+            onClick={() => setIsOpen(false)}
+          ></i>
         </div>
         <div className="flex flex-row space-x-4 pt-4 pb-4">
           <PositionButton
@@ -45,9 +48,9 @@ const Header = ({ position, setPosition, setIsOpen }) => {
 const PositionButton = ({ pos, currentPos, setCurrentPos }) => {
   return (
     <button
-      className={`w-10 h-10 rounded-full focus:outline-none focus:ring-1 focus:ring-gray-900 ${
-        currentPos > pos ? "far fa-check" : ""
-      }`}
+      className={`w-10 h-10 rounded-full focus:outline-none ${currentPos > pos && "focus:ring-1 focus:ring-gray-900"} ${
+        currentPos > pos && "far fa-check"
+      } ${currentPos < pos && "cursor-not-allowed"}`}
       style={{
         backgroundColor:
           currentPos < pos
@@ -58,7 +61,9 @@ const PositionButton = ({ pos, currentPos, setCurrentPos }) => {
 
         color: currentPos < pos ? "#5c5c5c" : "white",
       }}
-      onClick={() => setCurrentPos(pos)}
+      onClick={() => {
+        currentPos > pos && setCurrentPos(pos);
+      }}
     >
       {currentPos <= pos ? pos : ""}
     </button>
