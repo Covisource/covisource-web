@@ -48,24 +48,25 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   });
 
   const handleSubmit = async () => {
-    try {
-      const res = await axios({
-        method: "POST",
-        url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
-        data: {
-          resource: { ...formData },
-        },
-      });
-      if (res) {
-        // success
-        setPosition(1);
-        setFormData(initialFormData);
-        setIsOpen(false);
-      }
-    } catch (err) {
-      console.error(err);
-      // handle error
-    }
+    validate();
+    // try {
+    //   const res = await axios({
+    //     method: "POST",
+    //     url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
+    //     data: {
+    //       resource: { ...formData },
+    //     },
+    //   });
+    //   if (res) {
+    //     // success
+    //     setPosition(1);
+    //     setFormData(initialFormData);
+    //     setIsOpen(false);
+    //   }
+    // } catch (err) {
+    //   console.error(err);
+    //   // handle error
+    // }
   };
 
   const validate = () => {
@@ -164,6 +165,27 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
 
       // if everything is valid, return true
       if (Object.keys(errs.positionThree).length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (position === 4) {
+      formData.positionFour.extraParameters.map((param) => {
+        if (param.required && !param.value) {
+          const newErrs: any = { ...errs };
+          newErrs.positionFour[param.name] = "Please Fill Out This Field.";
+          setErrs(newErrs);
+        } else {
+          const newErrs: any = { ...errs };
+          delete newErrs.positionFour[param.name];
+          setErrs(newErrs);
+        }
+      });
+
+      // if everything is valid, return true
+      if (Object.keys(errs.positionFour).length === 0) {
         return true;
       } else {
         return false;
