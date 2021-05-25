@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/63039748/119088678-19d15f80-ba1a-11eb-9edf-c7410f273ef4.png" />
+  <img src="https://github.com/Covisource/covisource/raw/master/assets/covisource.png?raw=true" />
 </p>
 
 <h1 align="center">CoviSource</h1>

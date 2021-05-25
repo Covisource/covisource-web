@@ -1,7 +1,8 @@
 import Layout from "~hoc/Layout";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "~localComponents/Home/SearchBar";
 import TextLoop from "react-text-loop";
+import MetaData from "partials/MetaData";
 
 export default function Home() {
   const changingWords = [
@@ -17,8 +18,19 @@ export default function Home() {
     "Vaccines",
   ];
 
+  const [url, setUrl] = useState(undefined);
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
+
   return (
     <Layout page="home">
+      <MetaData
+        title="CoviSource"
+        description="Meet CoviSource - The #1 platform to manage all your needs for the virus."
+        keywords="CoviSource, Covid Support, Covid Resources, Coronavirus, Coronavirus Resources, Healthcare"
+        url={url}
+      />
       <div className="flex flex-col items-center h-full pt-28 relative">
         {/* Heading */}
         <div className="text-center mb-7">
