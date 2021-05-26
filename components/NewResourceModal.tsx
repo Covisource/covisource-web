@@ -59,6 +59,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const handleSubmit = async () => {
     validate();
     try {
+      const headers = {}
       const res = await axios({
         method: "POST",
         url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
@@ -83,7 +84,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
           },
         },
         headers: {
-          Authorization: user.jwt ? `token ${user.jwt}` : "",
+          Authorization: user?.jwt ? `token ${user.jwt}` : "",
         },
       });
       if (res) {
