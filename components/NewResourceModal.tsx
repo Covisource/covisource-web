@@ -6,8 +6,12 @@ import axios from "axios";
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 import Header from "~localComponents/NewResourceModal/Header";
 import Positions from "~localComponents/NewResourceModal/Positions";
+import { useSession } from "next-auth/client";
+import SessionSchema from "~schema/SessionSchema";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
+  const user: SessionSchema = useSession()[0] as any;
+
   const phoneRegex = new RegExp(
     "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
   );
@@ -77,6 +81,9 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             method: formData.positionThree.method,
             extraParameters: formData.positionFour.extraParameters,
           },
+        },
+        headers: {
+          Authorization: user.jwt ? `token ${user.jwt}` : "",
         },
       });
       if (res) {

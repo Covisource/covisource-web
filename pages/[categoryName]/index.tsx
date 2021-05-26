@@ -45,18 +45,12 @@ const index = ({ categoryName }) => {
   return (
     <Layout page="resources">
       <div className="flex justify-center h-full">
-        {/* sidebar */}
-        <div
-          className="h-full w-72 hidden lg:block"
-          style={{
-            borderRight: "1px solid #F3F3F4",
-          }}
-        ></div>
-
         {/* main */}
 
         <div className="flex flex-col gap-4 h-full p-5 w-full lg:w-160">
-          <h1 className="text-lg font-bold">{resources.length} Results Found</h1>
+          <h1 className="text-lg font-bold">
+            {resources.length} Results Found
+          </h1>
           {resources.map((resource, index) => {
             return (
               <Resource
@@ -72,14 +66,6 @@ const index = ({ categoryName }) => {
             );
           })}
         </div>
-
-        {/* ad bar */}
-        <div
-          className="h-full w-72 hidden lg:block"
-          style={{
-            borderLeft: "1px solid #F3F3F4",
-          }}
-        ></div>
       </div>
     </Layout>
   );
