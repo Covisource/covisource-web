@@ -19,8 +19,12 @@ const Resource = ({ title, locationName, description }) => {
 
       {/* Footer */}
       <div className="flex gap-2 absolute bottom-3 right-3">
-        <span className="ct-text-color-1 font-mont font-semibold text-sm">Call Vendor</span>
-        <span className="text-purple-500 font-mont font-semibold text-sm">Open</span>
+        <span className="ct-text-color-1 font-mont font-semibold text-sm">
+          Call Vendor
+        </span>
+        <span className="text-purple-500 font-mont font-semibold text-sm">
+          Open
+        </span>
       </div>
     </div>
   );

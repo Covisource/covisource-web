@@ -44,19 +44,37 @@ const index = ({ categoryName }) => {
   }, []);
   return (
     <Layout page="resources">
-      <div className="flex h-full">
-        {/* {resources.map((resource, index) => {
-          return <Resource key={index} title={resource.title} locationName={resource.location.displayName} description={resource.description} />;
-        })} */}
-
+      <div className="flex justify-center h-full">
         {/* sidebar */}
-        <div className="h-full w-1/5 hidden md:block"></div>
+        <div
+          className="h-full w-72 hidden lg:block"
+          style={{
+            borderRight: "1px solid #F3F3F4",
+          }}
+        ></div>
 
         {/* main */}
-        <div className="h-full w-3/5 ct-bg-muted"></div>
 
-        {/* ads */}
-        <div className="h-full w-1/5 hidden md:block"></div>
+        <div className="flex flex-col gap-4 h-full p-5 w-full lg:w-160">
+          {resources.map((resource, index) => {
+            return (
+              <Resource
+                key={index}
+                title={resource.title}
+                locationName={resource.location.displayName}
+                description={resource.description}
+              />
+            );
+          })}
+        </div>
+
+        {/* ad bar */}
+        <div
+          className="h-full w-72 hidden lg:block"
+          style={{
+            borderLeft: "1px solid #F3F3F4",
+          }}
+        ></div>
       </div>
     </Layout>
   );
