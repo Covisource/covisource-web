@@ -44,10 +44,19 @@ const index = ({ categoryName }) => {
   }, []);
   return (
     <Layout page="resources">
-      <div className="flex justify-center flex-wrap gap-2 mt-3">
-        {resources.map((resource, index) => {
+      <div className="flex h-full">
+        {/* {resources.map((resource, index) => {
           return <Resource key={index} title={resource.title} locationName={resource.location.displayName} description={resource.description} />;
-        })}
+        })} */}
+
+        {/* sidebar */}
+        <div className="h-full w-1/5 hidden md:block"></div>
+
+        {/* main */}
+        <div className="h-full w-3/5 ct-bg-muted"></div>
+
+        {/* ads */}
+        <div className="h-full w-1/5 hidden md:block"></div>
       </div>
     </Layout>
   );
