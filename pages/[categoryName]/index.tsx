@@ -56,6 +56,7 @@ const index = ({ categoryName }) => {
         {/* main */}
 
         <div className="flex flex-col gap-4 h-full p-5 w-full lg:w-160">
+          <h1 className="text-lg font-bold">{resources.length} Results Found</h1>
           {resources.map((resource, index) => {
             return (
               <Resource
@@ -63,6 +64,10 @@ const index = ({ categoryName }) => {
                 title={resource.title}
                 locationName={resource.location.displayName}
                 description={resource.description}
+                price={resource.price || 0}
+                qty={resource.quantity}
+                extraParameters={resource.extraParameters}
+                creator={resource.creator}
               />
             );
           })}
