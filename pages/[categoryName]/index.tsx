@@ -44,10 +44,30 @@ const index = ({ categoryName }) => {
   }, []);
   return (
     <Layout page="resources">
-      <div className="flex justify-center flex-wrap gap-2 mt-3">
-        {resources.map((resource, index) => {
-          return <Resource key={index} title={resource.title} locationName={resource.location.displayName} description={resource.description} />;
-        })}
+      <div className="flex justify-center h-full">
+        {/* main */}
+
+        <div className="h-full p-5 w-full lg:w-160">
+          <h1 className="text-lg font-bold mb-3">
+            {resources.length} Results Found
+          </h1>
+          <div className="flex flex-wrap gap-1">
+            {resources.map((resource, index) => {
+              return (
+                <Resource
+                  key={index}
+                  title={resource.title}
+                  locationName={resource.location.displayName}
+                  description={resource.description}
+                  price={resource.price || 0}
+                  qty={resource.quantity}
+                  extraParameters={resource.extraParameters}
+                  creator={resource.creator}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     </Layout>
   );
