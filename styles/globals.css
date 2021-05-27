@@ -78,12 +78,5 @@
 ::placeholder {
   color: #333a46;
 }
-@media only screen and (max-width: 850px) {
-  .resptext-6xl{
-    font-size: 2em !important;
-  }
-  .resptext-4xl {
-    font-size: 1.5em !important;
-  }
-}
+
 @tailwind utilities;

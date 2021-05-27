@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // components
 import Button from "~components/Button";
 import NavItem from "./NavItem";
-import Link from "next/link";
+
 // session
 import { useSession } from "next-auth/client";
 
@@ -15,6 +15,7 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
   const toggleMenu = () => {
     const menu = document.getElementById("menu");
     const menuicon = document.getElementById("icon");
+
     if (menuicon.classList.contains("fa-bars")) {
       menuicon.classList.remove("fa-bars");
       menuicon.classList.add("fa-times");
@@ -32,26 +33,22 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
     >
       <div className="hamburgermenu">
         <div className="icon">
-          <i className="fas fa-bars" id="icon" onClick={() => toggleMenu()}></i>
+          <i
+            className="fas fa-bars cursor-pointer"
+            id="icon"
+            onClick={() => toggleMenu()}
+          ></i>
         </div>
         <div>
           <div className="menu close" id="menu">
             <div className="content">
               <NavItem title="Home" active={page === "home"} link="/" />
               <NavItem
-                title="Donate"
-                active={page === "donate"}
-                link="/donate"
-              />
-              <NavItem
-                title="Resources"
-                active={page === "resources"}
-                link="/resources"
-              />
-              <NavItem
-                title="Connect"
-                active={page === "connect"}
-                link="/connect"
+                title="Add Resource"
+                onClick={() => {
+                  setIsResourceModalOpen(true);
+                  toggleMenu();
+                }}
               />
             </div>
           </div>
