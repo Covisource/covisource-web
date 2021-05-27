@@ -21,7 +21,7 @@ const Resource = ({
               {title}
             </h1>
             <span className="ct-text-primary text-xs font-semi">
-              {creator.userId
+              {creator?.userId
                 ? `Posted By ${creator.userId.name}`
                 : "Posted By Anonymous User"}
             </span>
