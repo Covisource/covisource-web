@@ -12,7 +12,7 @@ import { useSession } from "next-auth/client";
 // schema
 import SessionSchema from "~schema/SessionSchema";
 
-const Navbar = ({ setIsResourceModalOpen, page }) => {
+const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
   const user: SessionSchema = useSession()[0] as any;
 
   return (
@@ -59,7 +59,12 @@ const Navbar = ({ setIsResourceModalOpen, page }) => {
 
         {/* Auth Section */}
         <div>
-          <Button className="ct-bg-dark ct-text-inverted">Login</Button>
+          <Button
+            className="ct-bg-dark ct-text-inverted"
+            onClick={() => setIsLoginModalOpen(true)}
+          >
+            Login
+          </Button>
         </div>
       </div>
     </div>

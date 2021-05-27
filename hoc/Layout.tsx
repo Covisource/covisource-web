@@ -4,14 +4,16 @@ import React, { useState } from "react";
 
 import Navbar from "~components/Navbar";
 import NewResourceModal from "~components/NewResourceModal";
+import LoginModal from "~components/LoginModal";
 
 const Layout = ({ children, page }) => {
   let [isResourceModalOpen, setIsResourceModalOpen] = useState(false);
+  let [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   return (
     <>
       <div className="h-screen">
-        <Navbar setIsResourceModalOpen={setIsResourceModalOpen} page={page} />
+        <Navbar setIsResourceModalOpen={setIsResourceModalOpen} setIsLoginModalOpen={setIsLoginModalOpen} page={page} />
         
         <div
           className="overflow-auto"
@@ -25,6 +27,10 @@ const Layout = ({ children, page }) => {
       <NewResourceModal
         isOpen={isResourceModalOpen}
         setIsOpen={setIsResourceModalOpen}
+      />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        setIsOpen={setIsLoginModalOpen}
       />
     </>
   );
