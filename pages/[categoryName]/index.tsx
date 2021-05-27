@@ -49,7 +49,10 @@ const index = ({ categoryName }) => {
 
         <div className="h-full p-5 w-full lg:w-160">
           <h1 className="text-lg font-bold mb-3">
-            {resources.length} Results Found
+            {resources.length} Results Found For{" "}
+            {(categoryName as string).charAt(0).toUpperCase() +
+              (categoryName as string).slice(1)}{" "}
+            Near You
           </h1>
           <div className="flex flex-wrap gap-1">
             {resources.map((resource, index) => {
