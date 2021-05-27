@@ -1,3 +1,4 @@
+import { Popover } from "@headlessui/react";
 import React from "react";
 import Button from "~components/Button";
 
@@ -9,62 +10,98 @@ const Resource = ({
   qty,
   creator,
   extraParameters,
+  phone,
+  email,
 }) => {
   return (
-    <div className="p-5 shadow-md rounded-lg w-full h-48 mb-5">
-      <div className="w-2/3 h-full relative">
+    <div className="relative rounded-lg w-full mb-6 ct-bg-muted">
+      <div
+        className="rounded-lg p-5 bg-white"
+        style={{ boxShadow: "0px 4px 25px 1px #0000000D" }}
+      >
         {/* Header */}
-        <div className="flex flex-col gap-2 mb-3">
-          <div className="flex items-center gap-1">
-            <h1 className="font-semibold font-mont text-lg truncate">
-              {title}
-            </h1>
-            <span className="ct-text-primary text-xs font-semi">
-              {creator?.userId
-                ? `Posted By ${creator.userId.name}`
-                : "Posted By Anonymous User"}
+        <div className="flex justify-between items-end mb-3 relative">
+          <div className="font-extrabold flex items-center gap-2 text-xl truncate">
+            <span className="font-extrabold ct-text-accent">{qty || 1}x</span>
+            <h1 className="truncate">{title}</h1>
+            <span className="flex items-center gap-1 text-sm font-semibold text-gray-700 mt-1 truncate">
+              <span className="font-medium">in</span> {locationName}
             </span>
-          </div>
-
-          <div className="flex items-center gap-3 font-mont text-xs">
-            {/* Positive Feedback */}
-            <span className="flex items-center text-green-400 gap-1 font-semibold">
-              <i className="fas fa-thumbs-up"></i>
-              98%
-            </span>
-            <span className="flex items-center text-pink-500 gap-1 font-semibold">
-              <i className="fas fa-thumbs-down"></i>
-              2%
-            </span>
-            <span className="flex items-center gap-1 truncate font-semibold ">
-              <span className="font-bold">Price: </span>
-              <span className="font-bold">{price}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <span className="font-bold">Qty: </span>
-              <span className="font-bold">{qty || 1}</span>
-            </span>
-            {extraParameters.map((param, index) => {
-              return param.value ? (
-                <span className="flex items-center gap-1" key={index}>
-                  <span className="font-bold">{param.name}: </span>
-                  <span className="font-bold">{param.value}</span>
-                </span>
-              ) : (
-                ""
-              );
-            })}
           </div>
         </div>
 
         {/* Description */}
-        <p className="h-1/3 truncate font-mont text-xs ct-text-muted">
+        <p className="h-11 overflow-hidden w-4/5 font-semibold text-sm ct-text-muted mb-5">
           {description || "No Description Provided..."}
         </p>
+
+        {/* Sub Footer */}
+        <div className="flex items-center justify-between">
+          <Button className="rounded-lg ct-bg-accent ct-text-inverted font-semibold">
+            Open
+          </Button>
+          <span className="flex items-center gap-2 font-extrabold text-sm">
+            {phone && (
+              <>
+                <i className="fas fa-phone-alt"></i>
+                <span className="font-extrabold text-sm">{phone}</span>
+              </>
+            )}
+            {email && (
+              <>
+                <i className="fas fa-envelope-open"></i>
+                <span className="font-extrabold text-sm">{email}</span>
+              </>
+            )}
+          </span>
+        </div>
       </div>
-      <div className="w-1/3"></div>
+
+      {/* Footer */}
+      <div className="p-4 flex justify-between items-center">
+        <div className="flex items-baseline gap-2">
+          <span
+            className="flex items-center gap-1 font-semibold text-gray-700"
+            style={{ fontSize: "17px" }}
+          >
+            <i className="far fa-rupee-sign"></i>
+            {price}
+          </span>
+          {/* {extraParameters.map((param, index) => {
+            return param.value ? (
+              <span
+                className="flex items-center gap-1 text-sm text-gray-700"
+                key={index}
+              >
+                <span className="font-bold">{param.name}:</span> {param.value}
+              </span>
+            ) : (
+              ""
+            );
+          })} */}
+        </div>
+        <div className="flex items-center gap-2 truncate">
+          <h2 className="text-sm">
+            <span className="font-extrabold">Posted By</span>{" "}
+            <span className="truncate">
+              {creator?.userId ? creator.userId.name : "Anonymous User"}
+            </span>
+          </h2>
+          <div className="hidden sm:grid place-items-center h-8 w-8 bg-gray-200 rounded-full">
+            <i className="far fa-user"></i>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Resource;
+
+{
+  /* <span className="ct-text-primary text-xs font-semi">
+          {creator?.userId
+            ? `Posted By ${creator.userId.name}`
+            : "Posted By Anonymous User"}
+        </span> */
+}
