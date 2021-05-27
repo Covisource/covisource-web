@@ -14,7 +14,7 @@ const Button = (props: Props) => {
     return (
       <Link href={props.href}>
         <button
-          className={`flex justify-center items-center py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
+          className={`flex justify-center items-center py-3 px-4 cursor-pointer select-none rounded-md focus:outline-none focus:ring-1 ${props.className}`}
           disabled={props.disabled}
         >
           {props.children}
@@ -24,7 +24,7 @@ const Button = (props: Props) => {
   } else {
     return (
       <button
-        className={`inline-flex py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
+        className={`inline-flex py-3 px-4 cursor-pointer select-none rounded-md focus:outline-none focus:ring-1 ${props.className}`}
         onClick={props.onClick}
         disabled={props.disabled}
       >
