@@ -1,0 +1,69 @@
+.hamburgermenu {
+  display: none;
+  position: relative;
+}
+@media only screen and (max-width: 850px) {
+  .hamburgermenu {
+    display: block;
+  }
+
+  .hamburgermenu .close {
+    display: none !important;
+  }
+
+  .hamburgermenu .menu {
+    height: 100vh;
+    width: 0vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255);
+    overflow-y: hidden;
+    animation: slideleft 1s 0.1s ease-out forwards;
+  }
+
+  @keyframes slideleft {
+    to {
+      background-color: rgba(255, 255, 255);
+      width: 100vw;
+      position: fixed;
+    }
+  }
+
+  .hamburgermenu .icon .check {
+    position: fixed;
+    z-index: 2;
+  }
+  .hamburgermenu .menu .content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hamburgermenu .menu .content a {
+    padding: 8px;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 2em;
+    color: #080b3d;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .nav {
+    display: none;
+  }
+}
+@-webkit-keyframes move {
+  0% {
+    -webkit-transform: translateY(20px);
+  }
+  100% {
+    -webkit-transform: translateY(500px);
+  }
+}

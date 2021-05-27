@@ -33,33 +33,35 @@ export default function Home() {
       />
       <div className="flex flex-col items-center h-full pt-28 relative">
         {/* Heading */}
-        <div className="text-center mb-7">
-          <span className="ct-font-mont font-bold text-6xl">Find </span>
+        <div className="text-center mb-7 ">
+          <span className="ct-font-mont font-bold text-5xl md:text-6xl">
+            Find{" "}
+          </span>
           <TextLoop>
             {changingWords.map((word, index) => (
               <span
                 key={index}
-                className="ct-text-grad ct-font-mont font-bold text-6xl"
+                className="ct-text-grad ct-font-mont font-bold text-5xl md:text-6xl"
               >
                 {word}
               </span>
             ))}
           </TextLoop>{" "}
-          <span className="ct-font-mont font-bold text-6xl">
-            <br /> From Anywhere In India.
+          <span className="ct-font-mont font-bold text-5xl md:text-6xl">
+            <br /> Anywhere In India.
           </span>
         </div>
 
         {/* Description */}
         <p className="ct-text-muted text-center text-xl font-semibold mb-10">
-          The Number One platform for all your needs to fight the virus.
+          The #1 platform to manage all your needs to fight the virus.
         </p>
 
         {/* Search Bar */}
         <SearchBar />
 
         {/* Scroll Indicator */}
-        <i className="far fa-arrow-down ct-text-main text-2xl absolute bottom-3 animate-bounce"></i>
+        {/* <i className="far fa-arrow-down ct-text-main text-2xl absolute bottom-3 animate-bounce"></i> */}
       </div>
     </Layout>
   );

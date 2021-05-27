@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;800&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,27 +16,31 @@
 }
 
 .ct-bg-muted {
-  background-color: #F1F3F6;
+  background-color: #f1f3f6;
 }
 
 .ct-bg-dark {
-  background-color: #080B3D;
+  background-color: #080b3d;
 }
 
 .ct-bg-accent {
-  background-color: #4563CB;
+  background-color: #4563cb;
 }
 
 .ct-text-main {
-  color: #080B3D;
+  color: #080b3d;
 }
 
 .ct-text-muted {
   color: #838383;
 }
 
+.ct-text-accent {
+  color: #4563cb;
+}
+
 .ct-text-inverted {
-  color: #FBFBFB;
+  color: #fbfbfb;
 }
 
 .ct-placeholder-muted::placeholder {
@@ -48,11 +52,11 @@
 }
 
 .ct-bg-grad {
-  background: linear-gradient(180deg, #00ADFF, #4563CB);
+  background: linear-gradient(180deg, #00adff, #4563cb);
 }
 
 .ct-text-grad {
-  background: linear-gradient(180deg, #00ADFF, #4563CB);
+  background: linear-gradient(180deg, #00adff, #4563cb);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

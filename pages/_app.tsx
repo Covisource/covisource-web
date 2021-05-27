@@ -1,5 +1,6 @@
 import React from "react";
 import "~styles/globals.css";
+import "~styles/Navbar.css"
 import { Provider } from "next-auth/client";
 import { HereContextProvider } from "~contexts/HereContext";
 

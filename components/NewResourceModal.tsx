@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import axios from "axios";
+import { useSession } from "next-auth/client";
+
+// schemas
+import SessionSchema from "~schema/SessionSchema";
 
 // components
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
@@ -8,6 +12,8 @@ import Header from "~localComponents/NewResourceModal/Header";
 import Positions from "~localComponents/NewResourceModal/Positions";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
+  const user: SessionSchema = useSession()[0] as any;
+
   const phoneRegex = new RegExp(
     "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$"
   );
@@ -43,6 +49,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       extraParameters: [],
     },
   };
+
   const [position, setPosition] = useState(1);
   const [formData, setFormData] = useState(initialFormData);
   const [errs, setErrs] = useState({
@@ -77,6 +84,9 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
             method: formData.positionThree.method,
             extraParameters: formData.positionFour.extraParameters,
           },
+        },
+        headers: {
+          Authorization: user?.jwt ? `token ${user.jwt}` : "",
         },
       });
       if (res) {
@@ -237,7 +247,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         </span>
 
         {/* Actual Content */}
-        <div className="bg-white rounded-lg inline-flex w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
+        <div className="bg-white rounded-lg inline-flex h-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
           <div className="w-full">
             <Header
               position={position}
