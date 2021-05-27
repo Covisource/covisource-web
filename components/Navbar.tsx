@@ -24,7 +24,6 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
     }
     menuicon.classList.toggle("check");
     menu.classList.toggle("close");
-    
   };
   return (
     <div
@@ -33,12 +32,7 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
     >
       <div className="hamburgermenu">
         <div className="icon">
-            <i
-              className="fas fa-bars"
-              id="icon"
-              onClick={() => toggleMenu()}
-            ></i>
-
+          <i className="fas fa-bars" id="icon" onClick={() => toggleMenu()}></i>
         </div>
         <div>
           <div className="menu close" id="menu">
@@ -103,12 +97,16 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
 
         {/* Auth Section */}
         <div>
-          <Button
-            className="ct-bg-dark ct-text-inverted"
-            onClick={() => setIsLoginModalOpen(true)}
-          >
-            Login
-          </Button>
+          {user ? (
+            <img src={user.picture} alt="" className="h-11 w-11 rounded-full" />
+          ) : (
+            <Button
+              className="ct-bg-dark ct-text-inverted"
+              onClick={() => setIsLoginModalOpen(true)}
+            >
+              Login
+            </Button>
+          )}
         </div>
       </div>
     </div>
