@@ -66,6 +66,8 @@ const index = ({ categoryName }) => {
                   qty={resource.quantity}
                   extraParameters={resource.extraParameters}
                   creator={resource.creator}
+                  phone={resource.phone}
+                  email={resource.email}
                 />
               );
             })}

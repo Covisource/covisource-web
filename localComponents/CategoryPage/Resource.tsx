@@ -1,3 +1,4 @@
+import { Popover } from "@headlessui/react";
 import React from "react";
 import Button from "~components/Button";
 
@@ -9,6 +10,8 @@ const Resource = ({
   qty,
   creator,
   extraParameters,
+  phone,
+  email,
 }) => {
   return (
     <div className="relative rounded-lg w-full mb-6 ct-bg-muted">
@@ -28,20 +31,29 @@ const Resource = ({
         </div>
 
         {/* Description */}
-        <p className="h-1/3 font-semibold text-sm ct-text-muted mb-5">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-          repudiandae, facere minima labore dolorem quibusdam maxime veritatis
-          nobis, dolorum voluptatem ut ducimus amet id...
+        <p className="h-11 overflow-hidden w-4/5 font-semibold text-sm ct-text-muted mb-5">
+          {description || "No Description Provided..."}
         </p>
 
         {/* Sub Footer */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-between">
           <Button className="rounded-lg ct-bg-accent ct-text-inverted font-semibold">
             Open
           </Button>
-          <Button className="rounded-lg ct-text-accent font-semibold">
-            Contact Dealer
-          </Button>
+          <span className="flex items-center gap-2 font-extrabold text-sm">
+            {phone && (
+              <>
+                <i className="fas fa-phone-alt"></i>
+                <span className="font-extrabold text-sm">{phone}</span>
+              </>
+            )}
+            {email && (
+              <>
+                <i className="fas fa-envelope-open"></i>
+                <span className="font-extrabold text-sm">{email}</span>
+              </>
+            )}
+          </span>
         </div>
       </div>
 
@@ -68,7 +80,17 @@ const Resource = ({
             );
           })} */}
         </div>
-        <div className=""></div>
+        <div className="flex items-center gap-2 truncate">
+          <h2 className="text-sm">
+            <span className="font-extrabold">Posted By</span>{" "}
+            <span className="truncate">
+              {creator?.userId ? creator.userId.name : "Anonymous User"}
+            </span>
+          </h2>
+          <div className="hidden sm:grid place-items-center h-8 w-8 bg-gray-200 rounded-full">
+            <i className="far fa-user"></i>
+          </div>
+        </div>
       </div>
     </div>
   );
