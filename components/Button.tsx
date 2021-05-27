@@ -14,7 +14,7 @@ const Button = (props: Props) => {
     return (
       <Link href={props.href}>
         <button
-          className={`grid place-items-center py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
+          className={`flex justify-center items-center py-3 px-4 cursor-pointer select-none rounded-md ${props.className}`}
           disabled={props.disabled}
         >
           {props.children}
