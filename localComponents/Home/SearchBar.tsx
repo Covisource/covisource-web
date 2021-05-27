@@ -32,7 +32,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className="relative hidden md:flex items-center ct-shadow transition-all mb-10 bg-white rounded-xl md:w-144 lg:w-160 h-18"
+      className="relative hidden md:flex sm:flex items-center ct-shadow transition-all mb-10 bg-white rounded-xl sm:w-35 md:w-144 lg:w-160 h-18"
       id="searchbar_home"
     >
       <SearchablePopup
