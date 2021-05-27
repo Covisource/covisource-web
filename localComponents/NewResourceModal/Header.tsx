@@ -48,9 +48,11 @@ const Header = ({ position, setPosition, setIsOpen }) => {
 const PositionButton = ({ pos, currentPos, setCurrentPos }) => {
   return (
     <button
-      className={`w-10 h-10 rounded-full focus:outline-none ${currentPos > pos && "focus:ring-1 focus:ring-gray-900"} ${
-        currentPos > pos && "far fa-check"
-      } ${currentPos < pos && "cursor-not-allowed"}`}
+      className={`w-10 h-10 rounded-full focus:outline-none ${
+        currentPos > pos && "focus:ring-1 focus:ring-gray-900"
+      } ${currentPos > pos && "far fa-check"} ${
+        currentPos < pos && "cursor-not-allowed"
+      }`}
       style={{
         backgroundColor:
           currentPos < pos
@@ -74,10 +76,11 @@ const PositionText = ({ pos, currentPos, text }) => {
   return (
     <div className="flex flex-row">
       <span
-        className={`text-md font-bold ct-text-muted self-center pr-4 ${
-          currentPos !== pos && "hidden"
-        }`}
-        style={{ color: currentPos === pos && "#4563CB" }}
+        className="hidden md:block text-md font-bold ct-text-muted self-center pr-4"
+        style={{
+          color: currentPos === pos && "#4563CB",
+          display: currentPos !== pos && "none",
+        }}
       >
         {text}
       </span>

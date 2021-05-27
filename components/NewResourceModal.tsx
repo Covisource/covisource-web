@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import axios from "axios";
+import { useSession } from "next-auth/client";
+
+// schemas
+import SessionSchema from "~schema/SessionSchema";
 
 // components
 import TogglerButtons from "~localComponents/NewResourceModal/TogglerButtons";
 import Header from "~localComponents/NewResourceModal/Header";
 import Positions from "~localComponents/NewResourceModal/Positions";
-import { useSession } from "next-auth/client";
-import SessionSchema from "~schema/SessionSchema";
 
 const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const user: SessionSchema = useSession()[0] as any;
@@ -47,6 +49,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
       extraParameters: [],
     },
   };
+
   const [position, setPosition] = useState(1);
   const [formData, setFormData] = useState(initialFormData);
   const [errs, setErrs] = useState({
@@ -59,7 +62,6 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
   const handleSubmit = async () => {
     validate();
     try {
-      const headers = {}
       const res = await axios({
         method: "POST",
         url: `${process.env.NEXT_PUBLIC_SERVER_URL}/resource/newResource`,
@@ -245,7 +247,7 @@ const NewResourceModal = ({ isOpen, setIsOpen }) => {
         </span>
 
         {/* Actual Content */}
-        <div className="bg-white rounded-lg inline-flex w-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
+        <div className="bg-white rounded-lg inline-flex h-full max-w-lg p-6 my-8 overflow-hidden text-left align-middle transition-all transform ">
           <div className="w-full">
             <Header
               position={position}
