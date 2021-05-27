@@ -60,20 +60,20 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
 
       {/* Nav Links */}
       <div className="flex items-center gap-5 nav">
-        <i className="far fa-search"></i>
+        {/* <i className="far fa-search"></i> */}
         <i
           className="far fa-plus cursor-pointer"
           onClick={() => setIsResourceModalOpen(true)}
         ></i>
 
         <NavItem title="Home" active={page === "home"} link="/" />
-        <NavItem title="Donate" active={page === "donate"} link="/donate" />
-        <NavItem
+        {/* <NavItem title="Donate" active={page === "donate"} link="/donate" /> */}
+        {/* <NavItem
           title="Resources"
           active={page === "resources"}
           link="/resources"
-        />
-        <NavItem title="Connect" active={page === "connect"} link="/connect" />
+        /> */}
+        {/* <NavItem title="Connect" active={page === "connect"} link="/connect" /> */}
       </div>
 
       {/* Logo */}
@@ -90,10 +90,10 @@ const Navbar = ({ setIsResourceModalOpen, setIsLoginModalOpen, page }) => {
         </div>
 
         {/* Location Selector */}
-        <div className="flex items-center gap-2 nav">
+        {/* <div className="flex items-center gap-2 nav">
           <i className="far fa-map-marker-alt"></i>
           <span className="font-bold text-sm">India</span>
-        </div>
+        </div> */}
 
         {/* Auth Section */}
         <div>

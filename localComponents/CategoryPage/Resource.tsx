@@ -10,7 +10,6 @@ const Resource = ({
   creator,
   extraParameters,
 }) => {
-  console.log(creator);
   return (
     <div className="p-5 shadow-md rounded-lg w-full h-48 mb-5">
       <div className="w-2/3 h-full relative">

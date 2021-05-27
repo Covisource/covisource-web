@@ -34,7 +34,9 @@ export default function Home() {
       <div className="flex flex-col items-center h-full pt-28 relative">
         {/* Heading */}
         <div className="text-center mb-7 ">
-          <span className="ct-font-mont font-bold text-6xl resptext-6xl">Find </span>
+          <span className="ct-font-mont font-bold text-6xl resptext-6xl">
+            Find{" "}
+          </span>
           <TextLoop>
             {changingWords.map((word, index) => (
               <span
@@ -52,14 +54,14 @@ export default function Home() {
 
         {/* Description */}
         <p className="ct-text-muted text-center text-xl font-semibold mb-10 resptext-4xl">
-          The Number One platform for all your needs to fight the virus.
+          The #1 platform to manage all your needs to fight the virus.
         </p>
 
         {/* Search Bar */}
         <SearchBar />
 
         {/* Scroll Indicator */}
-        <i className="far fa-arrow-down ct-text-main text-2xl absolute bottom-3 animate-bounce"></i>
+        {/* <i className="far fa-arrow-down ct-text-main text-2xl absolute bottom-3 animate-bounce"></i> */}
       </div>
     </Layout>
   );
