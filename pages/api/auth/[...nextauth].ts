@@ -60,7 +60,7 @@ export default NextAuth({
           {
             id: `${account?.provider}_${account?.id}`,
           },
-          "hi"
+          process.env.JWT_SECRET
         );
         token.jwt = jwtToken;
       }
