@@ -62,7 +62,11 @@ const index = ({ resource }) => {
             <div>
               <h3 className="text-md">
                 <span className="font-bold">Posted By</span>{" "}
-                <span className="">Covibot</span>
+                <span className="">
+                  {resource.creator?.userId
+                    ? resource.creator.userId.name
+                    : "Anonymous User"}
+                </span>
               </h3>
             </div>
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold h-2/5 overflow-hidden">
@@ -74,11 +78,13 @@ const index = ({ resource }) => {
             <div className="flex justify-between items-baseline mt-auto">
               <div>
                 <div className="hidden md:flex items-center gap-4">
-                  <span className="flex items-center gap-2 font-bold text-xs">
+                  <span className="flex items-center gap-2 text-xs font-bold">
+                    <i className="fas fa-shapes"></i>
+                    {resource.category.name}
+                  </span>
+                  <span className="flex items-center tuncate font-bold gap-2 text-xs">
                     <i className="fas fa-map-marker-alt"></i>
-                    <span className="truncate">
-                      {resource.location.displayName}
-                    </span>
+                    {resource.location.displayName}
                   </span>
                   <span className="flex items-center gap-2 font-bold text-xs">
                     {resource.phone && (
@@ -121,13 +127,15 @@ const index = ({ resource }) => {
           <div className="flex flex-col gap-6 mt-5">
             {/* SM Extra Info Card */}
             <div className="md:hidden flex flex-col gap-2 ct-bg-muted rounded-lg p-7">
-              <span className="flex items-center gap-2 text-sm">
-                <span className="font-bold">Location: </span>
-                <span className="font-semibold truncate">
-                  {resource.location.displayName}
-                </span>
+              <span className="flex items-center gap-2 text-sm font-semibold">
+                <span className="font-bold">Category: </span>
+                {resource.category.name}
               </span>
-              <span className="flex items-center gap-2 font-bold text-sm">
+              <span className="flex items-center gap-2 text-sm font-semibold truncate">
+                <span className="font-bold">Location: </span>
+                {resource.location.displayName}
+              </span>
+              <span className="flex items-center gap-2 text-sm font-semibold">
                 {resource.phone && (
                   <>
                     <span className="font-bold">Phone:</span> {resource.phone}
@@ -142,10 +150,10 @@ const index = ({ resource }) => {
               {resource.extraParameters.map((param, index) => {
                 return param.value ? (
                   <span
-                    className="flex items-center gap-2 font-bold text-sm"
+                    className="flex items-center gap-2 text-sm font-semibold"
                     key={index}
                   >
-                    <span className="font-bold">{param.name}:</span>{" "}
+                    <span className="font-bold">{param.name}: </span>
                     {param.value}
                   </span>
                 ) : (
