@@ -56,20 +56,7 @@ const index = ({ categoryName }) => {
           </h1>
           <div className="flex flex-wrap gap-1">
             {resources.map((resource, index) => {
-              return (
-                <Resource
-                  key={index}
-                  title={resource.title}
-                  locationName={resource.location.displayName}
-                  description={resource.description}
-                  price={resource.price || 0}
-                  qty={resource.quantity}
-                  extraParameters={resource.extraParameters}
-                  creator={resource.creator}
-                  phone={resource.phone}
-                  email={resource.email}
-                />
-              );
+              return <Resource key={index} resource={resource} />;
             })}
           </div>
         </div>
