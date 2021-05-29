@@ -76,11 +76,23 @@ const index = ({ resource }) => {
                 <div className="hidden md:flex items-center gap-4">
                   <span className="flex items-center gap-2 font-bold text-xs">
                     <i className="fas fa-map-marker-alt"></i>
-                    Udaipur, Rajasthan
+                    <span className="truncate">
+                      {resource.location.displayName}
+                    </span>
                   </span>
                   <span className="flex items-center gap-2 font-bold text-xs">
-                    <i className="fas fa-phone-alt"></i>
-                    +91 22 1234 5678
+                    {resource.phone && (
+                      <>
+                        <i className="fas fa-phone-alt"></i>
+                        {resource.phone}
+                      </>
+                    )}
+                    {resource.email && (
+                      <>
+                        <i className="fas fa-envelope-open"></i>{" "}
+                        {resource.email}
+                      </>
+                    )}
                   </span>
 
                   {resource.extraParameters.map((param, index) => {
@@ -109,9 +121,11 @@ const index = ({ resource }) => {
           <div className="flex flex-col gap-6 mt-5">
             {/* SM Extra Info Card */}
             <div className="md:hidden flex flex-col gap-2 ct-bg-muted rounded-lg p-7">
-              <span className="flex items-center gap-2 font-semibold text-sm">
+              <span className="flex items-center gap-2 text-sm">
                 <span className="font-bold">Location: </span>
-                Udaipur, Rajasthan
+                <span className="font-semibold truncate">
+                  {resource.location.displayName}
+                </span>
               </span>
               <span className="flex items-center gap-2 font-bold text-sm">
                 {resource.phone && (
