@@ -67,18 +67,6 @@ const Resource = ({
             <i className="far fa-rupee-sign"></i>
             {price}
           </span>
-          {/* {extraParameters.map((param, index) => {
-            return param.value ? (
-              <span
-                className="flex items-center gap-1 text-sm text-gray-700"
-                key={index}
-              >
-                <span className="font-bold">{param.name}:</span> {param.value}
-              </span>
-            ) : (
-              ""
-            );
-          })} */}
         </div>
         <div className="flex items-center gap-2 truncate">
           <h2 className="text-sm">
