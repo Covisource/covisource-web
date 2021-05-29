@@ -15,6 +15,10 @@ export default NextAuth({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
     }),
+    Providers.Facebook({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
     async signIn(user, account, profile) {
@@ -43,7 +47,6 @@ export default NextAuth({
             console.log("User exists");
             return true; // we can let the login continue, because the user exists, and can login
           }
-          
           // handle error
         } else {
           console.log("User Created");
