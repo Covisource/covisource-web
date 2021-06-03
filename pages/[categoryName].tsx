@@ -23,7 +23,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const { categoryName } = params;
-
   return { props: { categoryName } };
 };
 
