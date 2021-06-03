@@ -3,6 +3,23 @@ import Input from "~components/Input";
 const Position4 = ({ formData, setFormData, errs }) => {
   return (
     <div className="mt-5 flex flex-col gap-2">
+      <Input
+        type="text"
+        heading="Source"
+        placeholder="Where did you find this resource"
+        className="ct-bg-muted p-3 rounded-lg"
+        subClassName="ct-text-color-1 text-sm font-medium bg-transparent"
+        prepend={<i className="fas fa-globe"></i>}
+        value={formData.positionFour.source}
+        onChange={(e) => {
+          const newPositionFour = { ...formData.positionFour };
+          newPositionFour.source = e.target.value;
+          setFormData((cur) => ({
+            ...cur,
+            positionFour: newPositionFour,
+          }));
+        }}
+      />
       {formData.positionFour.extraParameters?.map((param) => {
         const indexInFormData = formData.positionFour.extraParameters.findIndex(
           (formParam) => formParam.name === param.name
