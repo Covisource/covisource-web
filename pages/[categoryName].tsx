@@ -41,6 +41,7 @@ const index = ({ categoryName }) => {
       setResources(resources.data);
     })();
   }, []);
+
   return (
     <Layout page="resources">
       <div className="flex justify-center h-full">
