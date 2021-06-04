@@ -64,7 +64,7 @@ const index = ({ resource }) => {
                 <span className="font-bold">Posted By</span>{" "}
                 <span className="">
                   {resource.creator?.userId
-                    ? resource.creator.userId.name
+                    ? resource.creator.userId?.name
                     : "Anonymous User"}
                 </span>
               </h3>
@@ -80,7 +80,7 @@ const index = ({ resource }) => {
                 <div className="hidden md:flex items-center gap-4">
                   <span className="flex items-center gap-2 text-xs font-bold">
                     <i className="fas fa-shapes"></i>
-                    {resource.category.name}
+                    {resource.category?.name}
                   </span>
                   <span className="flex items-center tuncate font-bold gap-2 text-xs">
                     <i className="fas fa-map-marker-alt"></i>
@@ -108,7 +108,7 @@ const index = ({ resource }) => {
                         key={index}
                       >
                         <span className="font-bold">
-                          <i className={param.icon}></i> {param.name}:
+                          <i className={param.icon}></i> {param?.name}:
                         </span>{" "}
                         {param.value}
                       </span>
@@ -129,7 +129,7 @@ const index = ({ resource }) => {
             <div className="md:hidden flex flex-col gap-2 ct-bg-muted rounded-lg p-7">
               <span className="flex items-center gap-2 text-sm font-semibold">
                 <span className="font-bold">Category: </span>
-                {resource.category.name}
+                {resource.category?.name}
               </span>
               <span className="flex items-center gap-2 text-sm font-semibold truncate">
                 <span className="font-bold">Location: </span>
@@ -153,7 +153,7 @@ const index = ({ resource }) => {
                     className="flex items-center gap-2 text-sm font-semibold"
                     key={index}
                   >
-                    <span className="font-bold">{param.name}: </span>
+                    <span className="font-bold">{param?.name}: </span>
                     {param.value}
                   </span>
                 ) : (

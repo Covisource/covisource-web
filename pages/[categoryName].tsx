@@ -7,10 +7,11 @@ import Layout from "~hoc/Layout";
 
 export const getStaticPaths = async () => {
   const res: object[] = (await getAllResources()) as object[];
-  const paths = res.map((category) => {
+  console.log(res);
+  const paths = res.map((category: any) => {
     return {
       params: {
-        categoryName: ((category as any).name as string).toLowerCase(),
+        categoryName: (category.name as string).toLowerCase(),
       },
     };
   });
